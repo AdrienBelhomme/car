@@ -8,7 +8,7 @@ const MyApp = ({ Component, pageProps }) => (
   <ThemeProvider attribute="class">
     <div className="bg-color-car-app dark:bg-nft-dark min-h-screen">
       <Navbar />
-      <div className="pt-65">
+      <div>
         <Component {...pageProps} />
       </div>
       <Footer />

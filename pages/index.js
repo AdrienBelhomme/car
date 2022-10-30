@@ -1,7 +1,8 @@
-import { Button } from '../components';
+import { Button, Sidebar } from '../components';
 
 const Home = () => (
-  <div>
+  <div className="flex">
+    <Sidebar />
     <h1 className="text-3xl font-bold underline">
       Hello Team Web3
     </h1>

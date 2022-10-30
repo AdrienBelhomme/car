@@ -1,7 +1,7 @@
 const Navbar = () => {
   console.log('Navbar');
   return (
-    <div>Navbar</div>
+    <div className="h-32">Navbar</div>
   );
 };
 

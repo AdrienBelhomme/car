@@ -53,6 +53,8 @@ module.exports = {
         'information-dark-700': '#2A60B7',
         'information-dark-800': '#1A4393',
         'information-dark-900': '#102E7A',
+        'sidebar-bg': '#FFFFFF',
+        'sidebar-border': '#F3F5F7',
         'secondinary-light-100': '#E0E9F4',
         'secondinary-light-200': '#C3D4E9',
         'secondinary-light-300': '#90A3BF',
@@ -64,15 +66,25 @@ module.exports = {
         'secondinary-dark-900': '#040815',
         'overlay-black': 'rgba(0, 0, 0, 0.8)',
         'btn-blue': '#3563E9',
+        'side-title': '#94A7CB',
+        'search-border': '#C3D4E966',
+        'input-title': '#3D5278',
+        'input-number': '#90A3BF',
+        'checkbox-checked': '#3563E9',
+
       },
       width: {
         215: '215px',
         357: '357px',
         557: '557px',
+        360: '360px',
+        283: '283px',
       },
       height: {
+        124: '124px',
         300: '300px',
         557: '557px',
+        1600: '1600px',
       },
       inset: {
         45: '45%',
@@ -91,6 +103,7 @@ module.exports = {
         '-5': '-5',
         0: '0',
       },
+
     },
     fontFamily: {
       poppins: ['Poppins', 'sans-serif'],
