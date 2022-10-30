@@ -7,7 +7,7 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        'bg-color-car-app': '#F6F7F9',
+        'main-app': '#F6F7F9',
         'light-100': '#E7DEFE',
         'light-200': '#CEBEFE',
         'light-300': '#B49DFE',
@@ -67,6 +67,7 @@ module.exports = {
       },
       width: {
         215: '215px',
+        300: '300px',
         357: '357px',
         557: '557px',
       },
@@ -90,6 +91,9 @@ module.exports = {
       zIndex: {
         '-5': '-5',
         0: '0',
+      },
+      backgroundImage: {
+        'car-shadow': 'linear-gradient(180deg, rgba(255, 255, 255, 0) 0%, #FFFFFF 100%)',
       },
     },
     fontFamily: {
