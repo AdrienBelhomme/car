@@ -24,59 +24,63 @@ const Sidebar = () => {
           />
         </div>
       </div>
-      <div className="text-side-title font-jakarta pl-8 pt-10">
-        Type
-      </div>
-      <div className="flex items-center my-8">
-        <input id="default-checkbox" type="checkbox" value={checked} onChange={handleChange} className="ml-9 w-4 h-4 text-blue-600 bg-white rounded-md border-gray-300 focus:ring-checkbox-checked dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" />
-        <label htmlFor="default-checkbox" className="ml-2 text-2xl font-semibold font-jakarta text-input-title dark:text-gray-300">Sport <span className="text-input-number font-medium font-jakarta">(10)</span></label>
-      </div>
-      <div className="flex items-center my-8">
-        <input id="default-checkbox" type="checkbox" value={checked} onChange={handleChange} className="ml-9 w-4 h-4 text-blue-600 bg-white rounded-md border-gray-300 focus:ring-checkbox-checked dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" />
-        <label htmlFor="default-checkbox" className="ml-2 text-2xl font-semibold font-jakarta text-input-title dark:text-gray-300">SUV <span className="text-input-number font-medium font-jakarta">(12)</span></label>
-      </div>
-      <div className="flex items-center my-8">
-        <input id="default-checkbox" type="checkbox" value={checked} onChange={handleChange} className="ml-9 w-4 h-4 text-blue-600 bg-white rounded-md border-gray-300 focus:ring-checkbox-checked dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" />
-        <label htmlFor="default-checkbox" className="ml-2 text-2xl font-semibold font-jakarta text-input-title dark:text-gray-300">MVP <span className="text-input-number font-medium font-jakarta">(16)</span></label>
-      </div>
-      <div className="flex items-center my-8">
-        <input id="default-checkbox" type="checkbox" value={checked} onChange={handleChange} className="ml-9 w-4 h-4 text-blue-600 bg-white rounded-md border-gray-300 focus:ring-checkbox-checked dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" />
-        <label htmlFor="default-checkbox" className="ml-2 text-2xl font-semibold font-jakarta text-input-title dark:text-gray-300">Sedan <span className="text-input-number font-medium font-jakarta">(20)</span></label>
-      </div>
-      <div className="flex items-center my-8">
-        <input id="default-checkbox" type="checkbox" value={checked} onChange={handleChange} className="ml-9 w-4 h-4 text-blue-600 bg-white rounded-md border-gray-300 focus:ring-checkbox-checked dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" />
-        <label htmlFor="default-checkbox" className="ml-2 text-2xl font-semibold font-jakarta text-input-title dark:text-gray-300">Coupe <span className="text-input-number font-medium font-jakarta">(14)</span></label>
-      </div>
-      <div className="flex items-center my-8">
-        <input id="default-checkbox" type="checkbox" value={checked} onChange={handleChange} className="ml-9 w-4 h-4 text-blue-600 bg-white rounded-md border-gray-300 focus:ring-checkbox-checked dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" />
-        <label htmlFor="default-checkbox" className="ml-2 text-2xl font-semibold font-jakarta text-input-title dark:text-gray-300">Hackback <span className="text-input-number font-medium font-jakarta">(14)</span></label>
+
+      <div className="flex flex-col h-352 w-176 mt-14 mb-0 ">
+        <div className="text-side-title font-jakarta pl-8 ">
+          Type
+        </div>
+        <div className="flex items-center mt-7">
+          <input id="default-checkbox" type="checkbox" value={checked} onChange={handleChange} className="ml-8 w-5 h-5 text-blue-600 bg-white rounded-md border-gray-300 focus:ring-checkbox-checked dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" />
+          <label htmlFor="default-checkbox" className="pl-2 w-144 text-lg font-semibold font-jakarta text-input-title dark:text-gray-300">Sport <span className="text-input-number font-medium font-jakarta">(10)</span></label>
+        </div>
+        <div className="flex items-center mt-6">
+          <input id="default-checkbox" type="checkbox" value={checked} onChange={handleChange} className="ml-8 w-5 h-5 text-blue-600 bg-white rounded-md border-gray-300 focus:ring-checkbox-checked dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" />
+          <label htmlFor="default-checkbox" className="pl-2 w-144 text-lg font-semibold font-jakarta text-input-title dark:text-gray-300">SUV<span className="text-input-number font-medium font-jakarta">(12)</span> </label>
+        </div>
+        <div className="flex items-center mt-6">
+          <input id="default-checkbox" type="checkbox" value={checked} onChange={handleChange} className="ml-8 w-5 h-5 text-blue-600 bg-white rounded-md border-gray-300 focus:ring-checkbox-checked dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" />
+          <label htmlFor="default-checkbox" className="pl-2 w-144 text-lg font-semibold font-jakarta text-input-title dark:text-gray-300">MPV <span className="text-input-number font-medium font-jakarta">(16)</span></label>
+        </div>
+        <div className="flex  items-center mt-6 ">
+          <input id="default-checkbox" type="checkbox" value={checked} onChange={handleChange} className="ml-8 w-5 h-5 text-blue-600 bg-white rounded-md border-gray-300 focus:ring-checkbox-checked dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" />
+          <label htmlFor="default-checkbox" className="pl-2  w-144 text-lg font-semibold font-jakarta text-input-title dark:text-gray-300">Sedan<span className="text-input-number font-medium font-jakarta">(20)</span></label>
+        </div>
+        <div className="flex items-center mt-6 ">
+          <input id="default-checkbox" type="checkbox" value={checked} onChange={handleChange} className="ml-8 w-5 h-5 text-blue-600 bg-white rounded-md border-gray-300 focus:ring-checkbox-checked dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" />
+          <label htmlFor="default-checkbox" className="pl-2  w-144 text-lg font-semibold font-jakarta text-input-title dark:text-gray-300">Coupe<span className="text-input-number font-medium font-jakarta">(14)</span></label>
+        </div>
+        <div className="flex items-center mt-6 ">
+          <input id="default-checkbox" type="checkbox" value={checked} onChange={handleChange} className="ml-8 w-5 h-5 text-blue-600 bg-white rounded-md border-gray-300 focus:ring-checkbox-checked dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" />
+          <label htmlFor="default-checkbox" className="pl-2  w-144 text-lg font-semibold font-jakarta text-input-title dark:text-gray-300">Hacback<span className="text-input-number font-medium font-jakarta">(14)</span></label>
+        </div>
       </div>
 
-      <div className="text-side-title font-jakarta pl-8 pt-10">
-        Capacity
+      <div className="flex flex-col h-60 w-176 mt-14 mb-0  ">
+        <div className="text-side-title font-jakarta pl-8 ">
+          Capacity
+        </div>
+        <div className="flex items-center  mt-7">
+          <input id="default-checkbox" type="checkbox" value={checked} onChange={handleChange} className="ml-8 w-5 h-5 text-blue-600 bg-white rounded-md border-gray-300 focus:ring-checkbox-checked dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" />
+          <label htmlFor="default-checkbox" className="pl-2 w-144 text-lg font-semibold font-jakarta text-input-title dark:text-gray-300">2 Person <span className="text-input-number font-medium font-jakarta">(10)</span></label>
+        </div>
+        <div className="flex items-center mt-6">
+          <input id="default-checkbox" type="checkbox" value={checked} onChange={handleChange} className="ml-8 w-5 h-5 text-blue-600 bg-white rounded-md border-gray-300 focus:ring-checkbox-checked dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" />
+          <label htmlFor="default-checkbox" className="pl-2 w-144 text-lg font-semibold font-jakarta text-input-title dark:text-gray-300">4 Person<span className="text-input-number font-medium font-jakarta">(14)</span> </label>
+        </div>
+        <div className="flex items-center mt-6">
+          <input id="default-checkbox" type="checkbox" value={checked} onChange={handleChange} className="ml-8 w-5 h-5 text-blue-600 bg-white rounded-md border-gray-300 focus:ring-checkbox-checked dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" />
+          <label htmlFor="default-checkbox" className="pl-2 w-144 text-lg font-semibold font-jakarta text-input-title dark:text-gray-300">6 Person <span className="text-input-number font-medium font-jakarta">(12)</span></label>
+        </div>
+        <div className="flex items-center mt-6 ">
+          <input id="default-checkbox" type="checkbox" value={checked} onChange={handleChange} className="ml-8 w-5 h-5 text-blue-600 bg-white rounded-md border-gray-300 focus:ring-checkbox-checked dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" />
+          <label htmlFor="default-checkbox" className="pl-2  w-144 text-lg font-semibold font-jakarta text-input-title dark:text-gray-300">8 or More <span className="text-input-number font-medium font-jakarta">(16)</span></label>
+        </div>
       </div>
-      <div className="flex items-center my-8">
-        <input id="default-checkbox" type="checkbox" value={checked} onChange={handleChange} className="ml-9 w-4 h-4 text-blue-600 bg-white rounded-md border-gray-300 focus:ring-checkbox-checked dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" />
-        <label htmlFor="default-checkbox" className="ml-2 text-2xl font-semibold font-jakarta text-input-title dark:text-gray-300">2 Person <span className="text-input-number font-medium font-jakarta">(10)</span></label>
-      </div>
-      <div className="flex items-center my-8">
-        <input id="default-checkbox" type="checkbox" value={checked} onChange={handleChange} className="ml-9 w-4 h-4 text-blue-600 bg-white rounded-md border-gray-300 focus:ring-checkbox-checked dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" />
-        <label htmlFor="default-checkbox" className="ml-2 text-2xl font-semibold font-jakarta text-input-title dark:text-gray-300">4 Person <span className="text-input-number font-medium font-jakarta">(10)</span></label>
-      </div>
-      <div className="flex items-center my-8">
-        <input id="default-checkbox" type="checkbox" value={checked} onChange={handleChange} className="ml-9 w-4 h-4 text-blue-600 bg-white rounded-md border-gray-300 focus:ring-checkbox-checked dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" />
-        <label htmlFor="default-checkbox" className="ml-2 text-2xl font-semibold font-jakarta text-input-title dark:text-gray-300">6 Person <span className="text-input-number font-medium font-jakarta">(14)</span></label>
-      </div>
-      <div className="flex items-center my-8">
-        <input id="default-checkbox" type="checkbox" value={checked} onChange={handleChange} className="ml-9 w-4 h-4 text-blue-600 bg-white rounded-md border-gray-300 focus:ring-checkbox-checked dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" />
-        <label htmlFor="default-checkbox" className="ml-2 text-2xl font-semibold font-jakarta text-input-title dark:text-gray-300">Sport <span className="text-input-number font-medium font-jakarta">(12)</span></label>
-      </div>
-      <div className="flex items-center my-8">
-        <input id="default-checkbox" type="checkbox" value={checked} onChange={handleChange} className="ml-9 w-4 h-4 text-blue-600 bg-white rounded-md border-gray-300 focus:ring-checkbox-checked dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" />
-        <label htmlFor="default-checkbox" className="ml-2 text-2xl font-semibold font-jakarta text-input-title dark:text-gray-300">8 or More <span className="text-input-number font-medium font-jakarta">(16)</span></label>
-      </div>
-      <div className="text-side-title font-medium font-jakarta pl-8 pt-10">
-        Price
+
+      <div className=" container h-104 w-296 mt-14">
+        <div className="text-side-title font-medium font-jakarta pl-8 pt-10">
+          Price
+        </div>
       </div>
     </div>
   );
