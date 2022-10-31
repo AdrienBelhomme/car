@@ -39,7 +39,7 @@ const Sidebar = () => {
         {['Sport', 'SUV', 'MPV', 'Sedan', 'Coupe', 'Hatchback'].map((item, index) => (
           <div className="flex items-center mt-6" key={index}>
             <input name={item} id="default-checkbox" type="checkbox" value={checked} onChange={handleChange} className="ml-8 w-5 h-5 text-blue-600 bg-white rounded-md border-gray-300 focus:ring-checkbox-checked dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" />
-            <label htmlFor="default-checkbox" className="pl-2 w-144 text-lg font-semibold font-jakarta text-input-title dark:text-gray-300">{item}<span className="text-input-number font-medium font-jakarta"> ({index * 5})</span></label>
+            <label htmlFor="default-checkbox" className="pl-2 w-144 text-lg font-semibold font-jakarta text-input-title dark:text-gray-300">{item}<span className="text-secondinary-light-300 font-medium font-jakarta"> ({index * 5})</span></label>
           </div>
         ))}
       </div>
