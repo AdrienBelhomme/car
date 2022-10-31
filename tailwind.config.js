@@ -64,7 +64,9 @@ module.exports = {
         'secondinary-dark-900': '#040815',
         'overlay-black': 'rgba(0, 0, 0, 0.8)',
         'btn-blue': '#3563E9',
-        'btn-blue-30%': 'rgba(53, 99, 233, 0.3);',
+        'btn-blue-30%': 'rgba(53, 99, 233, 0.3)',
+        picker: 'rgba(195, 212, 233, 0.4)',
+        'drop-off': '#5CAFFC',
       },
       width: {
         215: '215px',
@@ -72,6 +74,7 @@ module.exports = {
         357: '357px',
         486: '486px',
         557: '557px',
+        '64rem': '64rem',
       },
       height: {
         300: '300px',
@@ -99,6 +102,7 @@ module.exports = {
       },
       boxShadow: {
         'dot-shadow': '0px 0px 0px 6px rgba(53, 99, 233, 0.3)',
+        'drop-off-shad': '0px 0px 0px 6px rgba(92, 175, 252, 0.4)',
       },
     },
     fontFamily: {
