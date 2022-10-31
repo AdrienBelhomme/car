@@ -1,3 +1,5 @@
+import Link from 'next/link';
+
 import { Button } from '../components';
 
 const Home = () => (
@@ -12,6 +14,7 @@ const Home = () => (
     <h3 className="text-success-light-300">success-light-300</h3>
     <h3 className="text-information-light-400">information-light-400</h3>
     <Button text="Rent Now" bgColor="bg-btn-blue" color="text-white" />
+    <Link color="text-red-600" href="/addCarForm">Add Car Page</Link>
   </div>
 );
 
