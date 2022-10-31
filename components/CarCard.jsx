@@ -2,12 +2,18 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHeart, faGasPump, faGear, faUsers } from '@fortawesome/free-solid-svg-icons';
 import '@fortawesome/fontawesome-svg-core/styles.css';
 import Image from 'next/image';
+import { useState } from 'react';
 
 import images from '../assets';
 import Button from './Button';
 
 const CarCard = ({ gas = '90L', type = 'Manual', people = '2 people', price = '99.00' }) => {
-  console.log('CarCard');
+  const [isFavorite, setIsFavorite] = useState(false);
+
+  const emptyHeart = () => (
+    setIsFavorite((prev) => !prev)
+  );
+
   return (
     <div className="w-full md:w-300 bg-white rounded-lg p-6">
       <div className="flex justify-between">
@@ -15,8 +21,11 @@ const CarCard = ({ gas = '90L', type = 'Manual', people = '2 people', price = '9
           <h2 className="text-xl text-secondinary-default font-bold mb-1 font-jakarta">Model</h2>
           <h3 className="text-secondinary-light-300 text-sm font-jakarta">Sport</h3>
         </div>
-        <div className="heart text-error-default cursor-pointer" onClick={() => {}}>
-          <FontAwesomeIcon className="h-6" icon={faHeart} />
+        <div className="heart cursor-pointer" onClick={emptyHeart}>
+          <FontAwesomeIcon
+            icon={faHeart}
+            className={`h-5 ${isFavorite ? 'text-error-default' : 'text-dark-900 dark:text-white'}`}
+          />
         </div>
       </div>
       <div className="flex md:block justify-between items-center mt-7 md:m-0">
