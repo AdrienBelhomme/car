@@ -21,7 +21,7 @@ const CarCard = ({ image = images.nissan, model = 'Model', category = 'Sport', g
   ];
 
   return (
-    <div className="w-full md:w-300 bg-white rounded-lg p-6">
+    <div className="w-full bg-white rounded-lg p-6 lg:w-200 xl:w-244 mid-xl:w-244">
       <div className="flex justify-between">
         <div className="title">
           <h2 className="text-xl text-secondinary-default font-bold mb-1 font-jakarta">{model}</h2>
@@ -30,7 +30,7 @@ const CarCard = ({ image = images.nissan, model = 'Model', category = 'Sport', g
         <div className="heart cursor-pointer" onClick={emptyHeart}>
           <FontAwesomeIcon
             icon={faHeart}
-            className={`h-5 ${isFavorite ? 'text-error-default' : 'text-dark-900 dark:text-white'}`}
+            className={`h-5 ${isFavorite ? 'text-error-default' : 'text-dark-900 dark:text-white'} xl:h-3 2xl:h-5`}
           />
         </div>
       </div>
@@ -44,8 +44,8 @@ const CarCard = ({ image = images.nissan, model = 'Model', category = 'Sport', g
           {iconList.map((icon, index) => (
             <div key={index} className="flex mx-0 my-2 md:my-0">
               <div className="icon flex items-center">
-                <FontAwesomeIcon icon={icon.icon} className="text-secondinary-light-300 h-5" />
-                <p className="ml-2 text-secondinary-light-300 text-sm font-jakarta">{icon.name}</p>
+                <FontAwesomeIcon icon={icon.icon} className="text-secondinary-light-300 h-5 xl:h-3" />
+                <p className="ml-2 text-secondinary-light-300 text-sm xl:text-xs font-jakarta">{icon.name}</p>
               </div>
             </div>
           ))}
@@ -54,12 +54,12 @@ const CarCard = ({ image = images.nissan, model = 'Model', category = 'Sport', g
 
       <div className="flex items-center mt-10 justify-between">
         <div className="price">
-          <div className="flex items-center text-xl font-jakarta font-bold">
+          <div className="flex items-center text-xl font-jakarta font-bold xl:text-sm">
             <p>${price} /</p>
             <p className="text-secondinary-light-300 text-sm ml-1 font-jakarta">day</p>
           </div>
         </div>
-        <div className="button">
+        <div className="button xl:w-1/2 w-auto xl:text-[11px] 2xl:xl:text-[14px]">
           <Button text="Rent Now" />
         </div>
 

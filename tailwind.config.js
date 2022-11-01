@@ -70,11 +70,19 @@ module.exports = {
       },
       width: {
         215: '215px',
+        244: '244px',
+        297: '297px',
         300: '300px',
+        336: '336px',
         357: '357px',
+        389: '389px',
+        455: '455px',
         486: '486px',
         557: '557px',
+        695: '695px',
+        1013: '1013px',
         '64rem': '64rem',
+        '66rem': '66rem',
       },
       height: {
         300: '300px',
@@ -103,6 +111,12 @@ module.exports = {
       boxShadow: {
         'dot-shadow': '0px 0px 0px 6px rgba(53, 99, 233, 0.3)',
         'drop-off-shad': '0px 0px 0px 6px rgba(92, 175, 252, 0.4)',
+      },
+      screens: {
+        'mid-xl': '1440px',
+      },
+      fontSize: {
+        11: '11px',
       },
     },
     fontFamily: {
