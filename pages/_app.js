@@ -1,8 +1,8 @@
 import { ThemeProvider } from 'next-themes';
 import Script from 'next/script';
 import { config } from '@fortawesome/fontawesome-svg-core';
-import { Footer, Navbar } from '../components';
 
+import { Footer, Navbar } from '../components';
 import '../styles/globals.css';
 
 config.autoAddCss = false;
