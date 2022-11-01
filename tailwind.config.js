@@ -7,7 +7,7 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        'bg-color-car-app': '#F6F7F9',
+        'main-app': '#F6F7F9',
         'light-100': '#E7DEFE',
         'light-200': '#CEBEFE',
         'light-300': '#B49DFE',
@@ -64,10 +64,13 @@ module.exports = {
         'secondinary-dark-900': '#040815',
         'overlay-black': 'rgba(0, 0, 0, 0.8)',
         'btn-blue': '#3563E9',
+        'btn-blue-30%': 'rgba(53, 99, 233, 0.3);',
       },
       width: {
         215: '215px',
+        300: '300px',
         357: '357px',
+        486: '486px',
         557: '557px',
       },
       height: {
@@ -90,6 +93,12 @@ module.exports = {
       zIndex: {
         '-5': '-5',
         0: '0',
+      },
+      backgroundImage: {
+        'car-shadow': 'linear-gradient(180deg, rgba(255, 255, 255, 0) 0%, #FFFFFF 100%)',
+      },
+      boxShadow: {
+        'dot-shadow': '0px 0px 0px 6px rgba(53, 99, 233, 0.3)',
       },
     },
     fontFamily: {
