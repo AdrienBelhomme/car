@@ -4,4 +4,5 @@ import nissangtr from './nissangtr.png';
 export default {
   koenigsegg,
   nissangtr,
+
 };
