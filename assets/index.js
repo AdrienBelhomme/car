@@ -1,8 +1,5 @@
-import koenigsegg from './koenigsegg.png';
-import nissangtr from './nissangtr.png';
+import Koenigsegg from './Koenigsegg.png';
+import nissan from './Nissan GT - R.png';
+import RollsRoyce from './Rolls-Royce.png';
 
-export default {
-  koenigsegg,
-  nissangtr,
-
-};
+export default { Koenigsegg, nissan, RollsRoyce };
