@@ -1,5 +1,4 @@
 import { ThemeProvider } from 'next-themes';
-import Script from 'next/script';
 import { config } from '@fortawesome/fontawesome-svg-core';
 import { Footer, Navbar } from '../components';
 
@@ -16,7 +15,7 @@ const MyApp = ({ Component, pageProps }) => (
       </div>
       <Footer />
     </div>
-    <Script src="https://kit.fontawesome.com/c6e55f6362.js" crossOrigin="anonymous" />
+
   </ThemeProvider>
 );
 
