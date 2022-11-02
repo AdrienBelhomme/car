@@ -26,10 +26,10 @@ const Sidebar = () => {
   };
 
   return (
-    <div className="flex flex-col bg-white-color border-sidebar-border border-2 max-h-[1400px] max-w-[360px] ">
+    <div className="hidden flex-col bg-white-color border-sidebar-border border-2 max-h-[1400px] max-w-[360px] md:flex ">
       <Searchbar />
       {filters.map(({ title, options }) => (
-        <div className="hidden container md:flex flex-col w-full mt-14" key={title}>
+        <div className="container flex-col w-full mt-14" key={title}>
           <div className="text-side-title font-jakarta pl-8 ">
             {title}
           </div>
@@ -41,7 +41,7 @@ const Sidebar = () => {
           ))}
         </div>
       ))}
-      <div className="hidden md:flex container flex-col w-full mt-14 mb-10">
+      <div className="container flex-col w-full mt-14 mb-10">
         <div className="text-side-title font-medium font-jakarta pl-8 ">
           Price
         </div>
