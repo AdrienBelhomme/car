@@ -7,7 +7,8 @@ import { Slider } from './index';
 
 const Sidebar = () => {
   const [checked, setChecked] = useState([]);
-  console.log(checked);
+  const [input, setInput] = useState('');
+
   const filters = [
     {
       title: 'Type',
@@ -17,6 +18,10 @@ const Sidebar = () => {
       title: 'Capacity',
       options: ['2 Persons', '4 Persons', '6 Persons', '8 or More'],
     }];
+
+  const handleInputSearch = (e) => {
+    setInput(e.target.value);
+  };
 
   const handleChecked = (e) => {
     const newChecks = [...checked];
@@ -39,8 +44,10 @@ const Sidebar = () => {
           </div>
           <input
             type="text"
+            value={input}
             className="block p-2 pl-10 font-jakarta text-gray-900 bg-white rounded-full border border-search-border w-283"
             placeholder="Search by brand or title"
+            onChange={handleInputSearch}
           />
         </div>
       </div>
