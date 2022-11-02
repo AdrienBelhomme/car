@@ -20,10 +20,6 @@ const CarCard = ({ image = images.nissan, model = 'Model', category = 'Sport', g
     { name: people, icon: images.user.src },
   ];
 
-  console.log(iconList);
-  console.log(iconList[0].name);
-  console.log(iconList[0].icon);
-
   return (
     <div className="w-full bg-white rounded-lg p-5">
       <div className="flex justify-between">

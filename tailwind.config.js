@@ -111,6 +111,9 @@ module.exports = {
       },
       margin: {
         '0-10%': '0 10%',
+        '0-5%': '0 5%',
+        '0-3%': '0 3%',
+        't-1%': '1% 0 0 0',
       },
       backgroundImage: {
         'car-shadow': 'linear-gradient(180deg, rgba(255, 255, 255, 0) 0%, #FFFFFF 100%)',
@@ -121,7 +124,8 @@ module.exports = {
       },
       screens: {
         'mid-xl': '1440px',
-        'lg-mobile': { raw: '(min-height: 550px)' },
+        'lg-mobile': { raw: '(min-width: 550px)' },
+        'xs-mobile': { raw: '(max-width: 325px)' },
         '3xl': '1900px',
       },
       fontSize: {
