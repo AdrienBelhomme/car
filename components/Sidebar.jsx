@@ -7,7 +7,7 @@ import { Slider } from './index';
 
 const Sidebar = () => {
   const [checked, setChecked] = useState([]);
-
+  console.log(checked);
   const filters = [
     {
       title: 'Type',
@@ -51,7 +51,7 @@ const Sidebar = () => {
           </div>
           {options.map((item, index) => (
             <div className="flex items-center mt-6 " key={index}>
-              <input name={item} id="default-checkbox" type="checkbox" value={checked} onChange={handleChecked} className="ml-8 w-5 h-4 text-btn-blue bg-white rounded-md border-gray-300 focus:ring-checkbox-checked dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" />
+              <input name={item} id="default-checkbox" type="checkbox" value={item} onChange={handleChecked} className="ml-8 w-5 h-4 text-btn-blue bg-white rounded-md border-gray-300 focus:ring-checkbox-checked dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" />
               <label htmlFor="default-checkbox" className="pl-2 text-lg font-semibold font-jakarta text-input-title dark:text-gray-300">{item}<span className="text-secondinary-light-300 font-medium font-jakarta"> ({index * 5})</span></label>
             </div>
           ))}
