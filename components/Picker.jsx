@@ -1,7 +1,7 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faChevronDown } from '@fortawesome/free-solid-svg-icons';
 import '@fortawesome/fontawesome-svg-core/styles.css';
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 
 const Picker = ({ isPickup }) => {
   const [state, setState] = useState({
@@ -12,6 +12,10 @@ const Picker = ({ isPickup }) => {
 
   const [isMobile, setIsMobile] = useState(true);
 
+  const inputValueDate = useRef(null);
+  const inputValueCity = useRef(null);
+  const inputValueTime = useRef(null);
+
   const handleInputChange = (e) => {
     const { target } = e;
     const value = target.type === 'checkbox' ? target.checked : target.value;
@@ -20,6 +24,28 @@ const Picker = ({ isPickup }) => {
     setState({
       ...state, [name]: value,
     });
+  };
+
+  const handlePlaceholderDate = () => {
+    inputValueDate.current.placeholder = '';
+  };
+  const handlePlaceholderCity = () => {
+    inputValueCity.current.placeholder = '';
+  };
+  const handlePlaceholderTime = () => {
+    inputValueTime.current.placeholder = '';
+  };
+
+  const handlePlaceholderBlurTime = () => {
+    inputValueTime.current.placeholder = 'Time';
+  };
+
+  const handlePlaceholderBlurDate = () => {
+    inputValueDate.current.placeholder = 'Date';
+  };
+
+  const handlePlaceholderBlurCity = () => {
+    inputValueCity.current.placeholder = 'City';
   };
 
   console.log(state);
@@ -35,8 +61,11 @@ const Picker = ({ isPickup }) => {
           <p className="font-bold">Locations</p>
           <div className="flex items-center cursor-pointer mt-2">
             <input
-              className="text-secondinary-light-300 text-xs font-light font-jakarta w-full"
-              placeholder={isMobile ? 'New-York' : 'Select your city'}
+              ref={inputValueCity}
+              className="text-secondinary-light-300 text-sm font-normal font-jakarta w-full h-6"
+              placeholder={isMobile ? 'City' : 'Select your city'}
+              onFocus={handlePlaceholderCity}
+              onBlur={handlePlaceholderBlurCity}
               name="location"
               type="text"
               value={state.location}
@@ -45,13 +74,16 @@ const Picker = ({ isPickup }) => {
             <FontAwesomeIcon icon={faChevronDown} className="w-3" />
           </div>
         </div>
-        <div className="border-r border-picker mx-4" />
+        <div className="border-r border-picker m-0-10%" />
         <div className="w-full">
           <p className="font-bold">Date</p>
           <div className="flex items-center cursor-pointer mt-2">
             <input
-              className="text-secondinary-light-300 text-xs font-light font-jakarta w-full"
-              placeholder={isMobile ? '22 July' : 'Select your date'}
+              ref={inputValueDate}
+              className="text-secondinary-light-300 text-sm font-normal font-jakarta w-full h-6"
+              placeholder={isMobile ? 'Date' : 'Select your date'}
+              onFocus={handlePlaceholderDate}
+              onBlur={handlePlaceholderBlurDate}
               name="date"
               type="text"
               value={state.date}
@@ -60,13 +92,16 @@ const Picker = ({ isPickup }) => {
             <FontAwesomeIcon icon={faChevronDown} className="w-3" />
           </div>
         </div>
-        <div className="border-r border-picker mx-4" />
+        <div className="border-r border-picker m-0-10%" />
         <div className="w-full">
           <p className="font-bold">Time</p>
           <div className="flex items-center cursor-pointer mt-2">
             <input
-              className="text-secondinary-light-300 text-xs font-light font-jakarta w-full"
-              placeholder={isMobile ? '07:00' : 'Select your time'}
+              ref={inputValueTime}
+              className="text-secondinary-light-300 text-sm font-normal font-jakarta w-full h-6"
+              placeholder={isMobile ? 'Time' : 'Select your time'}
+              onFocus={handlePlaceholderTime}
+              onBlur={handlePlaceholderBlurTime}
               name="time"
               type="text"
               value={state.time}

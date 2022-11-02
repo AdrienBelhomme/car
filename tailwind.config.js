@@ -109,6 +109,9 @@ module.exports = {
         '-5': '-5',
         0: '0',
       },
+      margin: {
+        '0-10%': '0 10%',
+      },
       backgroundImage: {
         'car-shadow': 'linear-gradient(180deg, rgba(255, 255, 255, 0) 0%, #FFFFFF 100%)',
       },

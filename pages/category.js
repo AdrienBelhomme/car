@@ -13,7 +13,7 @@ const category = () => {
   const inversePicker = () => {
     console.log('lcik');
     return (
-      <div onClick={() => console.log('click!')} className="flex bg-btn-blue rounded-md h-16 w-16 items-center cursor-pointer justify-center m-auto absolute inset-0">
+      <div onClick={() => console.log('click!')} className="flex bg-btn-blue rounded-md h-12 xl:h-14 2xl:h-16 w-12 xl:w-14 2xl:w-16 items-center cursor-pointer justify-center m-auto absolute inset-0 z-50">
         <FontAwesomeIcon icon={faArrowsRotate} color="white" className="h-6" />
       </div>
     );
@@ -22,13 +22,13 @@ const category = () => {
   return (
     <div className="p-4 md:p-8">
 
-      <div className="pickers w-full flex gap-y-4 flex-wrap">
+      <div className="pickers w-full flex gap-y-4 flex-wrap justify-between relative">
 
-        <div className="flex relative w-full">
+        <div className="flex relative w-full md:w-49%">
           <div className="w-full"><Picker isPickup /></div>
         </div>
         {inversePicker()}
-        <div className="flex relative w-full">
+        <div className="flex relative w-full md:w-49%">
           <div className="w-full"><Picker isPickup={false} /></div>
         </div>
       </div>
