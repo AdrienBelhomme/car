@@ -16,6 +16,7 @@ const MyApp = ({ Component, pageProps }) => (
       </div>
       <Footer />
     </div>
+
   </ThemeProvider>
 );
 
