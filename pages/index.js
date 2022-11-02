@@ -1,9 +1,9 @@
 import Link from 'next/link';
-
-import { Button } from '../components';
+import { Button, CarCard, Sidebar } from '../components';
 
 const Home = () => (
-  <div>
+  <div className="flex">
+    <Sidebar />
     <h1 className="text-3xl font-bold underline">
       Hello Team Web3
     </h1>
@@ -15,6 +15,9 @@ const Home = () => (
     <h3 className="text-information-light-400">information-light-400</h3>
     <Button text="Rent Now" bgColor="bg-btn-blue" color="text-white" />
     <Link color="text-red-600" href="/addCarForm">Add Car Page</Link>
+    <div className="m-2">
+      <CarCard />
+    </div>
   </div>
 );
 

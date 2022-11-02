@@ -4,10 +4,11 @@ module.exports = {
     './components/**/*.{js,ts,jsx,tsx,html}',
   ],
   darkMode: 'class',
+  mode: 'jit',
   theme: {
     extend: {
       colors: {
-        'bg-color-car-app': '#F6F7F9',
+        'main-app': '#F6F7F9',
         'light-100': '#E7DEFE',
         'light-200': '#CEBEFE',
         'light-300': '#B49DFE',
@@ -53,6 +54,8 @@ module.exports = {
         'information-dark-700': '#2A60B7',
         'information-dark-800': '#1A4393',
         'information-dark-900': '#102E7A',
+        'white-color': '#FFFFFF',
+        'sidebar-border': '#F3F5F7',
         'secondinary-light-100': '#E0E9F4',
         'secondinary-light-200': '#C3D4E9',
         'secondinary-light-300': '#90A3BF',
@@ -64,15 +67,38 @@ module.exports = {
         'secondinary-dark-900': '#040815',
         'overlay-black': 'rgba(0, 0, 0, 0.8)',
         'btn-blue': '#3563E9',
+        'side-title': '#94A7CB',
+        'search-border': '#C3D4E966',
+        'input-title': '#3D5278',
+        'btn-blue-30%': 'rgba(53, 99, 233, 0.3);',
       },
+
       width: {
+        144: '144px',
+        176: '176px',
         215: '215px',
+        208: '208',
+        284: '284',
+        296: '296px',
+        352: '352px',
+        300: '300px',
         357: '357px',
+        486: '486px',
         557: '557px',
+        360: '360px',
+        283: '283px',
+        406: '406px',
+        640: '640px',
+        1440: '1440px',
       },
       height: {
+        104: '104px',
+        124: '124px',
         300: '300px',
+        360: '360px',
         557: '557px',
+        1600: '1600px',
+        2120: '2120px',
       },
       inset: {
         45: '45%',
@@ -85,20 +111,36 @@ module.exports = {
         2: '2 2 0%',
       },
       lineHeight: {
+        30: '30px',
         70: '70px',
       },
       zIndex: {
         '-5': '-5',
         0: '0',
       },
+      marginTop: {
+        124: '124px',
+      },
+      paddingLeft: {
+        137: '137px',
+      },
+      paddingRight: {
+        97: '97px',
+        backgroundImage: {
+          'car-shadow': 'linear-gradient(180deg, rgba(255, 255, 255, 0) 0%, #FFFFFF 100%)',
+        },
+        boxShadow: {
+          'dot-shadow': '0px 0px 0px 6px rgba(53, 99, 233, 0.3)',
+        },
+      },
+      fontFamily: {
+        poppins: ['Poppins', 'sans-serif'],
+        jakarta: ['Plus Jakarta Sans', 'sans-serif'],
+      },
     },
-    fontFamily: {
-      poppins: ['Poppins', 'sans-serif'],
-      jakarta: ['Plus Jakarta Sans', 'sans-serif'],
+    variants: {
+      extend: {},
     },
+    plugins: [],
   },
-  variants: {
-    extend: {},
-  },
-  plugins: [],
 };
