@@ -18,12 +18,9 @@ const StatePicker = () => {
   const [isFocus, setIsFocus] = useState(false);
 
   const handleInverse = () => {
-    console.log('inverse');
     setPickupValue(dropoffValue);
     setDropoffValue(pickupValue);
   };
-
-  console.log(isFocus);
 
   const handleDateError = () => {
     if (dropoffValue.date !== '' && !isFocus) {

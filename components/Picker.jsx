@@ -14,9 +14,6 @@ const Picker = ({ isPickup, pickupValue, setPickupValue, setDropoffValue, dropof
     const { target } = e;
     const { value } = target;
     const { name } = target;
-    console.log(value);
-    console.log(name);
-    console.log(target);
     return isPickup ? setPickupValue({ ...pickupValue, [name]: value }) : setDropoffValue({ ...dropoffValue, [name]: value });
   };
 
