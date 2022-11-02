@@ -20,16 +20,22 @@ const category = () => {
   };
 
   return (
-    <div className="ml-96 p-8">
-      <div className="flex relative w-full">
-        <div className="mr-12 ml-4"><Picker isPickup /></div>
+    <div className="p-4 md:p-8">
+
+      <div className="pickers w-full flex gap-y-4 flex-wrap">
+
+        <div className="flex relative w-full">
+          <div className="w-full"><Picker isPickup /></div>
+        </div>
         {inversePicker()}
-        <Picker isPickup={false} />
+        <div className="flex relative w-full">
+          <div className="w-full"><Picker isPickup={false} /></div>
+        </div>
       </div>
 
-      <div className="flex mt-8 justify-center flex-wrap">
+      <div className="flex mt-4 justify-between flex-wrap gap-y-4">
         {carList.map((model, index) => (
-          <div key={index} className="m-4">
+          <div key={index} className="w-full md:w-49% lg:w-32% xl:w-24% 3xl:w-19%">
             <CarCard model={model} image={Object.values(images)[index].src} />
           </div>
         ))}

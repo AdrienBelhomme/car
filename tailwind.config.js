@@ -83,6 +83,10 @@ module.exports = {
         1013: '1013px',
         '64rem': '64rem',
         '66rem': '66rem',
+        '19%': '19%',
+        '24%': '24%',
+        '32%': '32%',
+        '49%': '49%',
       },
       height: {
         300: '300px',
@@ -114,6 +118,8 @@ module.exports = {
       },
       screens: {
         'mid-xl': '1440px',
+        'lg-mobile': { raw: '(min-height: 550px)' },
+        '3xl': '1900px',
       },
       fontSize: {
         11: '11px',
