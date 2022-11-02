@@ -7,6 +7,7 @@ import CarBanner from './CarBanner';
 import Slider from './Slider';
 import CarCard from './CarCard';
 import Picker from './Picker';
+import Searchbar from './Searchbar';
 
-export { Footer, Navbar, Button, Sidebar, CarBanner, Slider, Picker, CarCard };
+export { Footer, Navbar, Button, Sidebar, CarBanner, Slider, Picker, CarCard, Searchbar };
 
