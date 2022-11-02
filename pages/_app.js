@@ -1,13 +1,14 @@
 import { ThemeProvider } from 'next-themes';
 import Script from 'next/script';
-import { Footer, Navbar } from '../components';
+import { Footer, NavBarTop } from '../components';
 
 import '../styles/globals.css';
+import "./App.css";
 
-const MyApp = ({ Component, pageProps }) => (
+const App = ({ Component, pageProps }) => (
   <ThemeProvider attribute="class">
     <div className="bg-color-car-app dark:bg-nft-dark min-h-screen">
-      <Navbar />
+      <NavBarTop />
       <div>
         <Component {...pageProps} />
       </div>
@@ -17,4 +18,4 @@ const MyApp = ({ Component, pageProps }) => (
   </ThemeProvider>
 );
 
-export default MyApp;
+export default App;
