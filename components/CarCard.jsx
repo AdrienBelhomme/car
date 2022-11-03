@@ -1,5 +1,5 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faHeart, faGasPump, faGear, faUser } from '@fortawesome/free-solid-svg-icons';
+import { faHeart } from '@fortawesome/free-solid-svg-icons';
 import '@fortawesome/fontawesome-svg-core/styles.css';
 import Image from 'next/image';
 import { useState } from 'react';
@@ -36,7 +36,7 @@ const CarCard = ({ image = images.nissan, model = 'Model', category = 'Sport', g
       </div>
       <div className="flex md:block justify-around items-center mt-7 md:m-0">
         <div className="car relative w-3/5 md:w-11/12 m-0 md:mt-10 md:ml-auto md:mr-auto">
-          <Image src={image} layout="fill" width={300} height={100} alt="car-sport" className="w-full" />
+          <Image src={image} layout="contain" width={300} height={100} alt="car-sport" className="w-full" />
           <div className="absolute top-1/3 md:top-12 w-full h-4/5 bg-car-shadow" />
         </div>
         <div className="icons flex justify-between m-0 md:mt-8 flex-col md:flex-row h-16">

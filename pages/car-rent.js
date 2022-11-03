@@ -1,22 +1,23 @@
-import { CarBanner, CarCard } from '../components';
+import { Button, CarBanner, CarCard, StatePicker } from '../components';
 import image from '../assets/index';
 
 const CarRent = () => {
-  const carList = ['Koenigsegg', 'Nissan GT - R', 'Rolls-Royce', 'Nissan GT - R'];
-  return (
-    <div className="container px-4 mx-auto py-0">
+  const carList = ['Koenigsegg', 'Nissan GT - R', 'Rolls-Royce', 'Nissan GT - R', 'Koenigsegg', 'Koenigsegg'];
+  const recommendedCar = ['Koenigsegg', 'Nissan GT - R', 'Rolls-Royce', 'All New Rush', 'All New Terio', 'CRV', 'New MGZS', 'Exclusive MGZS'];
 
-      <div className="flex flex-col gap-8 md:justify-center px-4 pt-8 mx-auto  md:flex-row  mt-124 bg-bg-color-car-app">
-        <div className=" flex max-w-xl">
+  return (
+    <div className=" p-6 md:p-16">
+      <div className="flex flex-col gap-8 pt-8   md:flex-row  mt-124 bg-bg-color-car-app">
+        <div className=" flex w-full ">
           <CarBanner
             title="The Best Platform for Car Rental"
             subtitle="Ease of doing a car rental safely and reliably. Of course at a low price."
-            carImg={image.Koenigsegg}
+            carImg={image.koenigsegg}
             card="bg-[#5CAFFC]"
             btnColor="bg-btn-blue"
           />
         </div>
-        <div className=" hidden md:flex  max-w-xl ">
+        <div className=" hidden md:flex w-full ">
           <CarBanner
             title="Easy way to rent a car at a low price"
             subtitle="Providing cheap car rental services and safe and comfortable facilities."
@@ -26,20 +27,40 @@ const CarRent = () => {
           />
         </div>
       </div>
-      <div className="container flex flex-col px-16 mx-auto items-center w-full">
-        <h1 className="flex text-slate-900">
-          Popular Car
-        </h1>
-        <div className="flex flex-col mt-8 md:flex-row gap-1 justify-center">
+      <div className="mt-[42px]">
+        <StatePicker />
+      </div>
 
+      <div className="popular w-full mt-8 md:mt-[42px]">
+        <div className="flex justify-between">
+          <h1 className="flex text-secondinary-light-300 font-medium text-sm md:text-base md:font-semi-bold">
+            Popular Car
+          </h1>
+          <button type="button" onClick={() => {}}>
+            <h1 className="flex justify-end text-btn-blue text-xs font-semibold md:text-base">view all</h1>
+          </button>
+        </div>
+        <div className="flex mt-[30px] justify-between overflow-x-scroll gap-[19px] ">
           {carList.map((model, index) => (
-            <div key={index}> <CarCard model={model} image={Object.values(image)[index]} /></div>
+            <div key={index} className=" w-full "> <CarCard model={model} image={Object.values(image)[index]} /></div>
           ))}
         </div>
+      </div>
+      <div className="recommendation w-full mt-8 md:mt-[42px]">
+        <h1 className="flex text-secondinary-light-300 font-medium text-sm md:text-base md:font-semi-bold">
+          Recommendation Car
+        </h1>
+        <div className="flex mt-[30px] w-full gap-y-5 justify-between flex-wrap  md:gap-y-8  ">
+          {recommendedCar.map((model, index) => (
+            <div key={index} className=" w-full md:w-49% lg:w-32% xl:w-24% 3xl:w-19%"> <CarCard model={model} image={Object.values(image)[index]} /></div>
+          ))}
+        </div>
+      </div>
+      <div className="flex justify-center items-center mt-12 md:mt-16">
+        <Button text="Show more cars" bgColor="bg-btn-blue" color="text-white" onClick={() => {}} />
       </div>
     </div>
   );
 };
-
 export default CarRent;
 
