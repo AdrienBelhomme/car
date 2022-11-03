@@ -7,7 +7,7 @@ const category = () => {
   return (
     <div className="w-full flex">
       <Sidebar />
-      <div className="p-4 md:p-8 w-full">
+      <div className="p-4 w-full">
         <StatePicker />
         <div className="flex mt-4 justify-between flex-wrap gap-y-4">
           {carList.map((model, index) => (
