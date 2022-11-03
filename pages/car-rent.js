@@ -32,7 +32,7 @@ const CarRent = () => {
       </div>
 
       <div className="popular w-full mt-8 md:mt-[42px]">
-        <div className="flex justify-between">
+        <div className="flex justify-between mx-5">
           <h1 className="flex text-secondinary-light-300 font-medium text-sm md:text-base md:font-semi-bold">
             Popular Car
           </h1>
@@ -40,19 +40,19 @@ const CarRent = () => {
             <h1 className="flex justify-end text-btn-blue text-xs font-semibold md:text-base">view all</h1>
           </button>
         </div>
-        <div className="flex mt-[30px] justify-between overflow-x-scroll gap-[19px] ">
-          {carList.map((model, index) => (
-            <div key={index} className=" w-full "> <CarCard model={model} image={Object.values(image)[index]} /></div>
+        <div className="flex mt-[30px] justify-around w-full gap-[19px] overflow-x-auto md:flex-wrap md:gap-8">
+          {carList.slice(0, 4).map((model, index) => (
+            <div key={index} className=" w-[240px] md:w-47% lg:w-30% xl:w-22% 3xl:w-19% "> <CarCard model={model} image={Object.values(image)[index]} /></div>
           ))}
         </div>
       </div>
       <div className="recommendation w-full mt-8 md:mt-[42px]">
-        <h1 className="flex text-secondinary-light-300 font-medium text-sm md:text-base md:font-semi-bold">
+        <h1 className="flex mx-5 text-secondinary-light-300 font-medium text-sm md:text-base md:font-semi-bold">
           Recommendation Car
         </h1>
-        <div className="flex mt-[30px] w-full gap-y-5 justify-between flex-wrap  md:gap-y-8  ">
+        <div className="flex mt-[30px] justify-around w-full gap-y-5 flex-wrap md:gap-8">
           {recommendedCar.map((model, index) => (
-            <div key={index} className=" w-full md:w-49% lg:w-32% xl:w-24% 3xl:w-19%"> <CarCard model={model} image={Object.values(image)[index]} /></div>
+            <div key={index} className=" w-full md:w-47% lg:w-30% xl:w-22% 3xl:w-19%"> <CarCard model={model} image={Object.values(image)[index]} /></div>
           ))}
         </div>
       </div>
