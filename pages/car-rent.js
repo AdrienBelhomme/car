@@ -40,9 +40,9 @@ const CarRent = () => {
             <h1 className="flex justify-end text-btn-blue text-xs font-semibold md:text-base">view all</h1>
           </button>
         </div>
-        <div className="flex mt-[30px] justify-around w-full gap-[19px] overflow-x-auto md:flex-wrap md:gap-y-8 md:gap-x-8">
+        <div className="flex mt-[30px] justify-start w-full md:flex-wrap gap-8 overflow-x-auto">
           {carList.slice(0, 4).map((model, index) => (
-            <div key={index} className=" w-[240px] md:w-47% lg:w-30% xl:w-22% 3xl:w-19% "> <CarCard model={model} image={Object.values(image)[index]} /></div>
+            <div key={index} className="min-w-[280px] flex-1"> <CarCard model={model} image={Object.values(image)[index]} /></div>
           ))}
         </div>
       </div>
@@ -50,9 +50,9 @@ const CarRent = () => {
         <h1 className="flex mx-5 text-secondinary-light-300 font-medium text-sm md:text-base md:font-semi-bold">
           Recommendation Car
         </h1>
-        <div className="flex mt-[30px] justify-around w-full gap-y-5 flex-wrap md:gap-y-8 md:gap-x-8">
+        <div className="flex mt-[30px] justify-start w-full flex-wrap gap-8">
           {recommendedCar.map((model, index) => (
-            <div key={index} className=" w-full md:w-47% lg:w-30% xl:w-22% 3xl:w-19%"> <CarCard model={model} image={Object.values(image)[index]} /></div>
+            <div key={index} className="min-w-[280px] flex-1"> <CarCard model={model} image={Object.values(image)[index]} /></div>
           ))}
         </div>
       </div>
