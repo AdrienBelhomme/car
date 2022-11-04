@@ -25,14 +25,11 @@ const Footer = (props) => {
         className="h-36 absolute text-base font-medium text-left inline m-0 w-[152px] left-[1228px] top-[136px] leading-[1.2px] text-[rgba(19,19,19,0.6)]"
       >
         Discord
-        <br />
-        <br />
+        <br /> <br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /> <br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
         Instagram
-        <br />
-        <br />
+        <br /><br /><br /> <br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /> <br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
         Twitter
-        <br />
-        <br />
+        <br /><br /><br /> <br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /> <br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
         Facebook
       </p>
       <p
@@ -44,14 +41,11 @@ const Footer = (props) => {
         className="h-36 absolute text-base font-medium text-left inline m-0 w-[152px] left-[1016px] top-[136px] leading-[1.2px] text-[rgba(19,19,19,0.6)]"
       >
         Events
-        <br />
-        <br />
+        <br /><br /><br /><br /> <br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /> <br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
         Blog
-        <br />
-        <br />
+        <br /><br /><br /><br /> <br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /> <br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
         Podcast
-        <br />
-        <br />
+        <br /><br /><br /><br /> <br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /> <br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
         Invite a friend
       </p>
       <p
@@ -63,14 +57,11 @@ const Footer = (props) => {
         className="h-36 absolute text-base font-medium text-left inline m-0 w-[152px] left-[804px] top-[136px] leading-[1.2px] text-[rgba(19,19,19,0.6)]"
       >
         How it works
-        <br />
-        <br />
+        <br /><br /><br /><br /> <br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /> <br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
         Featured
-        <br />
-        <br />
+        <br /><br /><br /><br /> <br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /> <br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
         Partnership
-        <br />
-        <br />
+        <br /><br /><br /><br /> <br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /> <br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
         Bussiness Relation
       </p>
       <p
