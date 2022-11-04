@@ -1,6 +1,9 @@
 // eslint-disable-next-line import/no-extraneous-dependencies
+const express = require('express');
+
 const mongoose = require('mongoose');
 // eslint-disable-next-line import/no-extraneous-dependencies
+const router = express.Router();
 const dotenv = require('dotenv');
 
 dotenv.config({ path: `${__dirname}/.env` });
@@ -10,7 +13,10 @@ mongoose.connect(process.env.DB_CONNECTION, () => {
 });
 
 const carSchema = mongoose.Schema({
-  carTitle: String,
+  carTitle: {
+    type: String,
+    required: true,
+  },
   carBrand: String,
   rentPrice: Number,
   seatCapacity: Number,
@@ -85,3 +91,18 @@ const fifthCar = new Car({
 
 // Multiple Entries:
 // Car.insertMany([firstCar, secondCar, thirdCar, fourthCar, fifthCar]);
+
+// get
+// Car.find((err, Car) => {
+//   if (err) {
+//     console.log(err);
+//   } else {
+//     Car.forEach((Car) => {
+//       console.log(Car.carTitle);
+//     });
+//   }
+// });
+
+// Car.updateOne({_id: ""}, {carTitle: ""}, function(err){
+//   if
+// })
