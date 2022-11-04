@@ -45,7 +45,16 @@ const updatePost = async (req, res) => {
   try {
     const postUpdate = await PostMessage.updateOne(
       { _id: req.params.postId },
-      { $set: { carTitle: req.body.carTitle } },
+      { $set: {
+        carTitle: req.body.carTitle,
+        carBrand: req.body.carBrand,
+        rentPrice: req.body.rentPrice,
+        seatCapacity: req.body.seatCapacity,
+        carType: req.body.carType,
+        Location: req.body.Location,
+        fuelCapacity: req.body.fuelCapacity,
+        steering: req.body.steering,
+      } },
     );
     res.status(200).json(postUpdate);
   } catch (error) {
