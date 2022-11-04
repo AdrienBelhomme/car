@@ -1,3 +1,5 @@
+import React from 'react';
+
 const Footer = (props) => {
   return (
     <div
@@ -96,9 +98,5 @@ const Footer = (props) => {
     </div>
   );
 }
-
-Footer.defaultProps = {
-  style: {},
-};
 
 export default Footer;
