@@ -1,6 +1,6 @@
 const express = require('express');
-
 const bodyParser = require('body-parser');
+
 const { getPosts, createPost, getSpecficPost, deletePost, updatePost } = require('../controllers/posts');
 
 const router = express.Router();
