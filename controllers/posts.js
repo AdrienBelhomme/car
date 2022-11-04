@@ -1,6 +1,7 @@
 const { models } = require('mongoose');
 const PostMessage = require('../models/carSchema');
 
+// .
 const getPosts = async (req, res) => {
   try {
     const PostMessages = await PostMessage.find();
