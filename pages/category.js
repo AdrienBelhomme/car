@@ -4,6 +4,8 @@ import images from '../assets';
 const category = () => {
   const carList = ['Koenigsegg', 'Nissan GT - R', 'Rolls-Royce', 'All New Rush'];
 
+  const filters = ['Sport', 'SUV', 'MPV', 'Sedan', 'Hackback', 'Coupe'];
+
   return (
     <div className="w-full flex">
       <Sidebar />
@@ -12,7 +14,7 @@ const category = () => {
         <div className="flex mt-4 justify-between flex-wrap gap-y-4">
           {carList.map((model, index) => (
             <div key={index} className="w-full md:w-49% lg:w-32% xl:w-24% 3xl:w-19%">
-              <CarCard model={model} image={Object.values(images)[index].src} />
+              <CarCard model={model} image={Object.values(images)[index].src} type={filters[index]} />
             </div>
           ))}
         </div>

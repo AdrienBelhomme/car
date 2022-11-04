@@ -4,7 +4,10 @@ import { useState } from 'react';
 import { Slider, Searchbar } from './index';
 
 const Sidebar = () => {
-  const [checked, setChecked] = useState([]);
+  const [checked, setChecked] = useState([{
+    Sport: true,
+    SUV: false,
+  }]);
 
   const filters = [
     {
@@ -17,13 +20,35 @@ const Sidebar = () => {
     }];
 
   const handleChecked = (e) => {
-    const newChecks = [...checked];
-    if (e.target.checked)setChecked([...newChecks, e.target.value]);
+    const newChecks = { ...checked };
+    const valueTarget = e.target.value;
+    if (e.target.checked)setChecked({ ...newChecks, [e.target.value]: true });
     else {
-      newChecks.splice(checked.indexOf(e.target.value), 1);
-      setChecked([...newChecks]);
+      delete newChecks[valueTarget];
+      setChecked({ ...newChecks });
     }
   };
+
+  // filtering test
+
+  /* const isEven = (value) => value % 2 === 0;
+  const isOdd = (value) => !isEven(value);
+
+  const even = input.filter(isEven);
+  const odd = input.filter(isOdd);
+
+  const isChecked = (option) => checked.includes(option); */
+
+  const allCarType = [...filters[0].options];
+  // const filterCar = allCarType.filter((option) => option.length > 5);
+
+  // const testFilter = allCarType.some((car) => car === checked.indexOf(car));
+
+  const findSport = allCarType.find((element) => element === checked[element]);
+
+  // console.log(testFilter);
+  console.log(checked);
+  console.log(findSport);
 
   return (
     <div className="hidden flex-col bg-white-color border-sidebar-border border-2 max-h-[1400px] max-w-[360px] md:flex ">

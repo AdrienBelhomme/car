@@ -7,7 +7,7 @@ import { useState } from 'react';
 import images from '../assets';
 import Button from './Button';
 
-const CarCard = ({ image = images.nissan, model = 'Model', category = 'Sport', gas = '90L', type = 'Manual', people = '2 people', price = '99.00' }) => {
+const CarCard = ({ image = images.nissan, model = 'Model', type = 'Sport', gas = '90L', category = 'Manual', people = '2 people', price = '99.00' }) => {
   const [isFavorite, setIsFavorite] = useState(false);
 
   const emptyHeart = () => (
@@ -25,7 +25,7 @@ const CarCard = ({ image = images.nissan, model = 'Model', category = 'Sport', g
       <div className="flex justify-between">
         <div className="title">
           <h2 className="text-xl text-secondinary-default font-bold mb-1 font-jakarta">{model}</h2>
-          <h3 className="text-secondinary-light-300 text-sm font-jakarta">{category}</h3>
+          <h3 className="text-secondinary-light-300 text-sm font-jakarta">{type}</h3>
         </div>
         <div className="heart cursor-pointer" onClick={emptyHeart}>
           <FontAwesomeIcon
