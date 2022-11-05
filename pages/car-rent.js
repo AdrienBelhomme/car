@@ -1,9 +1,17 @@
-import { Button, CarBanner, CarCard, StatePicker } from '../components';
+import { Button, CarBanner, StatePicker, CarTypeList } from '../components';
 import image from '../assets/index';
 
 const CarRent = () => {
-  const carList = ['Koenigsegg', 'Nissan GT - R', 'Rolls-Royce', 'Nissan GT - R', 'Koenigsegg', 'Koenigsegg'];
-  const recommendedCar = ['Koenigsegg', 'Nissan GT - R', 'Rolls-Royce', 'All New Rush', 'All New Terio', 'CRV', 'New MGZS', 'Exclusive MGZS'];
+  const popular = [
+    {
+      title: 'Popular',
+      type: ['Koenigsegg', 'Nissan GT - R', 'Rolls-Royce', 'Nissan GT - R', 'Koenigsegg', 'Koenigsegg'],
+    }];
+  const recommended = [{
+    title: 'Recommended Cars',
+    type: ['Koenigsegg', 'Nissan GT - R', 'Rolls-Royce', 'All New Rush', 'All New Terio', 'CRV', 'New MGZS', 'Exclusive MGZS'],
+  },
+  ];
 
   return (
     <div className=" p-6 md:p-16">
@@ -30,32 +38,8 @@ const CarRent = () => {
       <div className="mt-[42px]">
         <StatePicker />
       </div>
-
-      <div className="popular w-full mt-8 md:mt-[42px]">
-        <div className="flex justify-between mx-5">
-          <h1 className="flex text-secondinary-light-300 font-medium text-sm md:text-base md:font-semi-bold">
-            Popular Car
-          </h1>
-          <button type="button" onClick={() => {}}>
-            <h1 className="flex justify-end text-btn-blue text-xs font-semibold md:text-base">view all</h1>
-          </button>
-        </div>
-        <div className="flex mt-[30px] justify-start w-full md:flex-wrap gap-8 overflow-x-auto">
-          {carList.slice(0, 4).map((model, index) => (
-            <div key={index} className="min-w-[280px] flex-1"> <CarCard model={model} image={Object.values(image)[index]} /></div>
-          ))}
-        </div>
-      </div>
-      <div className="recommendation w-full mt-8 md:mt-[42px]">
-        <h1 className="flex mx-5 text-secondinary-light-300 font-medium text-sm md:text-base md:font-semi-bold">
-          Recommendation Car
-        </h1>
-        <div className="flex mt-[30px] justify-start w-full flex-wrap gap-8">
-          {recommendedCar.map((model, index) => (
-            <div key={index} className="min-w-[304px] flex-1"> <CarCard model={model} image={Object.values(image)[index]} /></div>
-          ))}
-        </div>
-      </div>
+      <CarTypeList CarData={popular} scrollable="overflow-x-auto md:flex-wrap" />
+      <CarTypeList CarData={recommended} noscroll="flex-wrap" />
       <div className="flex justify-center items-center mt-12 md:mt-16">
         <Button text="Show more cars" bgColor="bg-btn-blue" color="text-white" onClick={() => {}} />
       </div>

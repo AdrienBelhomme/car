@@ -1,20 +1,20 @@
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faHeart } from "@fortawesome/free-solid-svg-icons";
-import "@fortawesome/fontawesome-svg-core/styles.css";
-import Image from "next/image";
-import { useState } from "react";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faHeart } from '@fortawesome/free-solid-svg-icons';
+import '@fortawesome/fontawesome-svg-core/styles.css';
+import Image from 'next/image';
+import { useState } from 'react';
 
-import images from "../assets";
-import Button from "./Button";
+import images from '../assets';
+import Button from './Button';
 
 const CarCard = ({
   image = images.nissan,
-  model = "Model",
-  category = "Sport",
-  gas = "90L",
-  type = "Manual",
-  people = "2 people",
-  price = "99.00",
+  model = 'Model',
+  category = 'Sport',
+  gas = '90L',
+  type = 'Manual',
+  people = '2 people',
+  price = '99.00',
 }) => {
   const [isFavorite, setIsFavorite] = useState(false);
 
@@ -42,8 +42,8 @@ const CarCard = ({
             icon={faHeart}
             className={`h-5 ${
               isFavorite
-                ? "text-error-default"
-                : "text-dark-900 dark:text-white"
+                ? 'text-error-default'
+                : 'text-dark-900 dark:text-white'
             } 2xl:h-5`}
           />
         </div>
