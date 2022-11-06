@@ -2,7 +2,7 @@
 import React from 'react';
 
 import { CarCard } from './index';
-import image from '../assets/index';
+// import image from '../assets/index';
 
 // const CarTypeList = ({ carData, scrollable, noscroll }) => (
 //   <div>
