@@ -71,8 +71,13 @@ module.exports = {
         'search-border': '#C3D4E966',
         'input-title': '#3D5278',
         'btn-blue-30%': 'rgba(53, 99, 233, 0.3);',
+<<<<<<< HEAD
         picker: 'rgba(195, 212, 233, 0.4)',
         'drop-off': '#5CAFFC',
+=======
+        'form-grey-background': '#F6F7F9',
+        'form-title-color': '#1A202C',
+>>>>>>> cebe4d1bdc81d00eefdf1dea31c514cb8de4a642
       },
 
       width: {
