@@ -23,8 +23,6 @@ const StatePicker = ({ windowSize }) => {
   };
 
   const handleDateError = () => {
-    console.log(pickupValue.date);
-    console.log(dropoffValue.date);
     if (dropoffValue.date !== '' && !isFocus) {
       if (pickupValue.date > dropoffValue.date) {
         return (

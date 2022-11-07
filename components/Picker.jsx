@@ -43,8 +43,6 @@ const Picker = ({ windowSize, isPickup, pickupValue, setPickupValue, setDropoffV
   const inputValueDate = useRef(null);
 
   const handleInputChange = (e) => {
-    console.log(pickupValue);
-    console.log(dropoffValue);
     const { target } = e;
     const { value } = target;
     const { name } = target;
