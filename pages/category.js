@@ -6,6 +6,7 @@ import images, { koenigsegg, nissan, rollsRoyce, allNewRush } from '../assets';
 const category = () => {
   const [checkedCapacity, setCheckedCapacity] = useState([]);
   const [checkedType, setCheckedType] = useState([]);
+  const [checkedPrice, setCheckedPrice] = useState(120);
 
   const carList = [
     { name: 'Koenigsegg', type: 'Sport', people: 2, image: koenigsegg, price: 99.00 },
@@ -55,19 +56,17 @@ const category = () => {
   const filteredData = () => {
     const allCheckedType = checkedType;
     const allCheckedCapacity = [...checkedCapacity];
+    const priceSet = checkedPrice;
 
-    const filterData = carList.filter(({ name, type, people }) => {
+    const filterData = carList.filter(({ name, type, people, price }) => {
       if (checkedType.length === 0 && checkedCapacity.length === 0) {
-        console.log('checkedType tout vide');
-        return filters.some((c) => c === type) && capacity.some((l) => l === people);
+        return filters.some((c) => c === type) && capacity.some((l) => l === people && price < priceSet);
       } if (checkedCapacity.length === 0) {
-        console.log('checkedCapacity vide');
-        return checkedType.some((c) => c === type) && capacity.some((l) => l === people);
+        return checkedType.some((c) => c === type) && capacity.some((l) => l === people) && price < priceSet;
       } if (checkedType.length === 0) {
-        console.log('checkedType vide');
-        return filters.some((c) => c === type) && checkedCapacity.some((l) => l === people);
+        return filters.some((c) => c === type) && checkedCapacity.some((l) => l === people) && price < priceSet;
       }
-      return checkedType.some((c) => c === type) && checkedCapacity.some((l) => l === people);
+      return checkedType.some((c) => c === type) && checkedCapacity.some((l) => l === people) && price < priceSet;
     });
 
     return filterData;
@@ -75,7 +74,7 @@ const category = () => {
 
   return (
     <div className="w-full flex">
-      <Sidebar checkedCapacity={checkedCapacity} setCheckedCapacity={setCheckedCapacity} checkedType={checkedType} setCheckedType={setCheckedType} />
+      <Sidebar checkedPrice={checkedPrice} setCheckedPrice={setCheckedPrice} checkedCapacity={checkedCapacity} setCheckedCapacity={setCheckedCapacity} checkedType={checkedType} setCheckedType={setCheckedType} />
       <div className="p-4 w-full">
         <StatePicker />
         <div className="flex mt-4 justify-between flex-wrap gap-y-4">

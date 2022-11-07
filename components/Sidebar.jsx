@@ -1,7 +1,9 @@
 /* eslint-disable import/no-cycle */
+import { useState } from 'react';
+
 import { Slider, Searchbar } from './index';
 
-const Sidebar = ({ checkedCapacity, checkedType, setCheckedCapacity, setCheckedType }) => {
+const Sidebar = ({ checkedPrice, setCheckedPrice, checkedCapacity, checkedType, setCheckedCapacity, setCheckedType }) => {
   const filters = [
     {
       title: 'Type',
@@ -29,25 +31,6 @@ const Sidebar = ({ checkedCapacity, checkedType, setCheckedCapacity, setCheckedT
     }
   };
 
-  // filtering test
-
-  /* const isEven = (value) => value % 2 === 0;
-  const isOdd = (value) => !isEven(value);
-
-  const even = input.filter(isEven);
-  const odd = input.filter(isOdd);
-
-  const isChecked = (option) => checked.includes(option); */
-
-  // const filterCar = allCarType.filter((option) => option.length > 5);
-
-  // const testFilter = allCarType.some((car) => car === checked.indexOf(car));
-
-  /* const findSport = allCarType.find((element) => element === checked[element]);
-
-  const findSportFilter = allCarType.filter((element) => element === checked[element]);
- */
-
   return (
     <div className="hidden flex-col bg-white-color border-sidebar-border border-2 max-h-[1400px] max-w-[360px] md:flex ">
       <Searchbar />
@@ -70,9 +53,9 @@ const Sidebar = ({ checkedCapacity, checkedType, setCheckedCapacity, setCheckedT
           Price
         </div>
         <div className="App mt-8 px-8">
-          <Slider />
+          <Slider price={checkedPrice} setPrice={setCheckedPrice} />
         </div>
-        <div className="pl-8 mt-4 font-jakarta text-input-title font-semibold"> Max $100.00</div>
+        <div className="pl-8 mt-4 font-jakarta text-input-title font-semibold"> Max ${checkedPrice }</div>
       </div>
     </div>
   );
