@@ -8,6 +8,7 @@ import Slider from './Slider';
 import CarCard from './CarCard';
 import Picker from './Picker';
 import Searchbar from './Searchbar';
+import CustomInput from './CustomInput';
 
-export { Footer, Navbar, Button, Sidebar, CarBanner, Slider, Picker, CarCard, Searchbar };
+export { Footer, Navbar, Button, Sidebar, CarBanner, Slider, Picker, CarCard, Searchbar, CustomInput };
 
