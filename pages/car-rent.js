@@ -1,21 +1,6 @@
 import { Button, CarBanner, StatePicker, CarTypeList } from '../components';
 import image from '../assets/index';
 
-const popular = [
-  {
-    title: 'Popular',
-    type: ['Koenigsegg', 'Nissan GT - R', 'Rolls-Royce', 'Nissan GT - R', 'Koenigsegg', 'Koenigsegg'],
-  },
-];
-
-const recommended = [
-  {
-    title: 'Recommended Cars',
-    type: ['Koenigsegg', 'Nissan GT - R', 'Rolls-Royce', 'All New Rush', 'All New Terio', 'CRV', 'New MGZS', 'Exclusive MGZS'],
-  },
-];
-
-// This is how your data format will be from backend.
 const popularNew = {
   type: 'Popular',
   cars: [
@@ -66,7 +51,6 @@ const CarRent = () => (
       <StatePicker />
     </div>
     <CarTypeList carData={popularNew} scrollable="overflow-x-auto md:flex-wrap" />
-    {/* <CarTypeList carData={recommended} noscroll="flex-wrap" /> */}
     <div className="flex justify-center items-center mt-12 md:mt-16">
       <Button text="Show more cars" bgColor="bg-btn-blue" color="text-white" onClick={() => {}} />
     </div>
