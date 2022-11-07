@@ -1,14 +1,7 @@
 /* eslint-disable import/no-cycle */
-import { useState } from 'react';
-
 import { Slider, Searchbar } from './index';
 
-const Sidebar = () => {
-  const [checked, setChecked] = useState([{
-    Sport: true,
-    SUV: false,
-  }]);
-
+const Sidebar = ({ checkedCapacity, checkedType, setCheckedCapacity, setCheckedType }) => {
   const filters = [
     {
       title: 'Type',
@@ -16,16 +9,23 @@ const Sidebar = () => {
     },
     {
       title: 'Capacity',
-      options: ['2 Persons', '4 Persons', '6 Persons', '8 or More'],
+      options: [2, 4, 6, 8],
     }];
 
   const handleChecked = (e) => {
-    const newChecks = { ...checked };
+    const capacityFilter = [...checkedCapacity];
+    const typeFilter = [...checkedType];
     const valueTarget = e.target.value;
-    if (e.target.checked)setChecked({ ...newChecks, [e.target.value]: true });
-    else {
-      delete newChecks[valueTarget];
-      setChecked({ ...newChecks });
+    const goodValue = valueTarget.length === 1 ? +valueTarget : valueTarget;
+    if (e.target.checked) {
+      console.log(goodValue);
+      console.log(typeof goodValue);
+      if (typeof goodValue === 'number') { setCheckedCapacity([...capacityFilter, goodValue]); } else { setCheckedType([...typeFilter, goodValue]); }
+    } else {
+      if (typeof goodValue === 'number') capacityFilter.splice(checkedCapacity.indexOf(goodValue), 1);
+      else { typeFilter.splice(checkedType.indexOf(goodValue), 1); }
+      if (typeof goodValue === 'number') setCheckedCapacity([...capacityFilter]);
+      else { setCheckedType([...typeFilter]); }
     }
   };
 
@@ -39,16 +39,14 @@ const Sidebar = () => {
 
   const isChecked = (option) => checked.includes(option); */
 
-  const allCarType = [...filters[0].options];
   // const filterCar = allCarType.filter((option) => option.length > 5);
 
   // const testFilter = allCarType.some((car) => car === checked.indexOf(car));
 
-  const findSport = allCarType.find((element) => element === checked[element]);
+  /* const findSport = allCarType.find((element) => element === checked[element]);
 
-  // console.log(testFilter);
-  console.log(checked);
-  console.log(findSport);
+  const findSportFilter = allCarType.filter((element) => element === checked[element]);
+ */
 
   return (
     <div className="hidden flex-col bg-white-color border-sidebar-border border-2 max-h-[1400px] max-w-[360px] md:flex ">
@@ -64,6 +62,7 @@ const Sidebar = () => {
               <label htmlFor="default-checkbox" className="pl-2 text-lg font-semibold font-jakarta text-input-title dark:text-gray-300">{item}<span className="text-secondinary-light-300 font-medium font-jakarta"> ({index * 5})</span></label>
             </div>
           ))}
+
         </div>
       ))}
       <div className="container flex-col w-full mt-14 mb-10">

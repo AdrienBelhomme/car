@@ -16,7 +16,7 @@ const CarCard = ({ image = images.nissan, model = 'Model', type = 'Sport', gas =
 
   const iconList = [
     { name: gas, icon: images.gas.src },
-    { name: type, icon: images.wheel.src },
+    { name: category, icon: images.wheel.src },
     { name: people, icon: images.user.src },
   ];
 
@@ -45,7 +45,7 @@ const CarCard = ({ image = images.nissan, model = 'Model', type = 'Sport', gas =
             <div key={index} className="flex">
               <div className="icon flex items-center">
                 <Image src={icon.icon} layout="fill" width={17} height={17} alt={icon.name} className="text-secondinary-light-300 md:w-6" />
-                <p className="ml-2 text-secondinary-light-300 text-xs md:text-sm font-jakarta">{icon.name}</p>
+                <p className="ml-2 text-secondinary-light-300 text-xs md:text-sm font-jakarta">{icon.name === people ? `${icon.name} persons` : icon.name}</p>
               </div>
             </div>
           ))}

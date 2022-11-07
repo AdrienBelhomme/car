@@ -7,3 +7,5 @@ import gas from './gas.svg';
 import wheel from './wheel.svg';
 
 export default { koenigsegg, nissan, rollsRoyce, allNewRush, user, wheel, gas };
+
+export { koenigsegg, nissan, rollsRoyce, allNewRush };
