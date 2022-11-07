@@ -7,6 +7,8 @@ import Link from 'next/link';
 const Navbar = () => {
   const { theme, setTheme } = useTheme();
 
+  console.log({ theme });
+
   return (
     <nav className="relative bg-white border-solid border w-[1440px] h-[124px] border-[rgba(195,212,233,0.4)] overflow-clip">
     
@@ -19,7 +21,20 @@ const Navbar = () => {
           MORENT
         </p>
         </div>
-        
+        <div className="w-11 h-11 relative">
+      <div
+        className="[background:url(https://uortjlczjmucmpaqqhqm.supabase.co/storage/v1/object/public/firejet-converted-images/images/f1f56cb57c6c5d88e94501a481b5f732536c2851.webp)_center_/_cover] inset-0 w-11 absolute rounded-[90px]"
+       />
+    </div>
+    <div className="w-11 h-11 relative">
+      <div
+        className="[box-shadow:0px_0px_0px_1px_rgba(195,_212,_233,_0.4)_inset] [box-shadow-width:1px] inset-0 opacity-80 w-11 absolute rounded-[90px]"
+       />
+      <div
+        className="absolute rounded-full w-[11px] left-[70.45%] right-[4.55%] top-[4.55%] bottom-[70.45%] bg-[rgba(255,68,35,1)]"
+       />
+    </div>
+    
     </nav>
   );
 };

@@ -1,6 +1,6 @@
 import koenigsegg from './koenigsegg.png';
 import nissangtr from './nissangtr.png';
-import Like from './Like.png';
+import Like from './Like.svg';
 import Notification from './Notification.png';
 import Profile from './Profile.png';
 import Settings from './Settings.png';
