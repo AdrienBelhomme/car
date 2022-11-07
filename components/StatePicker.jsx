@@ -2,7 +2,7 @@ import { useRef, useState } from 'react';
 
 import { Picker, InversePicker } from './index.js';
 
-const StatePicker = () => {
+const StatePicker = ({ windowSize }) => {
   const [pickupValue, setPickupValue] = useState({
     location: '',
     date: '',
@@ -23,6 +23,8 @@ const StatePicker = () => {
   };
 
   const handleDateError = () => {
+    console.log(pickupValue.date);
+    console.log(dropoffValue.date);
     if (dropoffValue.date !== '' && !isFocus) {
       if (pickupValue.date > dropoffValue.date) {
         return (
@@ -36,11 +38,11 @@ const StatePicker = () => {
     <>
       <div className="pickers w-full flex gap-y-4 flex-wrap justify-between relative">
         <div className="flex relative w-full md:w-49%">
-          <div className="w-full"><Picker isPickup setPickupValue={setPickupValue} pickupValue={pickupValue} setIsFocus={setIsFocus} /></div>
+          <div className="w-full"><Picker windowSize={windowSize} isPickup setPickupValue={setPickupValue} pickupValue={pickupValue} setIsFocus={setIsFocus} /></div>
         </div>
         <InversePicker handleInverse={handleInverse} />
         <div className="flex relative w-full md:w-49%">
-          <div className="w-full"><Picker setIsFocus={setIsFocus} isPickup={false} setDropoffValue={setDropoffValue} dropoffValue={dropoffValue} /></div>
+          <div className="w-full"><Picker windowSize={windowSize} setIsFocus={setIsFocus} isPickup={false} setDropoffValue={setDropoffValue} dropoffValue={dropoffValue} /></div>
         </div>
       </div>
       <div className="m-t-1%">{handleDateError()}</div>

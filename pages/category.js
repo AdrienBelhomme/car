@@ -19,11 +19,11 @@ const category = () => {
   const capacity = [1, 2, 4, 8];
 
   // calculate width to display the correct number of cars to match the flexbox display
-  function useWindowSize() {
-    const [windowSize, setWindowSize] = useState({
-      width: undefined,
-    });
+  const [windowSize, setWindowSize] = useState({
+    width: undefined,
+  });
 
+  function useWindowSize() {
     useEffect(() => {
       function handleResize() {
         setWindowSize({
@@ -44,13 +44,6 @@ const category = () => {
 
   const numberOfCars = size < 1900 ? 12 : 15;
 
-  /* const checkedFilters = checkedFilter
-    .filter((c) => c.checked)
-    .map((c) => c.category);
-  const checkedLevels = levelsChoices
-    .filter((l) => l.checked)
-    .map((l) => l.level);
- */
   const findSportFilter2 = checkedType.length === 0 ? carList : carList.filter((element) => checkedType.some((c) => c === element.type));
 
   const filteredData = () => {
@@ -76,7 +69,7 @@ const category = () => {
     <div className="w-full flex">
       <Sidebar checkedPrice={checkedPrice} setCheckedPrice={setCheckedPrice} checkedCapacity={checkedCapacity} setCheckedCapacity={setCheckedCapacity} checkedType={checkedType} setCheckedType={setCheckedType} />
       <div className="p-4 w-full">
-        <StatePicker />
+        <StatePicker windowSize={windowSize} />
         <div className="flex mt-4 justify-between flex-wrap gap-y-4">
           { filteredData().slice(0, numberOfCars).map((model, index) => (
             <div key={index} className="w-full md:w-49% lg:w-32% xl:w-24% 3xl:w-19%">
