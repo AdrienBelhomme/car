@@ -1,29 +1,7 @@
 import { Button, CarBanner, StatePicker, CarTypeList } from '../components';
-import image from '../assets/index';
 
-const popularNew = {
-  type: 'Popular',
-  cars: [
-    {
-      image: image.nissan,
-      model: 'Ferrari',
-      category: 'Sport',
-      gas: '90L',
-      type: 'Manual',
-      people: '2 people',
-      price: '99.00',
-    },
-    {
-      image: image.koenigsegg,
-      model: 'Ferrari',
-      category: 'Sport',
-      gas: '90L',
-      type: 'Manual',
-      people: '2 people',
-      price: '99.00',
-    },
-  ],
-};
+import { popularNew, recommendedCars } from '../public/dummyDatabase/CarData';
+import image from '../assets/index';
 
 const CarRent = () => (
   <div className=" p-6 md:p-16">
@@ -51,6 +29,7 @@ const CarRent = () => (
       <StatePicker />
     </div>
     <CarTypeList carData={popularNew} scrollable="overflow-x-auto md:flex-wrap" />
+    <CarTypeList carData={recommendedCars} noscroll="flex-wrap" />
     <div className="flex justify-center items-center mt-12 md:mt-16">
       <Button text="Show more cars" bgColor="bg-btn-blue" color="text-white" onClick={() => {}} />
     </div>

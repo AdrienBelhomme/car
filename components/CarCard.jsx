@@ -18,12 +18,12 @@ const CarCard = ({
 }) => {
   const [isFavorite, setIsFavorite] = useState(false);
 
-  const emptyHeart = () => setIsFavorite((prev) => !prev);
+  const handleIsFavorite = () => setIsFavorite((prev) => !prev);
 
   const iconList = [
-    { name: gas, icon: images.gas.src },
-    { name: type, icon: images.wheel.src },
-    { name: people, icon: images.user.src },
+    { name: gas, icon: images.gas },
+    { name: type, icon: images.wheel },
+    { name: people, icon: images.user },
   ];
 
   return (
@@ -37,7 +37,7 @@ const CarCard = ({
             {category}
           </h3>
         </div>
-        <div className="heart cursor-pointer" onClick={emptyHeart}>
+        <div className="heart cursor-pointer" onClick={handleIsFavorite}>
           <FontAwesomeIcon
             icon={faHeart}
             className={`h-5 ${
