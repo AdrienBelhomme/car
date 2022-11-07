@@ -10,7 +10,6 @@ const carSchema = mongoose.Schema({
   type: String,
   location: String,
   gas: Number,
-  steering: String,
 });
 
 const Car = mongoose.model('Car', carSchema);
