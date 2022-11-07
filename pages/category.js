@@ -17,6 +17,32 @@ const category = () => {
   const filters = ['Sport', 'SUV', 'MPV', 'Sedan', 'Hackback', 'Coupe'];
   const capacity = [1, 2, 4, 8];
 
+  // calculate width to display the correct number of cars to match the flexbox display
+  function useWindowSize() {
+    const [windowSize, setWindowSize] = useState({
+      width: undefined,
+    });
+
+    useEffect(() => {
+      function handleResize() {
+        setWindowSize({
+          width: window.innerWidth,
+        });
+      }
+
+      window.addEventListener('resize', handleResize);
+
+      handleResize();
+
+      return () => window.removeEventListener('resize', handleResize);
+    }, []);
+    return windowSize;
+  }
+
+  const size = useWindowSize();
+
+  const numberOfCars = size < 1900 ? 12 : 15;
+
   /* const checkedFilters = checkedFilter
     .filter((c) => c.checked)
     .map((c) => c.category);
@@ -47,36 +73,18 @@ const category = () => {
     return filterData;
   };
 
-  console.log({ checkedType });
-  console.log({ checkedCapacity });
-  console.log(filteredData());
-  console.log(filteredData().people);
-
-  /* const checkedCategories = categoryChoices
-    .filter((c) => c.checked)
-    .map((c) => c.category);
-  const checkedLevels = levelsChoices
-    .filter((l) => l.checked)
-    .map((l) => l.level); */
-
-  /* const filteredData = data.filter(
-    ({ category, level }) =>
-      checkedCategories.some((c) => c === category)
-      checkedLevels.some((l) => l === level)
-  ); */
-
   return (
     <div className="w-full flex">
       <Sidebar checkedCapacity={checkedCapacity} setCheckedCapacity={setCheckedCapacity} checkedType={checkedType} setCheckedType={setCheckedType} />
       <div className="p-4 w-full">
         <StatePicker />
         <div className="flex mt-4 justify-between flex-wrap gap-y-4">
-          { filteredData().map((model, index) => (
+          { filteredData().slice(0, numberOfCars).map((model, index) => (
             <div key={index} className="w-full md:w-49% lg:w-32% xl:w-24% 3xl:w-19%">
               <CarCard model={filteredData()[index].name} image={filteredData()[index].image} people={filteredData()[index].people} type={filteredData()[index].type} price={filteredData()[index].price} />
             </div>
           ))}
-          {filteredData().length === 0 ? <p>no cars matching your criterias</p> : null}
+          {filteredData().length === 0 ? <p className="text-5xl p-12 m-auto">no cars matching your criterias</p> : null}
         </div>
       </div>
     </div>

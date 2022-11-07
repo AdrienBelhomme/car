@@ -3,6 +3,21 @@ import { faChevronDown } from '@fortawesome/free-solid-svg-icons';
 import '@fortawesome/fontawesome-svg-core/styles.css';
 import { useRef, useState } from 'react';
 
+/* const CustomInput = ({ ref, mobile, desktop, focus, blur }) => (
+  <CustomInput
+    title="Date"
+    ref={ref}
+    placeholder={isMobile ? mobile : desktop}
+    onFocus={() => handlePlaceholder(focus)}
+    onBlur={() => handlePlaceholderBlur(blur, mobile)}
+    name="location"
+    type="text"
+    value={isPickup ? pickupValue.location : dropoffValue.location}
+    onChange={handleInputChange}
+    className="text-secondinary-light-300 text-xs xs-mobile:text-[10px] d:text-sm font-normal font-jakarta w-full h-6"
+  />
+); */
+
 const Picker = ({ isPickup, pickupValue, setPickupValue, setDropoffValue, dropoffValue, setIsFocus }) => {
   const [isMobile, setIsMobile] = useState(true);
 
@@ -25,27 +40,10 @@ const Picker = ({ isPickup, pickupValue, setPickupValue, setDropoffValue, dropof
     setIsFocus(false);
   };
 
-  /* const handlePlaceholderCity = () => {
-    inputValueCity.current.placeholder = '';
-  };
-  const handlePlaceholderTime = () => {
-    inputValueTime.current.placeholder = '';
-  };
+  const handlePlaceholder = (inputRef) => inputRef.current.placeholder = '';
 
-  const handlePlaceholderBlurTime = () => {
-    inputValueTime.current.placeholder = 'Time';
-  };
-
-  const handlePlaceholderBlurCity = () => {
-    inputValueCity.current.placeholder = 'City';
-  }; */
-
-  const handlePlaceholder = (ref) => {
-    ref.current.placeholder = '';
-  };
-
-  const handlePlaceholderBluer = (ref, name) => {
-    ref.current.placeholder = name;
+  const handlePlaceholderBlur = (inputRef, name) => {
+    inputRef.current.placeholder = name;
   };
 
   return (
@@ -62,8 +60,8 @@ const Picker = ({ isPickup, pickupValue, setPickupValue, setDropoffValue, dropof
               ref={inputValueCity}
               className="text-secondinary-light-300 text-xs xs-mobile:text-[10px] d:text-sm font-normal font-jakarta w-full h-6"
               placeholder={isMobile ? 'City' : 'Select your city'}
-              onFocus={handlePlaceholderCity}
-              onBlur={handlePlaceholderBlurCity}
+              onFocus={() => handlePlaceholder(inputValueCity)}
+              onBlur={() => handlePlaceholderBlur(inputValueCity, 'City')}
               name="location"
               type="text"
               value={isPickup ? pickupValue.location : dropoffValue.location}
@@ -98,8 +96,8 @@ const Picker = ({ isPickup, pickupValue, setPickupValue, setDropoffValue, dropof
               ref={inputValueTime}
               className="text-secondinary-light-300 text-xs xs-mobile:text-[10px] md:text-sm font-normal font-jakarta w-full h-6"
               placeholder={isMobile ? 'Time' : 'Select your time'}
-              onFocus={handlePlaceholderTime}
-              onBlur={handlePlaceholderBlurTime}
+              onFocus={() => handlePlaceholder(inputValueTime)}
+              onBlur={() => handlePlaceholderBlur(inputValueTime, 'Time')}
               name="time"
               type="text"
               value={isPickup ? pickupValue.time : dropoffValue.time}
