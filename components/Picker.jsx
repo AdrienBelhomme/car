@@ -25,7 +25,7 @@ const Picker = ({ isPickup, pickupValue, setPickupValue, setDropoffValue, dropof
     setIsFocus(false);
   };
 
-  const handlePlaceholderCity = () => {
+  /* const handlePlaceholderCity = () => {
     inputValueCity.current.placeholder = '';
   };
   const handlePlaceholderTime = () => {
@@ -38,6 +38,14 @@ const Picker = ({ isPickup, pickupValue, setPickupValue, setDropoffValue, dropof
 
   const handlePlaceholderBlurCity = () => {
     inputValueCity.current.placeholder = 'City';
+  }; */
+
+  const handlePlaceholder = (ref) => {
+    ref.current.placeholder = '';
+  };
+
+  const handlePlaceholderBluer = (ref, name) => {
+    ref.current.placeholder = name;
   };
 
   return (
