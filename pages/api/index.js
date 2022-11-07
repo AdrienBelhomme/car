@@ -1,19 +1,18 @@
 const express = require('express');
 
 const mongoose = require('mongoose');
-const bodyParser = require('body-parser');
 // eslint-disable-next-line import/no-extraneous-dependencies
 const cors = require('cors');
 
 const postRoutes = require('../../routes/posts');
+const router = require('../../routes/posts');
 require('dotenv/config');
 
 const app = express();
 
+app.use(express.json(router));
 app.use('/posts', postRoutes);
 
-app.use(bodyParser.json({ limit: '30mb', extended: true }));
-app.use(bodyParser.json({ limit: '30mb', extended: true }));
 app.use(cors());
 
 const PORT = 3000;

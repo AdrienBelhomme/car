@@ -1,14 +1,15 @@
 const mongoose = require('mongoose');
 
 const carSchema = mongoose.Schema({
+  // image
   carTitle: String,
-  carBrand: String,
-  rentPrice: Number,
-  seatCapacity: Number,
-  carType: String,
-  Location: String,
-  fuelCapacity: Number,
-  steering: String,
+  model: String,
+  category: String,
+  price: Number,
+  people: Number,
+  type: String,
+  location: String,
+  gas: Number,
 });
 
 const Car = mongoose.model('Car', carSchema);
