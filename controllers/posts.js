@@ -47,13 +47,13 @@ const updatePost = async (req, res) => {
       { _id: req.params.postId },
       { $set: {
         carTitle: req.body.carTitle,
-        carBrand: req.body.carBrand,
-        rentPrice: req.body.rentPrice,
-        seatCapacity: req.body.seatCapacity,
-        carType: req.body.carType,
-        Location: req.body.Location,
-        fuelCapacity: req.body.fuelCapacity,
-        steering: req.body.steering,
+        model: req.body.model,
+        category: req.body.category,
+        price: req.body.price,
+        people: req.body.people,
+        type: req.body.type,
+        location: req.body.location,
+        gas: req.body.gas,
       } },
     );
     res.status(200).json(postUpdate);
