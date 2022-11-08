@@ -70,13 +70,12 @@ module.exports = {
         'side-title': '#94A7CB',
         'search-border': '#C3D4E966',
         'input-title': '#3D5278',
-        'btn-blue-30%': 'rgba(53, 99, 233, 0.3);',
-        picker: 'rgba(195, 212, 233, 0.4)',
+        'btn-blue-30%': 'rgba(53, 99, 233, 0.3)',
+         picker: 'rgba(195, 212, 233, 0.4)',
         'drop-off': '#5CAFFC',
         'form-grey-background': '#F6F7F9',
         'form-title-color': '#1A202C',
       },
-
       width: {
         144: '144px',
         176: '176px',
@@ -138,11 +137,22 @@ module.exports = {
         '-5': '-5',
         0: '0',
       },
+<<<<<<< HEAD
       margin: {
         '0-10%': '0 10%',
         '0-5%': '0 5%',
         '0-3%': '0 3%',
         't-1%': '1% 0 0 0',
+=======
+      marginTop: {
+        124: '124px',
+      },
+      paddingLeft: {
+        137: '137px',
+      },
+      paddingRight: {
+        97: '97px',
+>>>>>>> 2465b30f5b37e22ac6e5798192d809873dc36043
       },
       backgroundImage: {
         'car-shadow': 'linear-gradient(180deg, rgba(255, 255, 255, 0) 0%, #FFFFFF 100%)',
@@ -150,6 +160,12 @@ module.exports = {
       boxShadow: {
         'dot-shadow': '0px 0px 0px 6px rgba(53, 99, 233, 0.3)',
         'drop-off-shad': '0px 0px 0px 6px rgba(92, 175, 252, 0.4)',
+      },
+      margin: {
+        '0-10%': '0 10%',
+        '0-5%': '0 5%',
+        '0-3%': '0 3%',
+        't-1%': '1% 0 0 0',
       },
       screens: {
         'mid-xl': '1440px',
@@ -161,9 +177,13 @@ module.exports = {
         11: '11px',
       },
     },
-    variants: {
-      extend: {},
+    fontFamily: {
+      poppins: ['Poppins', 'sans-serif'],
+      jakarta: ['Plus Jakarta Sans', 'sans-serif'],
     },
-    plugins: [],
   },
+  variants: {
+    extend: {},
+  },
+  plugins: [],
 };
