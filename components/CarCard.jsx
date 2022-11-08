@@ -4,10 +4,10 @@ import '@fortawesome/fontawesome-svg-core/styles.css';
 import Image from 'next/image';
 import { useState } from 'react';
 
-import images from '../assets';
+import images, { nissan } from '../assets';
 import Button from './Button';
 
-const CarCard = ({ image = images.nissan, model = 'Model', type = 'Sport', gas = '90L', category = 'Manual', people = '2 people', price = '99.00' }) => {
+const CarCard = ({ image = nissan, model = 'Model', type = 'Sport', gas = '90L', category = 'Manual', people = '2 people', price = '99.00' }) => {
   const [isFavorite, setIsFavorite] = useState(false);
 
   const emptyHeart = () => (
@@ -60,7 +60,7 @@ const CarCard = ({ image = images.nissan, model = 'Model', type = 'Sport', gas =
           </div>
         </div>
         <div className="button w-auto text-base">
-          <Button text="Rent Now" className="lg:w-full" />
+          <Button bgColor="bg-btn-blue" text="Rent Now" className="lg:w-full" />
         </div>
 
       </div>

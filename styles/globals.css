@@ -177,3 +177,17 @@ input[type="date"]::-webkit-calendar-picker-indicator {
     appearance: none;
     opacity: 0;
 }
+
+.ulul {
+    display: grid;
+}
+  
+  .ulul > * {
+    grid-column-start: 1;
+    grid-row-start: 1;
+    justify-self:center;
+  }
+  
+  .lastchild {
+    justify-self: right;
+  }

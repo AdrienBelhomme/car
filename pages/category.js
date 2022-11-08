@@ -1,23 +1,9 @@
 import { useEffect, useState } from 'react';
 
-import { CarCard, Sidebar, StatePicker } from '../components';
-import images, { koenigsegg, nissan, rollsRoyce, allNewRush } from '../assets';
+import { Button, CarCard, Sidebar, StatePicker } from '../components';
+import { koenigsegg, nissan, rollsRoyce, allNewRush } from '../assets';
 
 const category = () => {
-  const [checkedCapacity, setCheckedCapacity] = useState([]);
-  const [checkedType, setCheckedType] = useState([]);
-  const [checkedPrice, setCheckedPrice] = useState(120);
-
-  const carList = [
-    { name: 'Koenigsegg', type: 'Sport', people: 2, image: koenigsegg, price: 99.00 },
-    { name: 'Nissan GT - R', type: 'SUV', people: 4, image: nissan, price: 89.00 },
-    { name: 'Rolls-Royce', type: 'Hackback', people: 4, image: rollsRoyce, price: 109.00 },
-    { name: 'All New Rush', type: 'Coupe', people: 2, image: allNewRush, price: 79.00 },
-  ];
-
-  const filters = ['Sport', 'SUV', 'MPV', 'Sedan', 'Hackback', 'Coupe'];
-  const capacity = [1, 2, 4, 8];
-
   // calculate width to display the correct number of cars to match the flexbox display
   const [windowSize, setWindowSize] = useState({
     width: undefined,
@@ -42,13 +28,54 @@ const category = () => {
 
   const size = useWindowSize();
 
-  const numberOfCars = size < 1900 ? 12 : 15;
+  const [checkedCapacity, setCheckedCapacity] = useState([]);
+  const [checkedType, setCheckedType] = useState([]);
+  const [checkedPrice, setCheckedPrice] = useState(120);
+  const [numberOfCars, setNumberOfCars] = useState(size.width < 1900 ? 12 : 15);
 
-  const findSportFilter2 = checkedType.length === 0 ? carList : carList.filter((element) => checkedType.some((c) => c === element.type));
+  useEffect(() => {
+    console.log('useEffect');
+    setNumberOfCars(size.width < 1900 ? 12 : 15);
+    console.log(numberOfCars);
+  }, [size.width]);
+
+  const carList = [
+    { name: 'Koenigsegg', type: 'Sport', people: 2, image: koenigsegg, price: 99.00 },
+    { name: 'Nissan GT - R', type: 'SUV', people: 4, image: nissan, price: 89.00 },
+    { name: 'Rolls-Royce', type: 'Hackback', people: 4, image: rollsRoyce, price: 109.00 },
+    { name: 'Rolls-Royce', type: 'Hackback', people: 4, image: rollsRoyce, price: 109.00 },
+    { name: 'Rolls-Royce', type: 'Hackback', people: 4, image: rollsRoyce, price: 109.00 },
+    { name: 'Rolls-Royce', type: 'Hackback', people: 4, image: rollsRoyce, price: 109.00 },
+    { name: 'All New Rush', type: 'Coupe', people: 2, image: allNewRush, price: 79.00 },
+    { name: 'All New Rush', type: 'Coupe', people: 2, image: allNewRush, price: 79.00 },
+    { name: 'All New Rush', type: 'Coupe', people: 2, image: allNewRush, price: 79.00 },
+    { name: 'All New Rush', type: 'Coupe', people: 2, image: allNewRush, price: 79.00 },
+    { name: 'All New Rush', type: 'Coupe', people: 2, image: allNewRush, price: 79.00 },
+    { name: 'All New Rush', type: 'Coupe', people: 2, image: allNewRush, price: 79.00 },
+    { name: 'All New Rush', type: 'Coupe', people: 2, image: allNewRush, price: 79.00 },
+    { name: 'All New Rush', type: 'Coupe', people: 2, image: allNewRush, price: 79.00 },
+    { name: 'All New Rush', type: 'Coupe', people: 2, image: allNewRush, price: 79.00 },
+    { name: 'All New Rush', type: 'Coupe', people: 2, image: allNewRush, price: 79.00 },
+    { name: 'All New Rush', type: 'Coupe', people: 2, image: allNewRush, price: 79.00 },
+    { name: 'All New Rush', type: 'Coupe', people: 2, image: allNewRush, price: 79.00 },
+    { name: 'All New Rush', type: 'Coupe', people: 2, image: allNewRush, price: 79.00 },
+    { name: 'All New Rush', type: 'Coupe', people: 2, image: allNewRush, price: 79.00 },
+    { name: 'All New Rush', type: 'Coupe', people: 2, image: allNewRush, price: 79.00 },
+    { name: 'All New Rush', type: 'Coupe', people: 2, image: allNewRush, price: 79.00 },
+    { name: 'All New Rush', type: 'Coupe', people: 2, image: allNewRush, price: 79.00 },
+  ];
+
+  const filters = ['Sport', 'SUV', 'MPV', 'Sedan', 'Hackback', 'Coupe'];
+  const capacity = [1, 2, 4, 8];
+
+  const totalCars = carList.length;
+
+  const showMoreCars = () => {
+    console.log('show more cars');
+    setNumberOfCars(numberOfCars * 2);
+  };
 
   const filteredData = () => {
-    const allCheckedType = checkedType;
-    const allCheckedCapacity = [...checkedCapacity];
     const priceSet = checkedPrice;
 
     const filterData = carList.filter(({ name, type, people, price }) => {
@@ -78,7 +105,16 @@ const category = () => {
           ))}
           {filteredData().length === 0 ? <p className="text-5xl p-12 m-auto">no cars matching your criterias</p> : null}
         </div>
+        <div className="ulul my-16">
+          <div>
+            <Button handleClick={showMoreCars} text="Show more cars" textSize="text-sm" bgColor="bg-btn-blue" color="text-white" onClick={() => {}} margin="mx-auto" />
+          </div>
+          <div className="lastchild self-center">
+            <p className="text-secondinary-light-300 font-jakarta font-bold">{totalCars} cars</p>
+          </div>
+        </div>
       </div>
+
     </div>
   );
 };
