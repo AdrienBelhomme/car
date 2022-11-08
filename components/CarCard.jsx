@@ -3,11 +3,12 @@ import { faHeart, faGasPump, faGear, faUser } from '@fortawesome/free-solid-svg-
 import '@fortawesome/fontawesome-svg-core/styles.css';
 import Image from 'next/image';
 import { useState } from 'react';
+import Link from 'next/link';
 
 import images, { nissan } from '../assets';
 import Button from './Button';
 
-const CarCard = ({ image = nissan, model = 'Model', type = 'Sport', gas = '90L', category = 'Manual', people = '2 people', price = '99.00' }) => {
+const CarCard = ({ image = nissan, model = 'Model', type = 'Sport', gas = '90L', category = 'Manual', people = '2 people', price = '99.00', checkedCapacity, checkedType, checkedPrice }) => {
   const [isFavorite, setIsFavorite] = useState(false);
 
   const emptyHeart = () => (
@@ -60,7 +61,18 @@ const CarCard = ({ image = nissan, model = 'Model', type = 'Sport', gas = '90L',
           </div>
         </div>
         <div className="button w-auto text-base">
-          <Button bgColor="bg-btn-blue" text="Rent Now" className="lg:w-full" />
+          <Link
+            href={{
+              pathname: '/details',
+              query: {
+                checkedCapacity,
+                checkedType,
+                checkedPrice },
+              title: 'test',
+            }}
+          >
+            <Button bgColor="bg-btn-blue" text="Rent Now" className="lg:w-full" />
+          </Link>
         </div>
 
       </div>

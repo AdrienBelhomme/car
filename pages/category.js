@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import Link from 'next/link';
 
 import { Button, CarCard, Sidebar, StatePicker } from '../components';
 import { koenigsegg, nissan, rollsRoyce, allNewRush } from '../assets';
@@ -100,7 +101,7 @@ const category = () => {
         <div className="flex mt-4 justify-between flex-wrap gap-y-4">
           { filteredData().slice(0, numberOfCars).map((model, index) => (
             <div key={index} className="w-full md:w-49% lg:w-32% xl:w-24% 3xl:w-19%">
-              <CarCard model={filteredData()[index].name} image={filteredData()[index].image} people={filteredData()[index].people} type={filteredData()[index].type} price={filteredData()[index].price} />
+              <CarCard model={filteredData()[index].name} image={filteredData()[index].image} people={filteredData()[index].people} type={filteredData()[index].type} price={filteredData()[index].price} checkedCapacity={checkedCapacity} checkedType={checkedType} checkedPrice={checkedPrice} />
             </div>
           ))}
           {filteredData().length === 0 ? <p className="text-5xl p-12 m-auto">no cars matching your criterias</p> : null}
