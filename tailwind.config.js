@@ -7,6 +7,9 @@ module.exports = {
   mode: 'jit',
   theme: {
     extend: {
+      screens: {
+        '3xl': '1900px',
+      },
       colors: {
         'main-app': '#F6F7F9',
         'yellow-star': '#FBAD39',
@@ -74,6 +77,8 @@ module.exports = {
         'btn-blue-30%': 'rgba(53, 99, 233, 0.3)',
         picker: 'rgba(195, 212, 233, 0.4)',
         'drop-off': '#5CAFFC',
+        'form-grey-background': '#F6F7F9',
+        'form-title-color': '#1A202C',
       },
       width: {
         144: '144px',
@@ -125,6 +130,16 @@ module.exports = {
       },
       flex: {
         2: '2 2 0%',
+        19: '1 1 19%',
+        24: '1 1 24%',
+        31: '1 1 31%',
+        48: '1 1 48%',
+      },
+      maxWidth: {
+        19: '19%',
+        24: '24%',
+        31: '31%',
+        48: '48%',
       },
       lineHeight: {
         30: '30px',
@@ -133,6 +148,12 @@ module.exports = {
       zIndex: {
         '-5': '-5',
         0: '0',
+      },
+      margin: {
+        '0-10%': '0 10%',
+        '0-5%': '0 5%',
+        '0-3%': '0 3%',
+        't-1%': '1% 0 0 0',
       },
       marginTop: {
         124: '124px',
@@ -155,12 +176,6 @@ module.exports = {
         '0-5%': '0 5%',
         '0-3%': '0 3%',
         't-1%': '1% 0 0 0',
-      },
-      screens: {
-        'mid-xl': '1440px',
-        'lg-mobile': { raw: '(min-width: 550px)' },
-        'xs-mobile': { raw: '(max-width: 325px)' },
-        '3xl': '1900px',
       },
       fontSize: {
         11: '11px',

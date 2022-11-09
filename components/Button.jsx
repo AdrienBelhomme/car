@@ -1,4 +1,4 @@
-const Button = ({ text = 'button', bgColor, textSize, color = 'text-white', handleClick, margin }) => (
+const Button = ({ text = 'button', bgColor = 'bg-btn-blue', color = 'text-white', handleClick, margin, textSize }) => (
   <button
     onClick={handleClick}
     type="button"

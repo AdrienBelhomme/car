@@ -10,6 +10,7 @@ import Picker from './Picker';
 import Searchbar from './Searchbar';
 import StatePicker from './StatePicker';
 import InversePicker from './InversePicker';
+import CarTypeList from './CarTypeList';
 
-export { Footer, Navbar, Button, Sidebar, CarBanner, Slider, Picker, CarCard, Searchbar, StatePicker, InversePicker };
+export { Footer, Navbar, Button, Sidebar, CarBanner, Slider, Picker, CarCard, Searchbar, StatePicker, InversePicker, CarTypeList };
 
