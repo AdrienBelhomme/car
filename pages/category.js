@@ -72,7 +72,7 @@ const category = () => {
         <StatePicker windowSize={windowSize} />
         <div className="flex mt-4 justify-start flex-wrap gap-4">
           { filteredData().slice(0, numberOfCars).map((model, index) => (
-            <div key={index} className="w-full md:w-49% lg:w-32% xl:w-24% 3xl:w-19%">
+            <div key={index} className="w-full md:w-48% lg:w-31% xl:w-24% 3xl:w-19%">
               <CarCard model={model.name} image={model.image} people={model.people} type={model.type} price={model.price} checkedCapacity={checkedCapacity} checkedType={checkedType} checkedPrice={checkedPrice} />
             </div>
           ))}
