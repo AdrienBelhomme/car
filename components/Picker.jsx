@@ -1,10 +1,42 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faChevronDown } from '@fortawesome/free-solid-svg-icons';
 import '@fortawesome/fontawesome-svg-core/styles.css';
-import { useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
-const Picker = ({ isPickup, pickupValue, setPickupValue, setDropoffValue, dropoffValue, setIsFocus }) => {
+const CustomInput = ({ reference, mobile, desktop, handlePlaceholder, handlePlaceholderBlur, handleInputChange, isPickup, pickupValue, dropoffValue, isMobile, title, name, type, handleFocusDateInput, handleOutFocusDateInput }) => (
+  <div className="w-full">
+    <p className="font-bold xs-mobile:text-[10px]">{name.charAt(0).toUpperCase() + name.slice(1)}</p>
+    <div className="flex items-center cursor-pointer mt-2">
+      <input
+        ref={reference}
+        placeholder={isMobile ? mobile : desktop}
+        onFocus={type === 'date' ? () => handleFocusDateInput() : () => handlePlaceholder(reference)}
+        onBlur={type === 'date' ? () => handleOutFocusDateInput() : () => handlePlaceholderBlur(reference)}
+        name={name}
+        type={type}
+        value={isPickup ? pickupValue[title].replaceAll('"', '') : dropoffValue[title].replaceAll('"', '')}
+        onChange={handleInputChange}
+        className="text-secondinary-light-300 text-xs xs-mobile:text-[10px] md:text-sm font-normal font-jakarta w-full h-6"
+      />
+      <FontAwesomeIcon icon={faChevronDown} className="w-3" />
+    </div>
+  </div>
+);
+
+const Picker = ({ windowSize, isPickup, pickupValue, setPickupValue, setDropoffValue, dropoffValue, setIsFocus }) => {
   const [isMobile, setIsMobile] = useState(true);
+
+  const handleResize = () => {
+    if (windowSize.width > 768) {
+      setIsMobile(false);
+    } else {
+      setIsMobile(true);
+    }
+  };
+
+  useEffect(() => {
+    handleResize();
+  }, [windowSize]);
 
   const inputValueCity = useRef(null);
   const inputValueTime = useRef(null);
@@ -25,19 +57,12 @@ const Picker = ({ isPickup, pickupValue, setPickupValue, setDropoffValue, dropof
     setIsFocus(false);
   };
 
-  const handlePlaceholderCity = () => {
-    inputValueCity.current.placeholder = '';
-  };
-  const handlePlaceholderTime = () => {
-    inputValueTime.current.placeholder = '';
+  const handlePlaceholder = (inputRef) => {
+    inputRef.current.placeholder = '';
   };
 
-  const handlePlaceholderBlurTime = () => {
-    inputValueTime.current.placeholder = 'Time';
-  };
-
-  const handlePlaceholderBlurCity = () => {
-    inputValueCity.current.placeholder = 'City';
+  const handlePlaceholderBlur = (inputRef, name) => {
+    inputRef.current.placeholder = name;
   };
 
   return (
@@ -47,61 +72,20 @@ const Picker = ({ isPickup, pickupValue, setPickupValue, setDropoffValue, dropof
         <h4 className="font-jakarta font-semibold">{isPickup ? 'Pick-Up' : 'Drop-Off'}</h4>
       </div>
       <div className="flex justify-between">
-        <div className="w-full">
-          <p className="font-bold xs-mobile:text-[10px]">Locations</p>
-          <div className="flex items-center cursor-pointer mt-2">
-            <input
-              ref={inputValueCity}
-              className="text-secondinary-light-300 text-xs xs-mobile:text-[10px] d:text-sm font-normal font-jakarta w-full h-6"
-              placeholder={isMobile ? 'City' : 'Select your city'}
-              onFocus={handlePlaceholderCity}
-              onBlur={handlePlaceholderBlurCity}
-              name="location"
-              type="text"
-              value={isPickup ? pickupValue.location : dropoffValue.location}
-              onChange={handleInputChange}
-            />
-            <FontAwesomeIcon icon={faChevronDown} className="w-3" />
-          </div>
-        </div>
+
+        <CustomInput name="location" title="location" reference={inputValueCity} mobile="City" desktop="Select your city" handlePlaceholder={() => handlePlaceholder(inputValueCity)} handlePlaceholderBlur={() => handlePlaceholderBlur(inputValueCity, 'City')} handleInputChange={handleInputChange} isPickup={isPickup} pickupValue={pickupValue} dropoffValue={dropoffValue} isMobile={isMobile} type="text" />
+
         <div className="border-r border-picker m-0-5% xs-mobile:m-0-3% lg:m-0-10%" />
-        <div className="w-full">
-          <p className="font-bold xs-mobile:text-[10px]">Date</p>
-          <div className="flex items-center cursor-pointer mt-2">
-            <input
-              ref={inputValueDate}
-              className="text-secondinary-light-300 text-xs xs-mobile:text-[10px] md:text-sm font-normal font-jakarta w-full h-6"
-              placeholder={isMobile ? 'Date' : 'Select your date'}
-              onFocus={handleFocusDateInput}
-              onBlur={handleOutFocusDateInput}
-              name="date"
-              type="date"
-              value={isPickup ? pickupValue.date : dropoffValue.date}
-              onChange={handleInputChange}
-            />
-            <FontAwesomeIcon icon={faChevronDown} className="w-3" />
-          </div>
-        </div>
+
+        <CustomInput name="date" title="date" reference={inputValueDate} mobile="Date" desktop="Select your date" handlePlaceholder={() => handleFocusDateInput(inputValueDate)} handleOutFocusDateInput={handleOutFocusDateInput} handleFocusDateInput={() => handleFocusDateInput(inputValueDate, 'Date')} handleInputChange={handleInputChange} isPickup={isPickup} pickupValue={pickupValue} dropoffValue={dropoffValue} isMobile={isMobile} type="date" />
+
         <div className="border-r border-picker m-0-5% xs-mobile:m-0-3% lg:m-0-10%" />
-        <div className="w-full">
-          <p className="font-bold xs-mobile:text-[10px]">Time</p>
-          <div className="flex items-center cursor-pointer mt-2">
-            <input
-              ref={inputValueTime}
-              className="text-secondinary-light-300 text-xs xs-mobile:text-[10px] md:text-sm font-normal font-jakarta w-full h-6"
-              placeholder={isMobile ? 'Time' : 'Select your time'}
-              onFocus={handlePlaceholderTime}
-              onBlur={handlePlaceholderBlurTime}
-              name="time"
-              type="text"
-              value={isPickup ? pickupValue.time : dropoffValue.time}
-              onChange={handleInputChange}
-            />
-            <FontAwesomeIcon icon={faChevronDown} className="w-3" />
-          </div>
-        </div>
+
+        <CustomInput name="time" title="time" reference={inputValueTime} mobile="Time" desktop="Select your time" handlePlaceholder={() => handlePlaceholder(inputValueTime)} handlePlaceholderBlur={() => handlePlaceholderBlur(inputValueTime, 'Time')} handleInputChange={handleInputChange} isPickup={isPickup} pickupValue={pickupValue} dropoffValue={dropoffValue} isMobile={isMobile} type="text" />
+
       </div>
     </div>
+
   );
 };
 

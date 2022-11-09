@@ -3,8 +3,9 @@ import { faHeart } from '@fortawesome/free-solid-svg-icons';
 import '@fortawesome/fontawesome-svg-core/styles.css';
 import Image from 'next/image';
 import { useState } from 'react';
+import Link from 'next/link';
 
-import images from '../assets';
+import images, { nissan } from '../assets';
 import Button from './Button';
 
 const CarCard = ({
@@ -15,7 +16,11 @@ const CarCard = ({
   type = 'Manual',
   people = '2 people',
   price = '99.00',
+  checkedCapacity,
+  checkedType,
+  checkedPrice  
 }) => {
+
   const [isFavorite, setIsFavorite] = useState(false);
 
   const handleIsFavorite = () => setIsFavorite((prev) => !prev);
@@ -30,12 +35,8 @@ const CarCard = ({
     <div className="w-full bg-white rounded-lg p-5">
       <div className="flex justify-between">
         <div className="title">
-          <h2 className="text-xl text-secondinary-default font-bold mb-1 font-jakarta">
-            {model}
-          </h2>
-          <h3 className="text-secondinary-light-300 text-sm font-jakarta">
-            {category}
-          </h3>
+          <h2 className="text-xl text-secondinary-default font-bold mb-1 font-jakarta">{model}</h2>
+          <h3 className="text-secondinary-light-300 text-sm font-jakarta">{type}</h3>
         </div>
         <div className="heart cursor-pointer" onClick={handleIsFavorite}>
           <FontAwesomeIcon
@@ -57,17 +58,8 @@ const CarCard = ({
           {iconList.map((icon, index) => (
             <div key={index} className="flex">
               <div className="icon flex items-center">
-                <Image
-                  src={icon.icon}
-                  layout="fill"
-                  width={17}
-                  height={17}
-                  alt={icon.name}
-                  className="text-secondinary-light-300 md:w-6"
-                />
-                <p className="ml-2 text-secondinary-light-300 text-xs md:text-sm font-jakarta">
-                  {icon.name}
-                </p>
+                <Image src={icon.icon} layout="fill" width={17} height={17} alt={icon.name} className="text-secondinary-light-300 md:w-6" />
+                <p className="ml-2 text-secondinary-light-300 text-xs md:text-sm font-jakarta">{icon.name === people ? `${icon.name} persons` : icon.name}</p>
               </div>
             </div>
           ))}
@@ -84,7 +76,24 @@ const CarCard = ({
           </div>
         </div>
         <div className="button w-auto text-base">
-          <Button text="Rent Now" className="lg:w-full" />
+          <Link
+            href={{
+              pathname: '/details',
+              query: {
+                image,
+                model,
+                type,
+                gas,
+                category,
+                people,
+                price,
+                setIsFavorite,
+                isFavorite,
+              },
+            }}
+          >
+            <Button bgColor="bg-btn-blue" text="Rent Now" className="lg:w-full" />
+          </Link>
         </div>
       </div>
     </div>

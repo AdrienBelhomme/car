@@ -9,6 +9,7 @@ module.exports = {
     extend: {
       colors: {
         'main-app': '#F6F7F9',
+        'yellow-star': '#FBAD39',
         'light-100': '#E7DEFE',
         'light-200': '#CEBEFE',
         'light-300': '#B49DFE',
@@ -103,11 +104,9 @@ module.exports = {
         '64rem': '64rem',
         '66rem': '66rem',
         '19%': '19%',
-        '22%': '22%',
-        '24%': '24%',
-        '30%': '30%',
-        '32%': '32%',
-        '47%': '47%',
+        '24%': '23%',
+        '31%': '31%',
+        '48%': '48%',
         '49%': '49%',
       },
       height: {

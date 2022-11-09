@@ -3,9 +3,7 @@ import { useState } from 'react';
 
 import { Slider, Searchbar } from './index';
 
-const Sidebar = () => {
-  const [checked, setChecked] = useState([]);
-
+const Sidebar = ({ checkedPrice, setCheckedPrice, checkedCapacity, checkedType, setCheckedCapacity, setCheckedType }) => {
   const filters = [
     {
       title: 'Type',
@@ -13,20 +11,26 @@ const Sidebar = () => {
     },
     {
       title: 'Capacity',
-      options: ['2 Persons', '4 Persons', '6 Persons', '8 or More'],
+      options: [2, 4, 6, 8],
     }];
 
   const handleChecked = (e) => {
-    const newChecks = [...checked];
-    if (e.target.checked)setChecked([...newChecks, e.target.value]);
-    else {
-      newChecks.splice(checked.indexOf(e.target.value), 1);
-      setChecked([...newChecks]);
+    const capacityFilter = [...checkedCapacity];
+    const typeFilter = [...checkedType];
+    const inputValue = e.target.value;
+    const inputValueType = inputValue.length === 1 ? +inputValue : inputValue;
+    if (e.target.checked) {
+      if (typeof inputValueType === 'number') { setCheckedCapacity([...capacityFilter, inputValueType]); } else { setCheckedType([...typeFilter, inputValueType]); }
+    } else {
+      if (typeof inputValueType === 'number') capacityFilter.splice(checkedCapacity.indexOf(inputValueType), 1);
+      else { typeFilter.splice(checkedType.indexOf(inputValueType), 1); }
+      // eslint-disable-next-line no-unused-expressions
+      typeof inputValueType === 'number' ? setCheckedCapacity([...capacityFilter]) : setCheckedType([...typeFilter]);
     }
   };
 
   return (
-    <div className="hidden flex-col bg-white-color border-sidebar-border border-2 max-h-[1400px] max-w-[360px] md:flex ">
+    <div className="hidden flex-col bg-white-color border-sidebar-border border-2 max-w-[360px] md:flex ">
       <Searchbar />
       {filters.map(({ title, options }) => (
         <div className="container flex-col w-full mt-14" key={title}>
@@ -39,6 +43,7 @@ const Sidebar = () => {
               <label htmlFor="default-checkbox" className="pl-2 text-lg font-semibold font-jakarta text-input-title dark:text-gray-300">{item}<span className="text-secondinary-light-300 font-medium font-jakarta"> ({index * 5})</span></label>
             </div>
           ))}
+
         </div>
       ))}
       <div className="container flex-col w-full mt-14 mb-10">
@@ -46,9 +51,9 @@ const Sidebar = () => {
           Price
         </div>
         <div className="App mt-8 px-8">
-          <Slider />
+          <Slider price={checkedPrice} setPrice={setCheckedPrice} />
         </div>
-        <div className="pl-8 mt-4 font-jakarta text-input-title font-semibold"> Max $100.00</div>
+        <div className="pl-8 mt-4 font-jakarta text-input-title font-semibold"> Max ${checkedPrice }</div>
       </div>
     </div>
   );
