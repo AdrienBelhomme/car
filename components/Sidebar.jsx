@@ -17,22 +17,20 @@ const Sidebar = ({ checkedPrice, setCheckedPrice, checkedCapacity, checkedType, 
   const handleChecked = (e) => {
     const capacityFilter = [...checkedCapacity];
     const typeFilter = [...checkedType];
-    const valueTarget = e.target.value;
-    const goodValue = valueTarget.length === 1 ? +valueTarget : valueTarget;
+    const inputValue = e.target.value;
+    const inputValueType = inputValue.length === 1 ? +inputValue : inputValue;
     if (e.target.checked) {
-      console.log(goodValue);
-      console.log(typeof goodValue);
-      if (typeof goodValue === 'number') { setCheckedCapacity([...capacityFilter, goodValue]); } else { setCheckedType([...typeFilter, goodValue]); }
+      if (typeof inputValueType === 'number') { setCheckedCapacity([...capacityFilter, inputValueType]); } else { setCheckedType([...typeFilter, inputValueType]); }
     } else {
-      if (typeof goodValue === 'number') capacityFilter.splice(checkedCapacity.indexOf(goodValue), 1);
-      else { typeFilter.splice(checkedType.indexOf(goodValue), 1); }
-      if (typeof goodValue === 'number') setCheckedCapacity([...capacityFilter]);
-      else { setCheckedType([...typeFilter]); }
+      if (typeof inputValueType === 'number') capacityFilter.splice(checkedCapacity.indexOf(inputValueType), 1);
+      else { typeFilter.splice(checkedType.indexOf(inputValueType), 1); }
+      // eslint-disable-next-line no-unused-expressions
+      typeof inputValueType === 'number' ? setCheckedCapacity([...capacityFilter]) : setCheckedType([...typeFilter]);
     }
   };
 
   return (
-    <div className="hidden flex-col bg-white-color border-sidebar-border border-2 max-h-[1400px] max-w-[360px] md:flex ">
+    <div className="hidden flex-col bg-white-color border-sidebar-border border-2 max-w-[360px] md:flex ">
       <Searchbar />
       {filters.map(({ title, options }) => (
         <div className="container flex-col w-full mt-14" key={title}>

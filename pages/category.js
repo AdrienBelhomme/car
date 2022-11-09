@@ -1,10 +1,13 @@
 import { useEffect, useState } from 'react';
+import Link from 'next/link';
+import resolveConfig from 'tailwindcss/resolveConfig';
+import tailwindConfig from '../tailwind.config.js';
 
 import { Button, CarCard, Sidebar, StatePicker } from '../components';
 import { koenigsegg, nissan, rollsRoyce, allNewRush } from '../assets';
+import carList from '../constants/carList';
 
 const category = () => {
-  // calculate width to display the correct number of cars to match the flexbox display
   const [windowSize, setWindowSize] = useState({
     width: undefined,
   });
@@ -33,38 +36,6 @@ const category = () => {
   const [checkedPrice, setCheckedPrice] = useState(120);
   const [numberOfCars, setNumberOfCars] = useState(size.width < 1900 ? 12 : 15);
 
-  useEffect(() => {
-    console.log('useEffect');
-    setNumberOfCars(size.width < 1900 ? 12 : 15);
-    console.log(numberOfCars);
-  }, [size.width]);
-
-  const carList = [
-    { name: 'Koenigsegg', type: 'Sport', people: 2, image: koenigsegg, price: 99.00 },
-    { name: 'Nissan GT - R', type: 'SUV', people: 4, image: nissan, price: 89.00 },
-    { name: 'Rolls-Royce', type: 'Hackback', people: 4, image: rollsRoyce, price: 109.00 },
-    { name: 'Rolls-Royce', type: 'Hackback', people: 4, image: rollsRoyce, price: 109.00 },
-    { name: 'Rolls-Royce', type: 'Hackback', people: 4, image: rollsRoyce, price: 109.00 },
-    { name: 'Rolls-Royce', type: 'Hackback', people: 4, image: rollsRoyce, price: 109.00 },
-    { name: 'All New Rush', type: 'Coupe', people: 2, image: allNewRush, price: 79.00 },
-    { name: 'All New Rush', type: 'Coupe', people: 2, image: allNewRush, price: 79.00 },
-    { name: 'All New Rush', type: 'Coupe', people: 2, image: allNewRush, price: 79.00 },
-    { name: 'All New Rush', type: 'Coupe', people: 2, image: allNewRush, price: 79.00 },
-    { name: 'All New Rush', type: 'Coupe', people: 2, image: allNewRush, price: 79.00 },
-    { name: 'All New Rush', type: 'Coupe', people: 2, image: allNewRush, price: 79.00 },
-    { name: 'All New Rush', type: 'Coupe', people: 2, image: allNewRush, price: 79.00 },
-    { name: 'All New Rush', type: 'Coupe', people: 2, image: allNewRush, price: 79.00 },
-    { name: 'All New Rush', type: 'Coupe', people: 2, image: allNewRush, price: 79.00 },
-    { name: 'All New Rush', type: 'Coupe', people: 2, image: allNewRush, price: 79.00 },
-    { name: 'All New Rush', type: 'Coupe', people: 2, image: allNewRush, price: 79.00 },
-    { name: 'All New Rush', type: 'Coupe', people: 2, image: allNewRush, price: 79.00 },
-    { name: 'All New Rush', type: 'Coupe', people: 2, image: allNewRush, price: 79.00 },
-    { name: 'All New Rush', type: 'Coupe', people: 2, image: allNewRush, price: 79.00 },
-    { name: 'All New Rush', type: 'Coupe', people: 2, image: allNewRush, price: 79.00 },
-    { name: 'All New Rush', type: 'Coupe', people: 2, image: allNewRush, price: 79.00 },
-    { name: 'All New Rush', type: 'Coupe', people: 2, image: allNewRush, price: 79.00 },
-  ];
-
   const filters = ['Sport', 'SUV', 'MPV', 'Sedan', 'Hackback', 'Coupe'];
   const capacity = [1, 2, 4, 8];
 
@@ -75,18 +46,20 @@ const category = () => {
     setNumberOfCars(numberOfCars * 2);
   };
 
-  const filteredData = () => {
-    const priceSet = checkedPrice;
+  useEffect(() => {
+    setNumberOfCars(windowSize.width < 1900 ? 12 : 15);
+  }, [windowSize.width]);
 
+  const filteredData = () => {
     const filterData = carList.filter(({ name, type, people, price }) => {
       if (checkedType.length === 0 && checkedCapacity.length === 0) {
-        return filters.some((c) => c === type) && capacity.some((l) => l === people && price < priceSet);
+        return filters.some((c) => c === type) && capacity.some((l) => l === people && price < checkedPrice);
       } if (checkedCapacity.length === 0) {
-        return checkedType.some((c) => c === type) && capacity.some((l) => l === people) && price < priceSet;
+        return checkedType.some((c) => c === type) && capacity.some((l) => l === people) && price < checkedPrice;
       } if (checkedType.length === 0) {
-        return filters.some((c) => c === type) && checkedCapacity.some((l) => l === people) && price < priceSet;
+        return filters.some((c) => c === type) && checkedCapacity.some((l) => l === people) && price < checkedPrice;
       }
-      return checkedType.some((c) => c === type) && checkedCapacity.some((l) => l === people) && price < priceSet;
+      return checkedType.some((c) => c === type) && checkedCapacity.some((l) => l === people) && price < checkedPrice;
     });
 
     return filterData;
@@ -97,10 +70,10 @@ const category = () => {
       <Sidebar checkedPrice={checkedPrice} setCheckedPrice={setCheckedPrice} checkedCapacity={checkedCapacity} setCheckedCapacity={setCheckedCapacity} checkedType={checkedType} setCheckedType={setCheckedType} />
       <div className="p-4 w-full">
         <StatePicker windowSize={windowSize} />
-        <div className="flex mt-4 justify-between flex-wrap gap-y-4">
+        <div className="flex mt-4 justify-start flex-wrap gap-4">
           { filteredData().slice(0, numberOfCars).map((model, index) => (
-            <div key={index} className="w-full md:w-49% lg:w-32% xl:w-24% 3xl:w-19%">
-              <CarCard model={filteredData()[index].name} image={filteredData()[index].image} people={filteredData()[index].people} type={filteredData()[index].type} price={filteredData()[index].price} />
+            <div key={index} className="w-full md:w-48% lg:w-31% xl:w-24% 3xl:w-19%">
+              <CarCard model={model.name} image={model.image} people={model.people} type={model.type} price={model.price} checkedCapacity={checkedCapacity} checkedType={checkedType} checkedPrice={checkedPrice} />
             </div>
           ))}
           {filteredData().length === 0 ? <p className="text-5xl p-12 m-auto">no cars matching your criterias</p> : null}
