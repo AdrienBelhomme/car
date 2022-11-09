@@ -71,7 +71,7 @@ module.exports = {
         'search-border': '#C3D4E966',
         'input-title': '#3D5278',
         'btn-blue-30%': 'rgba(53, 99, 233, 0.3)',
-         picker: 'rgba(195, 212, 233, 0.4)',
+        picker: 'rgba(195, 212, 233, 0.4)',
         'drop-off': '#5CAFFC',
         'form-grey-background': '#F6F7F9',
         'form-title-color': '#1A202C',
@@ -103,8 +103,11 @@ module.exports = {
         '64rem': '64rem',
         '66rem': '66rem',
         '19%': '19%',
+        '22%': '22%',
         '24%': '24%',
+        '30%': '30%',
         '32%': '32%',
+        '47%': '47%',
         '49%': '49%',
       },
       height: {
@@ -134,45 +137,50 @@ module.exports = {
         '-5': '-5',
         0: '0',
       },
-      marginTop: {
-        124: '124px',
-      },
-      paddingLeft: {
-        137: '137px',
-      },
-      paddingRight: {
-        97: '97px',
-      },
-      backgroundImage: {
-        'car-shadow': 'linear-gradient(180deg, rgba(255, 255, 255, 0) 0%, #FFFFFF 100%)',
-      },
-      boxShadow: {
-        'dot-shadow': '0px 0px 0px 6px rgba(53, 99, 233, 0.3)',
-        'drop-off-shad': '0px 0px 0px 6px rgba(92, 175, 252, 0.4)',
-      },
       margin: {
         '0-10%': '0 10%',
         '0-5%': '0 5%',
         '0-3%': '0 3%',
         't-1%': '1% 0 0 0',
+        marginTop: {
+          124: '124px',
+        },
+        paddingLeft: {
+          137: '137px',
+        },
+        paddingRight: {
+          97: '97px',
+        },
+        backgroundImage: {
+          'car-shadow': 'linear-gradient(180deg, rgba(255, 255, 255, 0) 0%, #FFFFFF 100%)',
+        },
+        boxShadow: {
+          'dot-shadow': '0px 0px 0px 6px rgba(53, 99, 233, 0.3)',
+          'drop-off-shad': '0px 0px 0px 6px rgba(92, 175, 252, 0.4)',
+        },
+        margin: {
+          '0-10%': '0 10%',
+          '0-5%': '0 5%',
+          '0-3%': '0 3%',
+          't-1%': '1% 0 0 0',
+        },
+        screens: {
+          'mid-xl': '1440px',
+          'lg-mobile': { raw: '(min-width: 550px)' },
+          'xs-mobile': { raw: '(max-width: 325px)' },
+          '3xl': '1900px',
+        },
+        fontSize: {
+          11: '11px',
+        },
       },
-      screens: {
-        'mid-xl': '1440px',
-        'lg-mobile': { raw: '(min-width: 550px)' },
-        'xs-mobile': { raw: '(max-width: 325px)' },
-        '3xl': '1900px',
-      },
-      fontSize: {
-        11: '11px',
+      fontFamily: {
+        poppins: ['Poppins', 'sans-serif'],
+        jakarta: ['Plus Jakarta Sans', 'sans-serif'],
       },
     },
-    fontFamily: {
-      poppins: ['Poppins', 'sans-serif'],
-      jakarta: ['Plus Jakarta Sans', 'sans-serif'],
+    variants: {
+      extend: {},
     },
-  },
-  variants: {
-    extend: {},
-  },
-  plugins: [],
-};
+    plugins: [],
+  } };
