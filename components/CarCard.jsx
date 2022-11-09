@@ -65,10 +65,16 @@ const CarCard = ({ image = nissan, model = 'Model', type = 'Sport', gas = '90L',
             href={{
               pathname: '/details',
               query: {
-                checkedCapacity,
-                checkedType,
-                checkedPrice },
-              title: 'test',
+                image,
+                model,
+                type,
+                gas,
+                category,
+                people,
+                price,
+                setIsFavorite,
+                isFavorite,
+              },
             }}
           >
             <Button bgColor="bg-btn-blue" text="Rent Now" className="lg:w-full" />

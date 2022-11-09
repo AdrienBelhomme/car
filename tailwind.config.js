@@ -9,6 +9,7 @@ module.exports = {
     extend: {
       colors: {
         'main-app': '#F6F7F9',
+        'yellow-star': '#FBAD39',
         'light-100': '#E7DEFE',
         'light-200': '#CEBEFE',
         'light-300': '#B49DFE',
