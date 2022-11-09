@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import ReactSlider from 'react-slider';
 
 const Slider = ({ price, setPrice }) => {
