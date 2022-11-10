@@ -3,15 +3,17 @@ import nissangtr from './nissangtr.png';
 import Like from './Like.svg';
 import Notification from './Notification.png';
 import Profile from './Profile.png';
-import Settings from './Settings.png';
+import Setting from './Setting.png';
+import logo from './Logo.png';
 
 
 export default {
   koenigsegg,
   nissangtr,
-  Settings,
+  Setting,
   Profile,
   Notification,
   Like,
+  logo,
 
 };
