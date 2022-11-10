@@ -23,20 +23,8 @@ const CustomInput = ({ reference, mobile, desktop, handlePlaceholder, handlePlac
   </div>
 );
 
-const Picker = ({ windowSize, isPickup, pickupValue, setPickupValue, setDropoffValue, dropoffValue, setIsFocus }) => {
+const Picker = ({ isPickup, pickupValue, setPickupValue, setDropoffValue, dropoffValue, setIsFocus }) => {
   const [isMobile, setIsMobile] = useState(true);
-
-  const handleResize = () => {
-    if (windowSize.width > 768) {
-      setIsMobile(false);
-    } else {
-      setIsMobile(true);
-    }
-  };
-
-  useEffect(() => {
-    handleResize();
-  }, [windowSize]);
 
   const inputValueCity = useRef(null);
   const inputValueTime = useRef(null);

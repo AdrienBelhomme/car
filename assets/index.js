@@ -1,5 +1,5 @@
 import koenigsegg from './koenigsegg.png';
-import nissan from './Nissan GT - R.png';
+import nissan from './Nissan.png';
 import rollsRoyce from './Rolls-Royce copy.png';
 import allNewRush from './allNewRush.png';
 import allNewTerios from './allNewTerios.png';

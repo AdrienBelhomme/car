@@ -191,3 +191,7 @@ input[type="date"]::-webkit-calendar-picker-indicator {
   .lastchild {
     justify-self: right;
   }
+
+  .bg-banner {
+    background-image: url("../assets/background-banner.png");
+  }

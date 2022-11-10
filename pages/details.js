@@ -4,8 +4,8 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHeart, faGasPump, faGear, faUser, faStar } from '@fortawesome/free-solid-svg-icons';
 import '@fortawesome/fontawesome-svg-core/styles.css';
 
-import { Button, CarCard, Sidebar } from '../components';
-import { koenigsegg, nissan, rollsRoyce, allNewRush } from '../assets';
+import { Button, CarBanner, CarCard, Sidebar } from '../components';
+import images from '../assets';
 
 const Stars = ({ rating }) => {
   const stars = [];
@@ -37,10 +37,10 @@ const details = () => {
   );
 
   const carList = [
-    { name: 'Koenigsegg', type: 'Sport', people: 2, image: koenigsegg, price: 99.00 },
-    { name: 'Nissan GT - R', type: 'SUV', people: 4, image: nissan, price: 89.00 },
-    { name: 'Rolls-Royce', type: 'Hackback', people: 4, image: rollsRoyce, price: 109.00 },
-    { name: 'All New Rush', type: 'Coupe', people: 2, image: allNewRush, price: 79.00 },
+    { name: 'Koenigsegg', type: 'Sport', people: 2, image: images.koenigsegg, price: 99.00 },
+    { name: 'Nissan GT - R', type: 'SUV', people: 4, image: images.nissan, price: 89.00 },
+    { name: 'Rolls-Royce', type: 'Hackback', people: 4, image: images.rollsRoyce, price: 109.00 },
+    { name: 'All New Rush', type: 'Coupe', people: 2, image: images.allNewRush, price: 79.00 },
   ];
 
   const filters = ['Sport', 'SUV', 'MPV', 'Sedan', 'Hackback', 'Coupe'];
@@ -53,10 +53,16 @@ const details = () => {
 
         <div className="flex items-center justify-between">
 
-          <div className="flex items-center w-49% bg-white rounded-lg p-5">
-            <div className="text-4xl font-bold font-jakarta text-center text-input-title">{model}</div>
-            <div className="text-2xl font-medium font-jakarta text-center text-input-title">{type}</div>
-            <div className="text-2xl font-medium font-jakarta text-center text-input-title">${price}</div>
+          <div className="flex items-center w-49% bg-white rounded-lg p-5 bg-banner bg-cover">
+            <div className=" hidden md:flex w-full ">
+              <CarBanner
+                title="Easy way to rent a car at a low price"
+                subtitle="Providing cheap car rental services and safe and comfortable facilities."
+                carImg={images.nissan}
+                card="transparent"
+                btnColor="bg-[#5CAFFC]"
+              />
+            </div>
           </div>
 
           <div className=" w-49% bg-white rounded-lg p-5">
