@@ -3,9 +3,11 @@ import { useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHeart, faGasPump, faGear, faUser, faStar } from '@fortawesome/free-solid-svg-icons';
 import '@fortawesome/fontawesome-svg-core/styles.css';
+import Image from 'next/image';
 
 import { Button, CarBanner, CarCard, Sidebar } from '../components';
 import images from '../assets';
+import carList from '../constants/carList';
 
 const Stars = ({ rating }) => {
   const stars = [];
@@ -21,30 +23,37 @@ const Stars = ({ rating }) => {
 
 const details = () => {
   const router = useRouter();
-  const { image, model, type, gas, category, people, price, setIsFavorite, isFavorite } = router.query;
-
-  console.log(setIsFavorite);
-  console.log(isFavorite);
+  const { carImages, model, type, gas, category, people, price, setIsFavorite, isFavorite } = router.query;
 
   const [checkedCapacity, setCheckedCapacity] = useState([1, 2, 4]);
   const [checkedType, setCheckedType] = useState(['sport']);
   const [checkedPrice, setCheckedPrice] = useState(120);
+  const [banner, setBanner] = useState(images.banner.src);
+  const [selected, setSelected] = useState('');
 
   const numberOfCars = 10;
+
+  console.log(setIsFavorite);
 
   const emptyHeart = () => (
     setIsFavorite((prev) => !prev)
   );
 
-  const carList = [
-    { name: 'Koenigsegg', type: 'Sport', people: 2, image: images.koenigsegg, price: 99.00 },
-    { name: 'Nissan GT - R', type: 'SUV', people: 4, image: images.nissan, price: 89.00 },
-    { name: 'Rolls-Royce', type: 'Hackback', people: 4, image: images.rollsRoyce, price: 109.00 },
-    { name: 'All New Rush', type: 'Coupe', people: 2, image: images.allNewRush, price: 79.00 },
-  ];
-
   const filters = ['Sport', 'SUV', 'MPV', 'Sedan', 'Hackback', 'Coupe'];
   const capacity = [1, 2, 4, 8];
+  const id = 0;
+
+  const handleBanner = (e) => {
+    setBanner(e);
+  };
+
+  const handleSelected = (i) => {
+    setSelected(i);
+  };
+
+  const carImagess = [
+    images.carCurrent, images.detailsViewCar, images.detailsViewCar2,
+  ];
 
   return (
     <div className="w-full flex">
@@ -53,15 +62,32 @@ const details = () => {
 
         <div className="flex items-center justify-between">
 
-          <div className="flex items-center w-49% bg-white rounded-lg p-5 bg-banner bg-cover">
-            <div className=" hidden md:flex w-full ">
+          <div className="flex flex-col items-center w-49% rounded-lg p-5">
+
+            <div style={{ backgroundImage: `url(${banner})`, backgroundSize: '50% 100%', backgroundRepeat: 'no-repeat', backgroundPosition: 'top' }} className="md:flex w-full bg-cover rounded">
               <CarBanner
-                title="Easy way to rent a car at a low price"
-                subtitle="Providing cheap car rental services and safe and comfortable facilities."
+                title={carList[id].text}
+                subtitle={carList[id].subtitle}
                 carImg={images.nissan}
                 card="transparent"
                 btnColor="bg-[#5CAFFC]"
+                hidden="hidden"
               />
+            </div>
+            <div className="w-full mt-5">
+              <div className="flex items-center justify-between">
+                {carImagess.map((image, i) => (
+                  <Image
+                    onClick={(event) => {
+                      handleBanner(event.target.src);
+                      handleSelected(i);
+                    }}
+                    src={image}
+                    alt={`${image}`}
+                    className={`${selected === i ? 'selected p-2' : ''} w-31% object-contain`}
+                  />
+                ))}
+              </div>
             </div>
           </div>
 
@@ -87,8 +113,7 @@ const details = () => {
             </div>
 
             <div className="flex items-center mt-8">
-              <p className="text-xl font-jakarta text-input-title leading-9">NISMO has become the embodiment of Nissan's outstanding
-                performance, inspired by the most unforgiving proving ground, the "race track".
+              <p className="text-xl font-jakarta text-input-title leading-9">{carList[id].description}
               </p>
             </div>
 
