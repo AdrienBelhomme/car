@@ -4,18 +4,18 @@ import images from '../assets';
 
 const footerLinks = [
   {
-    title: "About Links",
+    title: "About",
     sublinks: [
       {
         name: "How it works",
         link: "/how-it-works"
       },
       {
-        name:  "Featured",
-        link: "/featured" 
+        name: "Featured",
+        link: "/featured"
       },
       {
-        name: "Partnership", 
+        name: "Partnership",
         link: "/partnership"
       },
       {
@@ -28,15 +28,15 @@ const footerLinks = [
     title: "Social",
     sublinks: [
       {
-        name: "Discord", 
+        name: "Discord",
         link: "/discord"
       },
       {
-        name: "Instagram", 
+        name: "Instagram",
         link: "/instagram"
       },
       {
-        name: "Twitter", 
+        name: "Twitter",
         link: "/twitter"
       },
       {
@@ -49,15 +49,15 @@ const footerLinks = [
     title: "Community",
     sublinks: [
       {
-        name: "Events", 
+        name: "Events",
         link: "/events"
       },
       {
-        name: "Blogs", 
+        name: "Blogs",
         link: "/blog"
       },
       {
-        name: "Podcast", 
+        name: "Podcast",
         link: "/podcast"
       },
       {
@@ -71,35 +71,35 @@ const footerLinks = [
 const Footer = () => {
   return (
     <footer className="w-full flex flex-col p-5 sm:gap-8 gap-4 bg-white">
-          {/* links */}
+      {/* links */}
       <div className="flex justify-between flex-wrap gap-4">
-          <div>
-      <Image 
-        src={images.logo} 
-        alt="Logo" 
-        width={148}
-        height={44} 
-        layout="fill" 
-      /><br></br>
-        {/* Logo here */}
-        {/* text below logo */}
-        <h1 className="max w-35 font-jakarta font-medium text-[16px] leading-[32px] text-[#90A3BF]">Our vision is to provide convenience <br /> and help increase your sales business.</h1>
-</div>
-      <div className="flex flex-row flex-wrap gap-8">
-        {footerLinks.map((links) => (
-          <div className='flex flex-col gap-4'>
-          {/* About links */}
-          <h1 className="font-jakarta font-semibold text-[20px] leading-[24px] text-[#131313]">{links.title}</h1>
-          <div className="flex flex-col gap-4 font-jakarta font-medium text-[16px] leading-[19.2px] text-[#90A3BF]">
-            {links.sublinks.map((sublink) => (
-              <a href={sublink.link} className='cursor-pointer'>{sublink.name}</a>
-            ))}
-          </div>
+        <div>
+          <Image
+            src={images.Logo}
+            alt="Logo"
+            width={148}
+            height={44}
+            layout="fill"
+          /><br></br>
+          {/* Logo here */}
+          {/* text below logo */}
+          <h1 className="max w-35 font-jakarta font-medium text-[16px] leading-[32px] text-[#90A3BF]">Our vision is to provide convenience <br /> and help increase your sales business.</h1>
         </div>
-        ))}
+        <div className="flex flex-row flex-wrap gap-8">
+          {footerLinks.map((links) => (
+            <div className='flex flex-col gap-4'>
+              {/* About links */}
+              <h1 className="font-jakarta font-semibold text-[20px] leading-[24px] text-[#131313]">{links.title}</h1>
+              <div className="flex flex-col gap-4 font-jakarta font-medium text-[16px] leading-[19.2px] text-[#90A3BF]">
+                {links.sublinks.map((sublink) => (
+                  <a href={sublink.link} className='cursor-pointer'>{sublink.name}</a>
+                ))}
+              </div>
+            </div>
+          ))}
 
-{/* Social links */}
-        {/* <div className='flex flex-col gap-4'>
+          {/* Social links */}
+          {/* <div className='flex flex-col gap-4'>
 
 <h1 className="font-jakarta font-semibold text-[20px] leading-[24px] text-[#131313]">Social</h1>
 <div className="flex flex-col gap-4 font-jakarta font-medium text-[16px] leading-[19.2px] text-[#90A3BF]">
@@ -110,9 +110,9 @@ const Footer = () => {
   
   </div>
   </div> */}
-        
+
           {/* Community links */}
-        {/* <div className='flex flex-col gap-4'>
+          {/* <div className='flex flex-col gap-4'>
           <h1 className="font-jakarta font-semibold text-[20px] leading-[24px] text-[#131313]">Community</h1>
           <div className="flex flex-col gap-4 font-jakarta font-medium text-[16px] leading-[19.2px] text-[#90A3BF]">
             <a className='cursor-pointer'>Events</a>
@@ -122,32 +122,32 @@ const Footer = () => {
         </div>
         </div> */}
 
-       
-      </div>
+
+        </div>
       </div>
 
       {/* hr tag */}
-       <hr class="my-8 h-px bg-gray-200 border-1 dark:bg-gray-700"></hr>
+      <hr class="my-8 h-px bg-gray-200 border-1 dark:bg-gray-700"></hr>
 
-         {/* copyright */}
+      {/* copyright */}
       <div className="flex justify-end gap-4">
         <div className="w-full flex justify-between flex-wrap">
           <p className="font-jakarta font-semibold text-[16px] leading-[32px] text-[#131313]">©2022 MORENT. All rights reserved</p>
-          
+
           <div className="flex flex-row flex-wrap  md:gap-8 gap-4">
             <p
-            className="font-semibold leading-[32px] text-[16px] md:text-[#131313] text-red-700">Privacy & Policy</p>
+              className="font-semibold leading-[32px] text-[16px] md:text-[#131313] text-red-700">Privacy & Policy</p>
             <p
-            className="font-semibold leading-[32px] text-[16px] text-[#131313]">Terms & Condition</p>
+              className="font-semibold leading-[32px] text-[16px] text-[#131313]">Terms & Condition</p>
           </div>
-        </div> 
+        </div>
       </div>
-   
+
     </footer>
   )
 }
 
-       // <h2 className="font-jakarta font-semibold w-[292px] h-[64px] text-[16px] leading-[32px] text-[#131313]">©2022 MORENT. All rights reserved</h2>
+// <h2 className="font-jakarta font-semibold w-[292px] h-[64px] text-[16px] leading-[32px] text-[#131313]">©2022 MORENT. All rights reserved</h2>
 
 // const Footer = (props) => {
 //   return (

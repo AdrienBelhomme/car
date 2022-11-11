@@ -16,7 +16,7 @@ const Navbar = () => {
       <div className="flex flex-row gap-4 items-center justify-center">
         <div className='sm:flex hidden relative w-[148px] h-auto object-contain'>
           <Image
-            src={images.logo}
+            src={images.Logo}
             alt="Logo"
             layout="fill"
           />
