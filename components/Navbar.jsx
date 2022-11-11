@@ -14,10 +14,19 @@ const Navbar = () => {
   return (
     <nav className="w-full flex justify-between items-center p-5 bg-white">
       <div className="flex flex-row gap-4 items-center justify-center">
-        <div className='relative w-[148px] h-auto object-contain'>
+        <div className='sm:flex hidden relative w-[148px] h-auto object-contain'>
           <Image
             src={images.logo}
             alt="Logo"
+            layout="fill"
+          />
+        </div>
+        <div className='sm:hidden flex'>
+          <Image
+            src={images.menu}
+            alt="Menu"
+            width={24}
+            height={24}
             layout="fill"
           />
         </div>
@@ -48,27 +57,29 @@ const Navbar = () => {
       </div>
 
       <div className="flex-1 flex flex-row justify-end gap-4 items-center">
-        <Image
-          src={images.Like}
-          alt="Like"
-          width={44}
-          height={44}
-          layout="fill"
-        />
-        <Image
-          src={images.Notification}
-          alt="Notification"
-          width={44}
-          height={44}
-          layout="fill"
-        />
-        <Image
-          src={images.Setting}
-          alt="Setting"
-          width={44}
-          height={44}
-          layout="fill"
-        />
+        <div className='sm:flex hidden gap-4'>
+          <Image
+            src={images.Like}
+            alt="Like"
+            width={44}
+            height={44}
+            layout="fill"
+          />
+          <Image
+            src={images.Notification}
+            alt="Notification"
+            width={44}
+            height={44}
+            layout="fill"
+          />
+          <Image
+            src={images.Setting}
+            alt="Setting"
+            width={44}
+            height={44}
+            layout="fill"
+          />
+        </div>
         <Image
           src={images.Profile}
           alt="Profile"
