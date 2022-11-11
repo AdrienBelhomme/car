@@ -4,11 +4,15 @@ module.exports = {
     './components/**/*.{js,ts,jsx,tsx,html}',
   ],
   darkMode: 'class',
-  mode: "jit",
+  mode: 'jit',
   theme: {
     extend: {
+      screens: {
+        '3xl': '1900px',
+      },
       colors: {
-        'bg-color-car-app': '#F6F7F9',
+        'main-app': '#F6F7F9',
+        'yellow-star': '#FBAD39',
         'light-100': '#E7DEFE',
         'light-200': '#CEBEFE',
         'light-300': '#B49DFE',
@@ -70,8 +74,12 @@ module.exports = {
         'side-title': '#94A7CB',
         'search-border': '#C3D4E966',
         'input-title': '#3D5278',
+        'btn-blue-30%': 'rgba(53, 99, 233, 0.3)',
+        picker: 'rgba(195, 212, 233, 0.4)',
+        'drop-off': '#5CAFFC',
+        'form-grey-background': '#F6F7F9',
+        'form-title-color': '#1A202C',
       },
-
       width: {
         144: '144px',
         176: '176px',
@@ -80,13 +88,29 @@ module.exports = {
         284: '284',
         296: '296px',
         352: '352px',
+        244: '244px',
+        297: '297px',
+        300: '300px',
+        336: '336px',
         357: '357px',
+        389: '389px',
+        455: '455px',
+        486: '486px',
         557: '557px',
         360: '360px',
         283: '283px',
         406: '406px',
         640: '640px',
         1440: '1440px',
+        695: '695px',
+        1013: '1013px',
+        '64rem': '64rem',
+        '66rem': '66rem',
+        '19%': '19%',
+        '24%': '23%',
+        '31%': '31%',
+        '48%': '48%',
+        '49%': '49%',
       },
       height: {
         104: '104px',
@@ -106,6 +130,16 @@ module.exports = {
       },
       flex: {
         2: '2 2 0%',
+        19: '1 1 19%',
+        24: '1 1 24%',
+        31: '1 1 31%',
+        48: '1 1 48%',
+      },
+      maxWidth: {
+        19: '19%',
+        24: '24%',
+        31: '31%',
+        48: '48%',
       },
       lineHeight: {
         30: '30px',
@@ -115,6 +149,12 @@ module.exports = {
         '-5': '-5',
         0: '0',
       },
+      margin: {
+        '0-10%': '0 10%',
+        '0-5%': '0 5%',
+        '0-3%': '0 3%',
+        't-1%': '1% 0 0 0',
+      },
       marginTop: {
         124: '124px',
       },
@@ -123,6 +163,22 @@ module.exports = {
       },
       paddingRight: {
         97: '97px',
+      },
+      backgroundImage: {
+        'car-shadow': 'linear-gradient(180deg, rgba(255, 255, 255, 0) 0%, #FFFFFF 100%)',
+      },
+      boxShadow: {
+        'dot-shadow': '0px 0px 0px 6px rgba(53, 99, 233, 0.3)',
+        'drop-off-shad': '0px 0px 0px 6px rgba(92, 175, 252, 0.4)',
+      },
+      margin: {
+        '0-10%': '0 10%',
+        '0-5%': '0 5%',
+        '0-3%': '0 3%',
+        't-1%': '1% 0 0 0',
+      },
+      fontSize: {
+        11: '11px',
       },
     },
     fontFamily: {

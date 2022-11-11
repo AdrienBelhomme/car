@@ -128,9 +128,9 @@
 
 .horizontal-slider {
     width: 100%;
-    max-width: 220px;
+    max-width: 296px;
     height: 5vh;
-    margin: auto;
+
 }
 
 .example-thumb {
@@ -170,3 +170,24 @@
     height: 20px;
     line-height: 38px;
 }
+
+input[type="date"]::-webkit-inner-spin-button,
+input[type="date"]::-webkit-calendar-picker-indicator {
+    display: none;
+    appearance: none;
+    opacity: 0;
+}
+
+.ulul {
+    display: grid;
+}
+  
+  .ulul > * {
+    grid-column-start: 1;
+    grid-row-start: 1;
+    justify-self:center;
+  }
+  
+  .lastchild {
+    justify-self: right;
+  }
