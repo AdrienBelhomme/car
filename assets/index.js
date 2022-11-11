@@ -5,6 +5,9 @@ import Notification from './Notification.png';
 import Profile from './Profile.png';
 import Setting from './Setting.png';
 import logo from './Logo.png';
+import search from './search.svg';
+import filter from './filter.svg';
+import menu from './menu.svg';
 
 
 export default {
@@ -15,5 +18,8 @@ export default {
   Notification,
   Like,
   logo,
+  search,
+  filter,
+  menu,
 
 };
