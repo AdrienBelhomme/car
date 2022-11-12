@@ -4,8 +4,8 @@ const mongoose = require('mongoose');
 // eslint-disable-next-line import/no-extraneous-dependencies
 const cors = require('cors');
 
-const postRoutes = require('../../routes/posts');
-const router = require('../../routes/posts');
+const postRoutes = require('./routes/posts');
+const router = require('./routes/posts');
 require('dotenv/config');
 
 const app = express();
