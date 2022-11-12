@@ -7,10 +7,9 @@ import tailwindConfig from '../tailwind.config.js';
 import { Button, CarCard, Sidebar, StatePicker } from '../components';
 import { koenigsegg, nissan, rollsRoyce, allNewRush } from '../assets';
 import carList from '../constants/carList';
+import { useThemeContext } from '../context/filtersState';
 
 const category = () => {
-  const Context = createContext('default');
-
   const [windowSize, setWindowSize] = useState({
     width: undefined,
   });
@@ -34,9 +33,10 @@ const category = () => {
 
   const size = useWindowSize();
 
-  const [checkedCapacity, setCheckedCapacity] = useState([]);
-  const [checkedType, setCheckedType] = useState([]);
-  const [checkedPrice, setCheckedPrice] = useState(120);
+  const [filterState, setFilterState] = useThemeContext();
+
+  console.log(filterState);
+
   const [numberOfCars, setNumberOfCars] = useState(size.width < 1900 ? 12 : 15);
 
   const filters = ['Sport', 'SUV', 'MPV', 'Sedan', 'Hackback', 'Coupe'];
@@ -55,14 +55,14 @@ const category = () => {
 
   const filteredData = () => {
     const filterData = carList.filter(({ name, type, people, price }) => {
-      if (checkedType.length === 0 && checkedCapacity.length === 0) {
-        return filters.some((c) => c === type) && capacity.some((l) => l === people && price < checkedPrice);
-      } if (checkedCapacity.length === 0) {
-        return checkedType.some((c) => c === type) && capacity.some((l) => l === people) && price < checkedPrice;
-      } if (checkedType.length === 0) {
-        return filters.some((c) => c === type) && checkedCapacity.some((l) => l === people) && price < checkedPrice;
+      if (filterState.checkedType.length === 0 && filterState.checkedCapacity.length === 0) {
+        return filters.some((c) => c === type) && capacity.some((l) => l === people && price < filterState.checkedPrice);
+      } if (filterState.checkedCapacity.length === 0) {
+        return filterState.checkedType.some((c) => c === type) && capacity.some((l) => l === people) && price < filterState.checkedPrice;
+      } if (filterState.checkedType.length === 0) {
+        return filters.some((c) => c === type) && filterState.checkedCapacity.some((l) => l === people) && price < filterState.checkedPrice;
       }
-      return checkedType.some((c) => c === type) && checkedCapacity.some((l) => l === people) && price < checkedPrice;
+      return filterState.checkedType.some((c) => c === type) && filterState.checkedCapacity.some((l) => l === people) && price < filterState.checkedPrice;
     });
 
     return filterData;
@@ -70,13 +70,13 @@ const category = () => {
 
   return (
     <div className="w-full flex">
-      <Sidebar checkedPrice={checkedPrice} setCheckedPrice={setCheckedPrice} checkedCapacity={checkedCapacity} setCheckedCapacity={setCheckedCapacity} checkedType={checkedType} setCheckedType={setCheckedType} />
+      <Sidebar filterState={filterState} setFilterState={setFilterState} />
       <div className="p-4 w-full">
         <StatePicker windowSize={windowSize} />
         <div className="flex mt-4 justify-start flex-wrap gap-4">
           { filteredData().slice(0, numberOfCars).map((model, index) => (
             <div key={index} className="w-full md:max-w-48 lg:max-w-31 xl:max-w-24 3xl:max-w-19 md:flex-48 lg:flex-31 xl:flex-24 3xl:flex-19">
-              <CarCard model={model.name} image={model.image} people={model.people} type={model.type} price={model.price} checkedCapacity={checkedCapacity} checkedType={checkedType} checkedPrice={checkedPrice} />
+              <CarCard model={model.name} image={model.image} people={model.people} type={model.type} price={model.price} checkedCapacity={filterState.checkedCapacity} checkedType={filterState.checkedType} checkedPrice={filterState.checkedPrice} />
             </div>
           ))}
           {filteredData().length === 0 ? <p className="text-5xl p-12 m-auto">no cars matching your criterias</p> : null}

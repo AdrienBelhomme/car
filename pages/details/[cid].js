@@ -8,6 +8,7 @@ import Image from 'next/image';
 import { Button, CarBanner, CarCard, Sidebar } from '../../components';
 import images from '../../assets';
 import carList from '../../constants/carList';
+import { useThemeContext } from '../../context/filtersState';
 
 const Stars = ({ rating }) => {
   const stars = [];
@@ -22,11 +23,12 @@ const Stars = ({ rating }) => {
 };
 
 const details = () => {
-  const [checkedCapacity, setCheckedCapacity] = useState([1, 2, 4]);
-  const [checkedType, setCheckedType] = useState(['sport']);
-  const [checkedPrice, setCheckedPrice] = useState(120);
+  const [filterState, setFilterState] = useThemeContext();
+
   const [banner, setBanner] = useState(images.banner.src);
   const [selected, setSelected] = useState('');
+
+  console.log(filterState);
 
   const router = useRouter();
   const { cid } = router.query;
@@ -55,7 +57,7 @@ const details = () => {
 
   return (
     <div className="w-full flex">
-      <Sidebar checkedPrice={checkedPrice} setCheckedPrice={setCheckedPrice} checkedCapacity={checkedCapacity} setCheckedCapacity={setCheckedCapacity} checkedType={checkedType} setCheckedType={setCheckedType} />
+      <Sidebar />
       <div className="p-4 w-full">
 
         <div className="flex items-baseline justify-between">
@@ -124,7 +126,7 @@ const details = () => {
                 </div>
                 <div className="flex w-full">
                   <p className="tracking-tight text-xl leading-6 text-secondinary-light-300">Capacity:</p>
-                  <p className="tracking-tight text-xl font-bold leading-6 text-input-title ml-3">{capacity}</p>
+                  <p className="tracking-tight text-xl font-bold leading-6 text-input-title ml-3">{people}</p>
                 </div>
               </div>
               <div className="flex items-center justify-between w-full">

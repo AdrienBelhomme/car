@@ -5,7 +5,7 @@ const Home = () => (
   <div className="flex">
     <Sidebar />
     <h1 className="text-3xl font-bold underline">
-      Hello Team Web3
+      Hello
     </h1>
     <h2 className="text-light-400 font-jakarta">Color light 400, Jakarta Font</h2>
     <h2 className="text-light-400 font-jakarta font-bold">Color light 400, Jakarta Font Bold</h2>

@@ -2,8 +2,9 @@
 import { useState } from 'react';
 
 import { Slider, Searchbar } from './index';
+import { useThemeContext } from '../context/filtersState';
 
-const Sidebar = ({ checkedPrice, setCheckedPrice, checkedCapacity, checkedType, setCheckedCapacity, setCheckedType }) => {
+const Sidebar = () => {
   const filters = [
     {
       title: 'Type',
@@ -14,19 +15,25 @@ const Sidebar = ({ checkedPrice, setCheckedPrice, checkedCapacity, checkedType, 
       options: [2, 4, 6, 8],
     }];
 
+  const [filterState, setFilterState] = useThemeContext();
+
+  console.log(filterState.checkedInput);
+
   const handleChecked = (e) => {
-    const capacityFilter = [...checkedCapacity];
-    const typeFilter = [...checkedType];
+    const { name } = e.target;
+    const capacityFilter = [...filterState.checkedCapacity];
+    const typeFilter = [...filterState.checkedType];
     const inputValue = e.target.value;
     const inputValueType = inputValue.length === 1 ? +inputValue : inputValue;
     if (e.target.checked) {
-      if (typeof inputValueType === 'number') { setCheckedCapacity([...capacityFilter, inputValueType]); } else { setCheckedType([...typeFilter, inputValueType]); }
+      if (typeof inputValueType === 'number') { setFilterState({ ...filterState, checkedCapacity: [...capacityFilter, inputValueType] }); } else { setFilterState({ ...filterState, checkedType: [...typeFilter, inputValueType] }); }
     } else {
-      if (typeof inputValueType === 'number') capacityFilter.splice(checkedCapacity.indexOf(inputValueType), 1);
-      else { typeFilter.splice(checkedType.indexOf(inputValueType), 1); }
+      if (typeof inputValueType === 'number') capacityFilter.splice(filterState.checkedCapacity.indexOf(inputValueType), 1);
+      else { typeFilter.splice(filterState.checkedType.indexOf(inputValueType), 1); }
       // eslint-disable-next-line no-unused-expressions
-      typeof inputValueType === 'number' ? setCheckedCapacity([...capacityFilter]) : setCheckedType([...typeFilter]);
+      typeof inputValueType === 'number' ? setFilterState({ ...filterState, checkedCapacity: capacityFilter }) : setFilterState({ ...filterState, checkedType: typeFilter });
     }
+    setFilterState({ ...filterState, checkedInput: { ...filterState.checkedInput, [name]: e.target.checked } });
   };
 
   return (
@@ -37,12 +44,16 @@ const Sidebar = ({ checkedPrice, setCheckedPrice, checkedCapacity, checkedType, 
           <div className="text-side-title font-jakarta pl-8 ">
             {title}
           </div>
-          {options.map((item, index) => (
-            <div className="flex items-center mt-6 " key={index}>
-              <input name={item} id="default-checkbox" type="checkbox" value={item} onChange={handleChecked} className="ml-8 w-5 h-4 accent-btn-blue text-secondinary-light-300 bg-white rounded-md border-secondinary-light-300 focus:ring-checkbox-checked dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" />
-              <label htmlFor="default-checkbox" className="pl-2 text-lg font-semibold font-jakarta text-input-title dark:text-gray-300">{item}<span className="text-secondinary-light-300 font-medium font-jakarta"> ({index * 5})</span></label>
-            </div>
-          ))}
+          {options.map((item, index) => {
+            console.log(filterState.checkedInput[item]);
+            console.log(item);
+            return (
+              <div className="flex items-center mt-6 " key={index}>
+                <input name={item} id="default-checkbox" type="checkbox" checked={filterState.checkedInput[item]} value={item} onChange={handleChecked} className="ml-8 w-5 h-4 accent-btn-blue text-secondinary-light-300 bg-white rounded-md border-secondinary-light-300 focus:ring-checkbox-checked dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" />
+                <label htmlFor="default-checkbox" className="pl-2 text-lg font-semibold font-jakarta text-input-title dark:text-gray-300">{item}<span className="text-secondinary-light-300 font-medium font-jakarta"> ({index * 5})</span></label>
+              </div>
+            );
+          })}
 
         </div>
       ))}
@@ -51,9 +62,9 @@ const Sidebar = ({ checkedPrice, setCheckedPrice, checkedCapacity, checkedType, 
           Price
         </div>
         <div className="App mt-8 px-8">
-          <Slider price={checkedPrice} setPrice={setCheckedPrice} />
+          <Slider filterState={filterState} setFilterState={setFilterState} />
         </div>
-        <div className="pl-8 mt-4 font-jakarta text-input-title font-semibold"> Max ${checkedPrice }</div>
+        <div className="pl-8 mt-4 font-jakarta text-input-title font-semibold"> Max ${filterState.checkedPrice}</div>
       </div>
     </div>
   );

@@ -1,7 +1,5 @@
 /* eslint-disable no-lone-blocks */
-
 import Image from 'next/image';
-
 import Button from './Button';
 
 const CarBanner = (props) => {
