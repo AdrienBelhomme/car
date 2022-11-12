@@ -1,4 +1,5 @@
 import { ThemeProvider } from 'next-themes';
+import Script from 'next/script';
 import { config } from '@fortawesome/fontawesome-svg-core';
 import '@fortawesome/fontawesome-svg-core/styles.css';
 
@@ -7,11 +8,11 @@ import '../styles/globals.css';
 
 config.autoAddCss = false;
 
-const MyApp = ({ Component, pageProps }) => (
+const App = ({ Component, pageProps }) => (
   <ThemeProvider attribute="class">
-    <div className="bg-main-app dark:bg-nft-dark min-h-screen">
+    <div className="bg-main-app min-h-screen">
       <Navbar />
-      <div>
+      <div className="min-h-screen">
         <Component {...pageProps} />
       </div>
       <Footer />
@@ -20,4 +21,4 @@ const MyApp = ({ Component, pageProps }) => (
   </ThemeProvider>
 );
 
-export default MyApp;
+export default App;
