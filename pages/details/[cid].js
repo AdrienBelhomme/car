@@ -22,22 +22,20 @@ const Stars = ({ rating }) => {
 };
 
 const details = () => {
-  const router = useRouter();
-  const { carImages, model, type, gas, category, people, price, setIsFavorite, isFavorite } = router.query;
-
   const [checkedCapacity, setCheckedCapacity] = useState([1, 2, 4]);
   const [checkedType, setCheckedType] = useState(['sport']);
   const [checkedPrice, setCheckedPrice] = useState(120);
   const [banner, setBanner] = useState(images.banner.src);
   const [selected, setSelected] = useState('');
 
+  const router = useRouter();
+  const { cid } = router.query;
+
+  console.log(cid);
+
+  const { carImages, model, type, gas, category, people, price } = router.query;
+
   const numberOfCars = 10;
-
-  console.log(setIsFavorite);
-
-  const emptyHeart = () => (
-    setIsFavorite((prev) => !prev)
-  );
 
   const filters = ['Sport', 'SUV', 'MPV', 'Sedan', 'Hackback', 'Coupe'];
   const capacity = [1, 2, 4, 8];
@@ -60,7 +58,7 @@ const details = () => {
       <Sidebar checkedPrice={checkedPrice} setCheckedPrice={setCheckedPrice} checkedCapacity={checkedCapacity} setCheckedCapacity={setCheckedCapacity} checkedType={checkedType} setCheckedType={setCheckedType} />
       <div className="p-4 w-full">
 
-        <div className="flex items-center justify-between">
+        <div className="flex items-baseline justify-between">
 
           <div className="flex flex-col items-center w-49% rounded-lg p-5">
 
@@ -78,6 +76,7 @@ const details = () => {
               <div className="flex items-center justify-between">
                 {carImagess.map((image, i) => (
                   <Image
+                    key={i}
                     onClick={(event) => {
                       handleBanner(event.target.src);
                       handleSelected(i);
@@ -96,17 +95,17 @@ const details = () => {
             <div className="flex items-center justify-between">
 
               <div className="text-3xl font-bold font-jakarta text-center text-input-title">{model}</div>
-              <div className="heart cursor-pointer" onClick={emptyHeart}>
+              <div className="heart cursor-pointer" onClick={() => {}}>
                 <FontAwesomeIcon
                   icon={faHeart}
-                  className={`h-5 ${isFavorite ? 'text-error-default' : 'text-dark-900 dark:text-white'} 2xl:h-5`}
+                  className={`h-5 ${carImages ? 'text-error-default' : 'text-dark-900 dark:text-white'} 2xl:h-5`}
                 />
               </div>
             </div>
 
             <div className="flex items-center mt-3">
 
-              <div className="self-center cursor-pointer" onClick={emptyHeart}>
+              <div className="self-center cursor-pointer">
                 <Stars rating={4} />
               </div>
               <div className="text-sm ml-4 font-jakarta text-center text-input-title">440+ reviewers</div>

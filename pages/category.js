@@ -1,4 +1,5 @@
-import { useEffect, useState } from 'react';
+import { useEffect, createContext, useContext, useState } from 'react';
+
 import Link from 'next/link';
 import resolveConfig from 'tailwindcss/resolveConfig';
 import tailwindConfig from '../tailwind.config.js';
@@ -8,6 +9,8 @@ import { koenigsegg, nissan, rollsRoyce, allNewRush } from '../assets';
 import carList from '../constants/carList';
 
 const category = () => {
+  const Context = createContext('default');
+
   const [windowSize, setWindowSize] = useState({
     width: undefined,
   });

@@ -18,9 +18,8 @@ const CarCard = ({
   price = '99.00',
   checkedCapacity,
   checkedType,
-  checkedPrice  
+  checkedPrice,
 }) => {
-
   const [isFavorite, setIsFavorite] = useState(false);
 
   const handleIsFavorite = () => setIsFavorite((prev) => !prev);
@@ -78,7 +77,7 @@ const CarCard = ({
         <div className="button w-auto text-base">
           <Link
             href={{
-              pathname: '/details',
+              pathname: `/details/${model}`,
               query: {
                 image,
                 model,
@@ -87,8 +86,6 @@ const CarCard = ({
                 category,
                 people,
                 price,
-                setIsFavorite,
-                isFavorite,
               },
             }}
           >
