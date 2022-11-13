@@ -17,24 +17,40 @@ const Sidebar = () => {
 
   const [filterState, setFilterState] = useThemeContext();
 
-  console.log(filterState.checkedInput);
-
-  const handleChecked = (e) => {
+  /* const handleChecked = (e) => {
     const { name } = e.target;
     const capacityFilter = [...filterState.checkedCapacity];
     const typeFilter = [...filterState.checkedType];
     const inputValue = e.target.value;
     const inputValueType = inputValue.length === 1 ? +inputValue : inputValue;
+
     if (e.target.checked) {
       if (typeof inputValueType === 'number') { setFilterState({ ...filterState, checkedCapacity: [...capacityFilter, inputValueType] }); } else { setFilterState({ ...filterState, checkedType: [...typeFilter, inputValueType] }); }
+    } else {
+      if (typeof inputValueType === 'number') { capacityFilter.splice(filterState.checkedCapacity.indexOf(inputValueType), 1); } else { typeFilter.splice(filterState.checkedType.indexOf(inputValueType), 1); }
+      // eslint-disable-next-line no-unused-expressions
+      typeof inputValueType === 'number' ? setFilterState({ ...filterState, checkedCapacity: capacityFilter }) : setFilterState({ ...filterState, checkedType: typeFilter });
+    }
+    // setFilterState({ ...filterState, checkedInput: { ...filterState.checkedInput, [name]: e.target.checked } });
+  }; */
+
+  const handleClicked = (e) => {
+    const capacityFilter = [...filterState.checkedCapacity];
+    const typeFilter = [...filterState.checkedType];
+    const inputValue = e.target.value;
+    const inputValueType = inputValue.length === 1 ? +inputValue : inputValue;
+    const { name } = e.target;
+    if (e.target.checked) {
+      if (typeof inputValueType === 'number') { setFilterState({ ...filterState, checkedCapacity: [...capacityFilter, inputValueType], checkedInput: { ...filterState.checkedInput, [name]: e.target.checked } }); } else { setFilterState({ ...filterState, checkedType: [...typeFilter, inputValueType], checkedInput: { ...filterState.checkedInput, [name]: e.target.checked } }); }
     } else {
       if (typeof inputValueType === 'number') capacityFilter.splice(filterState.checkedCapacity.indexOf(inputValueType), 1);
       else { typeFilter.splice(filterState.checkedType.indexOf(inputValueType), 1); }
       // eslint-disable-next-line no-unused-expressions
-      typeof inputValueType === 'number' ? setFilterState({ ...filterState, checkedCapacity: capacityFilter }) : setFilterState({ ...filterState, checkedType: typeFilter });
+      typeof inputValueType === 'number' ? setFilterState({ ...filterState, checkedCapacity: [...capacityFilter], checkedInput: { ...filterState.checkedInput, [name]: e.target.checked } }) : setFilterState({ ...filterState, checkedType: [...typeFilter], checkedInput: { ...filterState.checkedInput, [name]: e.target.checked } });
     }
-    setFilterState({ ...filterState, checkedInput: { ...filterState.checkedInput, [name]: e.target.checked } });
   };
+
+  console.log(filterState);
 
   return (
     <div className="hidden flex-col bg-white-color border-sidebar-border border-2 max-w-[360px] md:flex ">
@@ -44,16 +60,22 @@ const Sidebar = () => {
           <div className="text-side-title font-jakarta pl-8 ">
             {title}
           </div>
-          {options.map((item, index) => {
-            console.log(filterState.checkedInput[item]);
-            console.log(item);
-            return (
-              <div className="flex items-center mt-6 " key={index}>
-                <input name={item} id="default-checkbox" type="checkbox" checked={filterState.checkedInput[item]} value={item} onChange={handleChecked} className="ml-8 w-5 h-4 accent-btn-blue text-secondinary-light-300 bg-white rounded-md border-secondinary-light-300 focus:ring-checkbox-checked dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" />
-                <label htmlFor="default-checkbox" className="pl-2 text-lg font-semibold font-jakarta text-input-title dark:text-gray-300">{item}<span className="text-secondinary-light-300 font-medium font-jakarta"> ({index * 5})</span></label>
-              </div>
-            );
-          })}
+          {options.map((item, index) => (
+            <div className="flex items-center mt-6 " key={index}>
+              <input
+                name={item}
+                id="default-checkbox"
+                type="checkbox"
+                checked={filterState.checkedInput[item]}
+                value={item}
+                onChange={(event) => {
+                  handleClicked(event);
+                }}
+                className="ml-8 w-5 h-4 accent-btn-blue text-secondinary-light-300 bg-white rounded-md border-secondinary-light-300 focus:ring-checkbox-checked dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
+              />
+              <label htmlFor="default-checkbox" className="pl-2 text-lg font-semibold font-jakarta text-input-title dark:text-gray-300">{item}<span className="text-secondinary-light-300 font-medium font-jakarta"> ({index * 5})</span></label>
+            </div>
+          ))}
 
         </div>
       ))}

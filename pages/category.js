@@ -35,8 +35,6 @@ const category = () => {
 
   const [filterState, setFilterState] = useThemeContext();
 
-  console.log(filterState);
-
   const [numberOfCars, setNumberOfCars] = useState(size.width < 1900 ? 12 : 15);
 
   const filters = ['Sport', 'SUV', 'MPV', 'Sedan', 'Hackback', 'Coupe'];
@@ -45,7 +43,6 @@ const category = () => {
   const totalCars = carList.length;
 
   const showMoreCars = () => {
-    console.log('show more cars');
     setNumberOfCars(numberOfCars * 2);
   };
 
