@@ -55,6 +55,21 @@ const details = () => {
     images.carCurrent, images.detailsViewCar, images.detailsViewCar2,
   ];
 
+  const filteredData = () => {
+    const filterData = carList.filter(({ name, type, people, price }) => {
+      if (filterState.checkedType.length === 0 && filterState.checkedCapacity.length === 0) {
+        return filters.some((c) => c === type) && capacity.some((l) => l === people && price < filterState.checkedPrice);
+      } if (filterState.checkedCapacity.length === 0) {
+        return filterState.checkedType.some((c) => c === type) && capacity.some((l) => l === people) && price < filterState.checkedPrice;
+      } if (filterState.checkedType.length === 0) {
+        return filters.some((c) => c === type) && filterState.checkedCapacity.some((l) => l === people) && price < filterState.checkedPrice;
+      }
+      return filterState.checkedType.some((c) => c === type) && filterState.checkedCapacity.some((l) => l === people) && price < filterState.checkedPrice;
+    });
+
+    return filterData;
+  };
+
   return (
     <div className="w-full flex">
       <Sidebar />
@@ -156,7 +171,7 @@ const details = () => {
         </div>
 
         <div className="flex mt-4 justify-between flex-wrap gap-y-4">
-          { carList.map((model, index) => (
+          { filteredData().map((model, index) => (
             <div key={index} className="w-full md:w-49% lg:w-32% xl:w-24% 3xl:w-19%">
               <CarCard model={model.name} image={model.image} people={model.people} type={model.type} price={model.price} />
             </div>

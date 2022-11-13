@@ -16,9 +16,6 @@ const CarCard = ({
   type = 'Manual',
   people = '2 people',
   price = '99.00',
-  checkedCapacity,
-  checkedType,
-  checkedPrice,
 }) => {
   const [isFavorite, setIsFavorite] = useState(false);
 
