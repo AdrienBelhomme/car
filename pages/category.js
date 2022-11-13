@@ -65,6 +65,15 @@ const category = () => {
     return filterData;
   };
 
+  const hidden = () => {
+    if (numberOfCars > totalCars) {
+      return 'hidden';
+    }
+    return '';
+  };
+
+  console.log(numberOfCars);
+
   return (
     <div className="w-full flex">
       <Sidebar filterState={filterState} setFilterState={setFilterState} />
@@ -72,15 +81,15 @@ const category = () => {
         <StatePicker windowSize={windowSize} />
         <div className="flex mt-4 justify-start flex-wrap gap-4">
           { filteredData().slice(0, numberOfCars).map((model, index) => (
-            <div key={index} className="w-full md:max-w-48 lg:max-w-31 xl:max-w-24 3xl:max-w-19 md:flex-48 lg:flex-31 xl:flex-24 3xl:flex-19">
+            <div key={index} className="w-full md:max-w-49 lg:max-w-32 xl:max-w-25 3xl:max-w-20 md:flex-48 lg:flex-31 xl:flex-23 3xl:flex-19">
               <CarCard model={model.name} image={model.image} people={model.people} type={model.type} price={model.price} checkedCapacity={filterState.checkedCapacity} checkedType={filterState.checkedType} checkedPrice={filterState.checkedPrice} />
             </div>
           ))}
           {filteredData().length === 0 ? <p className="text-5xl p-12 m-auto">no cars matching your criterias</p> : null}
         </div>
         <div className="ulul my-16">
-          <div>
-            <Button handleClick={showMoreCars} text="Show more cars" textSize="text-sm" bgColor="bg-btn-blue" color="text-white" onClick={() => {}} margin="mx-auto" />
+          <div className={`${hidden()}`}>
+            <Button handleClick={showMoreCars} text="Show more cars" textSize="text-sm" bgColor="bg-btn-blue" color="text-white" margin="mx-auto" />
           </div>
           <div className="lastchild self-center">
             <p className="text-secondinary-light-300 font-jakarta font-bold">{totalCars} cars</p>

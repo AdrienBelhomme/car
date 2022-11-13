@@ -5,10 +5,12 @@ import { faHeart, faGasPump, faGear, faUser, faStar } from '@fortawesome/free-so
 import '@fortawesome/fontawesome-svg-core/styles.css';
 import Image from 'next/image';
 
-import { Button, CarBanner, CarCard, Sidebar } from '../../components';
+import Link from 'next/link';
+import { Button, CarBanner, CarCard, CarTypeList, Sidebar } from '../../components';
 import images from '../../assets';
 import carList from '../../constants/carList';
 import { useThemeContext } from '../../context/filtersState';
+import { popularNew, recommendedCars } from '../../public/dummyDatabase/CarData';
 
 const Stars = ({ rating }) => {
   const stars = [];
@@ -70,6 +72,11 @@ const details = () => {
     return filterData;
   };
 
+  const navigate = () => {
+    console.log('navigate');
+    router.push('/category');
+  };
+
   return (
     <div className="w-full flex">
       <Sidebar />
@@ -77,7 +84,7 @@ const details = () => {
 
         <div className="flex items-baseline justify-between">
 
-          <div className="flex flex-col items-center w-49% rounded-lg p-5">
+          <div className="flex flex-col items-center w-49% rounded-lg" style={{ padding: '0 1.25rem 1.25rem 0' }}>
 
             <div style={{ backgroundImage: `url(${banner})`, backgroundSize: 'cover', backgroundRepeat: 'no-repeat', backgroundPosition: 'top' }} className="md:flex w-full bg-cover rounded">
               <CarBanner
@@ -170,12 +177,30 @@ const details = () => {
 
         </div>
 
-        <div className="flex mt-4 justify-between flex-wrap gap-y-4">
-          { filteredData().map((model, index) => (
-            <div key={index} className="w-full md:w-49% lg:w-32% xl:w-24% 3xl:w-19%">
-              <CarCard model={model.name} image={model.image} people={model.people} type={model.type} price={model.price} />
+        <div className="flex mt-4 justify-start flex-wrap gap-4">
+          <CarTypeList numberOfCars={5} carData={recommendedCars} noscroll="flex-wrap" />
+
+        </div>
+
+        <div className="flex justify-between mt-8 md:mt-[42px]">
+          <h3 className="flex text-secondinary-light-300 font-medium text-sm md:text-base md:font-semi-bold">
+            All cars
+          </h3>
+          <button type="button" onClick={() => {}}>
+            <h3 className="flex justify-end text-btn-blue text-xs font-semibold md:text-base">
+              <Link href="/category">view all</Link>
+            </h3>
+          </button>
+        </div>
+
+        <div className="flex mt-[30px] justify-start flex-wrap gap-4">
+
+          { filteredData().slice(0, numberOfCars).map((model, index) => (
+            <div key={index} className="w-full md:max-w-49 lg:max-w-32 xl:max-w-25 3xl:max-w-20 md:flex-48 lg:flex-31 xl:flex-23 3xl:flex-19">
+              <CarCard model={model.name} image={model.image} people={model.people} type={model.type} price={model.price} checkedCapacity={filterState.checkedCapacity} checkedType={filterState.checkedType} checkedPrice={filterState.checkedPrice} />
             </div>
           ))}
+          {filteredData().length === 0 ? <p className="text-5xl p-12 m-auto">no cars matching your criterias</p> : null}
         </div>
 
       </div>
