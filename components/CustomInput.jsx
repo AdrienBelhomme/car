@@ -34,5 +34,6 @@ const CustomInput = (props) => {
 
   );
 };
-export default CustomInput;
+// export default CustomInput;
+module.exports = CustomInput;
 // module.exports = { CustomInput, handleChange };
