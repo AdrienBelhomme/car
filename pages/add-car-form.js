@@ -1,12 +1,23 @@
 import Axios from 'axios';
-import React, { useState } from 'react';
-import { CustomInput } from '../components';
+import React, { useEffect, useState } from 'react';
+
+import CustomInput from '../components/CustomInput';
+import Button from '../components/Button';
 
 const addCarForm = () => {
+  const [listOfCars, setListOfCars] = useState([]);
   const [carTitle, setCarTitle] = useState('');
   const [model, setModel] = useState('');
   const [price, setPrice] = useState(0);
 
+  //get data
+  useEffect(() => {
+    Axios.get('http://localhost:4000/posts').then((response) => {
+      setListOfCars(response.data);
+    });
+  }, []);
+
+  //post data
   const createCar = (event) => {
     event.preventDefault();
     const params = new URLSearchParams();
@@ -14,11 +25,8 @@ const addCarForm = () => {
     Axios.post(
       'http://localhost:4000/posts',
       {
-        method: 'post',
-        url: 'http://localhost:4000/posts',
-        data: params,
         carTitle,
-        // model,
+        model,
         // price,
       },
     ).then((response) => {
@@ -32,15 +40,50 @@ const addCarForm = () => {
 
   const handleChange = (event) => {
     setCarTitle(event.target.value);
-    // setModel(event.target.value);
+    setModel(event.target.value);
     // setPrice(event.target.value);
   };
+
+  // grid place-items-center flex-row place-content-center -mx-3 mb-6 bg-gray-background border-r-{10} px-6 w-full bg-white flex flex-wrap
+  // flex-row place-items-center place-content-center gap-x-3 px-6 m-20 mx-96 text-black bg-white flex-wrap
   return (
     <>
-      <div className="grid place-items-center flex-row place-content-center -mx-3 mb-6 bg-gray-background border-r-{10}">
-        <h1 className="text-justify text-2xl text-secondinary-default">Add a Car for Rent</h1>
+      <div className="grid place-items-center flex-row -mx-3 mb-6 bg-gray-background border-r-{10} px-6 w-full">
+        <h1 className="content-center text-left text-2xl text-secondinary-default bg-white flex-wrap">Add a Car for Rent</h1>
+        <p className="text-secondinary-default bg-white flex-wrap">Please enter your car info</p>
 
-        <form className="place-content-center w-full md:w-1/2 px-6 mb-6 md:mb-0 gap-x-3 text-black bg-white flex flex-wrap" action="/" method="post" onSubmit={createCar}>
+        <div className="text-form-title-color">
+          {listOfCars.map((cars) => (
+            <div>
+              <h1>
+                Name: {cars.carTitle}
+              </h1>
+            </div>
+          ))}
+        </div>
+
+        <form
+          className="grid gap-6 mb-6 md:grid-cols-2 place-items-center place-content-center w-full md:w-1/2 px-6 md:mb-0 gap-x-3 overflow:hidden
+         text-black bg-white flex-wrap"
+          action="/"
+          method="post"
+          onSubmit={createCar}
+        >
+
+          <div className="mb-4">
+            <label className="block text-sm font-bold mb-2 text-form-title-color">cars</label>
+            <input
+              className="bg-form-grey-background border-r-{10}"
+              type="text"
+              placeholder="placeholder"
+              onClick={handleChange}
+              onChange={(event) => {
+                setCarTitle(event.target.value);
+                setModel(event.target.value);
+              }}
+            />
+
+          </div>
 
           <CustomInput
             label="Car Name"
@@ -48,6 +91,10 @@ const addCarForm = () => {
             id="last"
             placeholder="Car Title"
             onClick={handleChange}
+            onChange={(event) => {
+              setCarTitle(event.target.value);
+              setModel(event.target.value);
+            }}
           />
 
           <CustomInput
@@ -92,16 +139,58 @@ const addCarForm = () => {
 
         </form>
 
-        <div>
+        <div className="place-content-center w-half md:w-1/2 px-6 mb-6 md:mb-0 gap-x-3 overflow:hidden text-black bg-blue flex flex-wrap">
           Upload Images
         </div>
-        <div>
-          Uploading files
+
+        <div className="place-content-center w-full md:w-1/2 px-6 mb-6 md:mb-0 gap-x-3 overflow:hidden text-black bg-white flex flex-wrap">
+          <label
+            htmlFor="dropzone-file"
+            className="flex justify-center w-full h-32 px-4 transition bg-white border-2
+            border-gray-300 border-dashed rounded-md appearance-none cursor-pointer hover:border-gray-400 focus:outline-none"
+          >
+            <div className="flex flex-col justify-center items-center pt-5 pb-6">
+              <svg
+                aria-hidden="true"
+                className="mb-3 w-10 h-10 text-gray-400"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+                xmlns="http://www.w3.org/2000/svg"
+              ><path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="2"
+                d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"
+              />
+              </svg>
+              <p className="mb-2 text-sm text-gray-500 dark:text-gray-400">Drag and drop an image, or <span className="font-semibold text-cyan-600"> Browse</span></p>
+              <p className="text-xs text-gray-500 dark:text-gray-400">High resolution images (png, jpg, gif)</p>
+            </div>
+            <input id="dropzone-file" type="file" className="hidden" />
+          </label>
         </div>
+
+        <div className="place-content-center w-full md:w-1/2 px-6 mb-6 md:mb-0 gap-x-3 overflow:hidden text-black bg-btn-blue flex flex-wrap">
+          Uploading files
+
+          <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300" htmlFor="multiple_files">Upload multiple files</label>
+          <input
+            className="block w-full text-sm text-gray-900 bg-gray-50 rounded-lg border
+           border-gray-300 cursor-pointer dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400"
+            id="multiple_files"
+            type="file"
+            multiple
+          />
+
+        </div>
+
       </div>
-      <div>
+
+      <div className="place-content-center w-full md:w-1/2 px-6 mb-6 md:mb-0 gap-x-3 overflow:hidden text-black bg-white flex flex-wrap">
         Confirmation
       </div>
+      <Button />
     </>
   );
 };
