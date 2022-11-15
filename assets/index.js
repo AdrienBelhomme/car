@@ -9,5 +9,6 @@ import exclusiveMGZS from './exclusiveMGZS.png';
 import user from './user.svg';
 import gas from './gas.svg';
 import wheel from './wheel.svg';
+import vector from './Vector.svg';
 
-export default { koenigsegg, nissan, rollsRoyce, allNewRush, allNewTerios, CRV, newMGZS, exclusiveMGZS, user, wheel, gas };
+export default { koenigsegg, nissan, rollsRoyce, allNewRush, allNewTerios, CRV, newMGZS, exclusiveMGZS, user, wheel, gas, vector };

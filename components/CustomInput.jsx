@@ -1,22 +1,3 @@
-// import Axios from 'axios';
-// import React, { useState } from 'react';
-
-// const createCar = () => {
-//   Axios.post('http://localhost:3000/createCar', {
-//     carTitle,
-//     model,
-//     price,
-//   }).then((response) => {
-//     alert('User Created');
-//   });
-// };
-
-// const handleChange = (event) => {
-//   setCarTitle(event.target.value);
-//   setModel(event.target.value);
-//   setPrice(event.target.value);
-// };
-
 const CustomInput = (props) => {
   const { label, type, id, placeholder } = props;
 
