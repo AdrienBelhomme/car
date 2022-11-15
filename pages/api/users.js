@@ -1,10 +1,10 @@
-import dbConnect from '../../utils/connectDB';
+import { connectDB } from '../../utils/connectDB';
 import Car from '../../models/carSchema';
 
 export default async function handler(req, res) {
   const { method } = req;
 
-  await dbConnect();
+  await connectDB();
 
   switch (method) {
     case 'GET':
