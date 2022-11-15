@@ -1,4 +1,4 @@
-import Axios from 'axios';
+import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 
 import CustomInput from '../components/CustomInput';
@@ -10,14 +10,25 @@ const addCarForm = () => {
   const [model, setModel] = useState('');
   const [price, setPrice] = useState(0);
 
-  //get data
+  const fetchCars = async () => {
+    try {
+      const response = await axios.get('/api/car', {
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      });
+      console.log('data', response.data);
+    } catch (error) {
+      console.log('Error', error);
+    }
+  };
+
+  // get data
   useEffect(() => {
-    Axios.get('http://localhost:4000/posts').then((response) => {
-      setListOfCars(response.data);
-    });
+    fetchCars();
   }, []);
 
-  //post data
+  // post data
   const createCar = (event) => {
     event.preventDefault();
     const params = new URLSearchParams();

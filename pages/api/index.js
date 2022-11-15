@@ -1,5 +1,5 @@
 import connectDB from '../../utils/connectDB';
-import Car from '../../models/carSchema';
+// import Car from '../../models/carSchema';
 
 export default async function index(req, res) {
   console.log('connecting to mongo');
@@ -7,8 +7,10 @@ export default async function index(req, res) {
   console.log('connected to mongo');
 
   console.log('Creating document');
-  const test = await Car.find();
+  // const test = await Car.find();
   console.log('Created document');
 
-  res.json({ test });
+  res.json({ test: 'success' });
+
+  // res.json({ test });
 }
