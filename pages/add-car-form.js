@@ -29,24 +29,20 @@ const addCarForm = () => {
   }, []);
 
   // post data
-  const createCar = (event) => {
+  const createCar = async (event) => {
     event.preventDefault();
     const params = new URLSearchParams();
     params.append('car-title', carTitle);
-    Axios.post(
-      'http://localhost:4000/posts',
-      {
+    try {
+      const response = await axios.post('/api/car', {
         carTitle,
         model,
-        // price,
-      },
-    ).then((response) => {
+      });
       alert('User Created');
-
       console.log(response);
-    }).catch((err) => {
-      console.log(err);
-    });
+    } catch (error) {
+      console.log('Error', error);
+    }
   };
 
   const handleChange = (event) => {

@@ -10,14 +10,12 @@ const carSchema = mongoose.Schema({
   type: String,
   location: String,
   gas: Number,
-  /*
+  pickupLocation: String,
+  dropOffLocation: String,
+  availabilityFrom: Date,
+  availabilityTo: Date,
+  description: String,
 
-pickupLocation: string
-dropOffLocation: string
-availabilityFrom: date
-availabilityTo: date
-"description"
-  */
 });
 
 mongoose.models = {};
