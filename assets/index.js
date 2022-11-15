@@ -17,9 +17,27 @@ import filter from './filter.svg';
 import Profile from './Profile.png';
 import search from './search.svg';
 import Setting from './Setting.png';
-
+import vector from './Vector.svg';
 
 export default {
-  koenigsegg, nissan, rollsRoyce, allNewRush, allNewTerios, CRV, newMGZS, exclusiveMGZS, user, wheel,
-  gas, Like, Logo, menu, Notification, Profile, search, Setting, filter,
+  koenigsegg,
+  nissan,
+  rollsRoyce,
+  allNewRush,
+  allNewTerios,
+  CRV,
+  newMGZS,
+  exclusiveMGZS,
+  user,
+  wheel,
+  gas,
+  Like,
+  Logo,
+  menu,
+  Notification,
+  Profile,
+  search,
+  Setting,
+  filter,
+  vector,
 };

@@ -10,7 +10,14 @@ const carSchema = mongoose.Schema({
   type: String,
   location: String,
   gas: Number,
+  pickupLocation: String,
+  dropOffLocation: String,
+  availabilityFrom: Date,
+  availabilityTo: Date,
+  description: String,
+
 });
 
-const Car = mongoose.model('Car', carSchema);
+mongoose.models = {};
+const Car = mongoose.models.carSchema || mongoose.model('Car', carSchema);
 module.exports = Car;
