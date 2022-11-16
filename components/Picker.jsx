@@ -1,3 +1,4 @@
+/* eslint-disable no-param-reassign */
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faChevronDown } from '@fortawesome/free-solid-svg-icons';
 import '@fortawesome/fontawesome-svg-core/styles.css';
@@ -23,11 +24,11 @@ const CustomInput = ({ reference, mobile, desktop, handlePlaceholder, handlePlac
   </div>
 );
 
-const Picker = ({ windowSize, isPickup, pickupValue, setPickupValue, setDropoffValue, dropoffValue, setIsFocus }) => {
+const Picker = ({ windowSize = 800, isPickup, pickupValue, setPickupValue, setDropoffValue, dropoffValue, setIsFocus }) => {
   const [isMobile, setIsMobile] = useState(true);
 
   const handleResize = () => {
-    if (windowSize.width > 768) {
+    if (windowSize) {
       setIsMobile(false);
     } else {
       setIsMobile(true);
