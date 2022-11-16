@@ -1,6 +1,7 @@
 /* eslint-disable no-lone-blocks */
 
 import Image from 'next/image';
+import Link from 'next/link';
 
 import Button from './Button';
 
@@ -12,7 +13,9 @@ const CarBanner = (props) => {
         <h1 className=" font-jakarta text-white-color  font-semibold text-base text-left md:text-base md:font-semibold">{title}</h1>
         <h2 className=" font-jakarta text-white-color  font-medium text-xs pt-3">{subtitle}</h2>
         <div className="pt-4">
-          <Button text="Rental Car" bgColor={btnColor} onClick={() => {}} />
+          <Link href="/category">
+            <Button text="Rental Car" bgColor={btnColor} onClick={() => {}} />
+          </Link>
         </div>
       </div>
       <div className="flex justify-center items-center mt-[26px]  mb-1 md:mb-5 md:mt-0.5 lg:pt-2 flex-shrink-1">
