@@ -8,7 +8,7 @@ const Sidebar = () => {
   const filters = [
     {
       title: 'Type',
-      options: ['Sport', 'SUV', 'MPV', 'Sedan', 'Hackback', 'Coupe'],
+      options: ['Sport', 'SUV', 'MPV', 'Sedan', 'Hackback', 'Coupe', 'family'],
     },
     {
       title: 'Capacity',
@@ -16,23 +16,6 @@ const Sidebar = () => {
     }];
 
   const [filterState, setFilterState] = useThemeContext();
-
-  /* const handleChecked = (e) => {
-    const { name } = e.target;
-    const capacityFilter = [...filterState.checkedCapacity];
-    const typeFilter = [...filterState.checkedType];
-    const inputValue = e.target.value;
-    const inputValueType = inputValue.length === 1 ? +inputValue : inputValue;
-
-    if (e.target.checked) {
-      if (typeof inputValueType === 'number') { setFilterState({ ...filterState, checkedCapacity: [...capacityFilter, inputValueType] }); } else { setFilterState({ ...filterState, checkedType: [...typeFilter, inputValueType] }); }
-    } else {
-      if (typeof inputValueType === 'number') { capacityFilter.splice(filterState.checkedCapacity.indexOf(inputValueType), 1); } else { typeFilter.splice(filterState.checkedType.indexOf(inputValueType), 1); }
-      // eslint-disable-next-line no-unused-expressions
-      typeof inputValueType === 'number' ? setFilterState({ ...filterState, checkedCapacity: capacityFilter }) : setFilterState({ ...filterState, checkedType: typeFilter });
-    }
-    // setFilterState({ ...filterState, checkedInput: { ...filterState.checkedInput, [name]: e.target.checked } });
-  }; */
 
   const handleClicked = (e) => {
     const capacityFilter = [...filterState.checkedCapacity];
@@ -49,8 +32,6 @@ const Sidebar = () => {
       typeof inputValueType === 'number' ? setFilterState({ ...filterState, checkedCapacity: [...capacityFilter], checkedInput: { ...filterState.checkedInput, [name]: e.target.checked } }) : setFilterState({ ...filterState, checkedType: [...typeFilter], checkedInput: { ...filterState.checkedInput, [name]: e.target.checked } });
     }
   };
-
-  console.log(filterState);
 
   return (
     <div className="hidden flex-col bg-white-color border-sidebar-border border-2 max-w-[360px] md:flex ">

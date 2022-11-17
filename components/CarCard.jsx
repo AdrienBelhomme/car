@@ -32,7 +32,7 @@ const CarCard = ({
       <div className="flex justify-between">
         <div className="title">
           <h2 className="text-xl text-secondinary-default font-bold mb-1 font-jakarta">{model}</h2>
-          <h3 className="text-secondinary-light-300 text-sm font-jakarta">{type}</h3>
+          <h3 className="text-secondinary-light-300 text-sm font-jakarta">{category}</h3>
         </div>
         <div className="heart cursor-pointer" onClick={handleIsFavorite}>
           <FontAwesomeIcon
@@ -47,10 +47,17 @@ const CarCard = ({
       </div>
       <div className="block mt-7 md:m-0">
         <div className="relative w-full flex justify-center items-center h-[120px]">
-          <Image src={image} alt="car-sport" />
+          <Image
+            src={image}
+            alt="car-sport"
+            layout="fill"
+            width="100"
+            height="120"
+            className="w-[70%] object-cover"
+          />
           <div className="absolute top-1/3 md:top-12 w-full h-4/5 bg-car-shadow" />
         </div>
-        <div className="icons flex justify-between m-0 md:mt-8 flex-row h-16">
+        <div className="icons flex justify-between m-0 md:mt-4 flex-row h-16">
           {iconList.map((icon, index) => (
             <div key={index} className="flex">
               <div className="icon flex items-center">
