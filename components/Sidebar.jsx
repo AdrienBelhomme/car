@@ -1,6 +1,4 @@
 /* eslint-disable import/no-cycle */
-import { useState } from 'react';
-
 import { Slider, Searchbar } from './index';
 import { useThemeContext } from '../context/filtersState';
 

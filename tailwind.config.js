@@ -145,6 +145,9 @@ module.exports = {
         48: '48%',
         49: '49%',
       },
+      gap: {
+        percentage: '1.5rem 1.2%',
+      },
       lineHeight: {
         30: '30px',
         70: '70px',

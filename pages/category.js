@@ -36,10 +36,13 @@ const category = () => {
 
   const [filterState, setFilterState] = useThemeContext();
 
+  const { checkedCapacity, checkedPrice, checkedType, checkedInput, checkedPickup, checkedDropoff } = filterState;
+
   const [numberOfCars, setNumberOfCars] = useState(size.width < 1900 ? 12 : 15);
 
   const filters = ['sport', 'SUV', 'MPV', 'sedan', 'hackback', 'coupe', 'family', 'Family', 'Sedan', 'Hackback', 'Coupe', 'Sport', 'Suv', 'Mpv'];
   const capacity = [1, 2, 4, 6, 8];
+  const location = ['NYC', 'Los Angeles', 'Chicago'];
 
   const showMoreCars = () => {
     setNumberOfCars(numberOfCars * 2);
@@ -73,33 +76,6 @@ const category = () => {
 
   const totalCars = cars.length;
 
-  /* carTitle: "Ferrari"
-category: "Sport"
-gas: 90
-location: "not available"
-model: "Ferrari"
-people: 2
-price: 99
-type: "Manual"
-
-name: 'Koenigsegg', type: 'Sport', people: 2, image: koenigsegg, price: 99.00, description: 'NISMO has become the embodiment of Nissan\'s outstanding performance, inspired by the most unforgiving proving ground, the "race track".', text: 'Sports car with the best design and acceleration', id: 0, subtitle */
-
-  const filteredData = () => {
-    const filterData = cars.filter(({ category: cat, people, price }) => {
-      if (filterState.checkedType.length === 0 && filterState.checkedCapacity.length === 0) {
-        return filters.some((c) => c === cat) && capacity.some((l) => l === people && price < filterState.checkedPrice);
-      } if (filterState.checkedCapacity.length === 0) {
-        return filterState.checkedType.some((c) => c === cat) && capacity.some((l) => l === people) && price < filterState.checkedPrice;
-      } if (filterState.checkedType.length === 0) {
-        return filters.some((c) => c === cat) && filterState.checkedCapacity.some((l) => l === people) && price < filterState.checkedPrice;
-      }
-
-      return filterState.checkedType.some((c) => c === cat) && filterState.checkedCapacity.some((l) => l === people) && price < filterState.checkedPrice;
-    });
-
-    return filterData;
-  };
-
   const hidden = () => {
     if (numberOfCars > totalCars) {
       return 'hidden';
@@ -107,18 +83,88 @@ name: 'Koenigsegg', type: 'Sport', people: 2, image: koenigsegg, price: 99.00, d
     return '';
   };
 
+  /* const filteredData = () => {
+    let filterData = cars.filter(({ name, category: cat, people, price }) => {
+      if (checkedType.length === 0 && checkedCapacity.length === 0) {
+        return filters.some((c) => c === cat) && capacity.some((l) => l === people && price < checkedPrice);
+      } if (checkedCapacity.length === 0) {
+        return checkedType.some((c) => c === cat) && capacity.some((l) => l === people) && price < checkedPrice;
+      } if (checkedType.length === 0) {
+        return filters.some((c) => c === cat) && checkedCapacity.some((l) => l === people) && price < checkedPrice;
+      }
+      return checkedType.some((c) => c === cat) && checkedCapacity.some((l) => l === people) && price < checkedPrice;
+    });
+
+    filterData = filterData.filter(({ pickupLocation: loc }) => {
+      if (Object.keys(checkedPickup.location).length === 0) {
+        return filterData;
+      }
+      return checkedPickup.location.includes(loc);
+    });
+    return filterData;
+  }; */
+
+  const filterPickup = (car) => {
+    const filteredCars = car.filter(({ pickupLocation }) => {
+      if (checkedPickup.location.length > 0) return checkedPickup.location.toLowerCase().includes(pickupLocation.toLowerCase());
+      if (checkedPickup.location.length === 0) return car;
+      return filteredCars;
+    });
+    return filteredCars;
+  };
+
+  const filterDropoff = (car) => {
+    const filteredCars = filterPickup(car).filter(({ dropOffLocation }) => {
+      if (checkedDropoff.location.length > 0) return checkedDropoff.location.toLowerCase().includes(dropOffLocation.toLowerCase());
+      if (checkedDropoff.location.length === 0) return car;
+      return filteredCars;
+    });
+    return filteredCars;
+  };
+
+  const filterPickupDate = (car) => {
+    const filteredCars = filterDropoff(car).filter(({ availabilityFrom }) => {
+      if (checkedPickup.date.length > 0) return checkedPickup.date.getTime() >= availabilityFrom.getTime();
+      if (checkedPickup.date.length === 0) return car;
+      return filteredCars;
+    });
+    return filteredCars;
+  };
+
+  console.log('filterPickupDate', filterPickupDate(cars));
+
+  const filterCarTypes = (car) => {
+    const locationFilteredCars = filterDropoff(car);
+
+    const filterData = locationFilteredCars.filter((allCars) => {
+      if (checkedType.length === 0 && checkedCapacity.length === 0) {
+        return allCars.price < checkedPrice;
+      }
+      if (checkedCapacity.length === 0) {
+        return checkedType.includes(allCars.category) && allCars.price < checkedPrice;
+      }
+      if (checkedType.length === 0) {
+        return checkedCapacity.includes(allCars.people) && allCars.price < checkedPrice;
+      }
+
+      return checkedType.includes(allCars.category) && checkedCapacity.includes(allCars.people) && allCars.price < checkedPrice;
+    });
+
+    return filterData;
+  };
+
   return (
     <div className="w-full flex">
       <Sidebar filterState={filterState} setFilterState={setFilterState} />
       <div className="p-4 w-full">
         <StatePicker windowSize={windowSize} />
-        <div className="flex mt-4 justify-start flex-wrap gap-4">
-          { filteredData().slice(0, numberOfCars).map((model, index) => (
-            <div key={index} className="w-full md:max-w-49 lg:max-w-32 xl:max-w-25 3xl:max-w-20 md:flex-48 lg:flex-31 xl:flex-23 3xl:flex-19">
+        <div className="flex mt-4 justify-start flex-wrap gap-percentage">
+          { filterCarTypes(cars).slice(0, numberOfCars).map((model, index) => (
+            <div key={index} className="w-full md:max-w-49 lg:max-w-32 xl:max-w-24 3xl:max-w-19 md:flex-48 lg:flex-31 xl:flex-23 3xl:flex-19">
               <CarCard model={model.carTitle} type={model.type} image={model.image} people={model.people} category={model.category} price={model.price} checkedCapacity={filterState.checkedCapacity} checkedType={filterState.checkedType} checkedPrice={filterState.checkedPrice} />
             </div>
           ))}
-          {filteredData().length === 0 ? <p className="text-5xl p-12 m-auto">no cars matching your criterias</p> : null}
+          {filterCarTypes(cars).length === 0 ? <p className="text-5xl p-12 m-auto">no cars matching your criterias</p> : null}
         </div>
         <div className="ulul my-16">
           <div className={`${hidden()}`}>

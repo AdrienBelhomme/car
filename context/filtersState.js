@@ -9,6 +9,8 @@ export const StateFilterProvider = ({ children }) => {
     checkedPrice: 120,
     checkedType: [],
     checkedInput: { Sport: false, SUV: false, MPV: false, Sedan: false, Hackback: false, Coupe: false, 2: false, 4: false, 8: false, 6: false },
+    checkedPickup: { location: '', date: '', time: '' },
+    checkedDropoff: { location: '', date: '', time: '' },
   });
   return (
     <Context.Provider value={[filterState, setFilterState]}>{children}</Context.Provider>
