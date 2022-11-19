@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Button, CarBanner, StatePicker, CarTypeList } from '../components';
 
 import { popularNew, recommendedCars } from '../public/dummyDatabase/CarData';
@@ -13,6 +13,28 @@ const CarRent = () => {
     setNumberOfPopularCars(popularNew.cars);
     setNumberOfRecommendedCars(recommendedCars.cars);
   };
+  const [windowSize, setWindowSize] = useState({
+    width: undefined,
+  });
+
+  function useWindowSize() {
+    useEffect(() => {
+      function handleResize() {
+        setWindowSize({
+          width: window.innerWidth,
+        });
+      }
+
+      window.addEventListener('resize', handleResize);
+
+      handleResize();
+
+      return () => window.removeEventListener('resize', handleResize);
+    }, []);
+    return windowSize;
+  }
+
+  const size = useWindowSize();
 
   return (
     <div className=" p-6 md:p-16">
@@ -37,7 +59,7 @@ const CarRent = () => {
         </div>
       </div>
       <div className="mt-[42px]">
-        <StatePicker />
+        <StatePicker windowSize={size}/>
       </div>
       <CarTypeList carType={popularNew.type} carAmount={numberOfPopularCars} scrollable="overflow-x-auto md:flex-wrap" />
       <CarTypeList carData={recommendedCars.type} carAmount={numberOfRecommendedCars} noscroll="flex-wrap" />

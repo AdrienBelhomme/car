@@ -1,8 +1,11 @@
-import { useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
+import { useThemeContext } from '../context/filtersState';
 import { Picker, InversePicker } from './index.js';
 
 const StatePicker = ({ windowSize }) => {
+  const [filterState, setFilterState] = useThemeContext();
+
   const [pickupValue, setPickupValue] = useState({
     location: '',
     date: '',
@@ -31,6 +34,14 @@ const StatePicker = ({ windowSize }) => {
       }
     }
   };
+
+  useEffect(() => {
+    setFilterState({
+      ...filterState,
+      checkedPickup: pickupValue,
+      checkedDropoff: dropoffValue,
+    });
+  }, [pickupValue, dropoffValue]);
 
   return (
     <>

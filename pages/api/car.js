@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import { connectDB } from '../../utils/connectDB';
 import Car from '../../models/carSchema';
 
@@ -28,3 +29,35 @@ export default async function handler(req, res) {
       break;
   }
 }
+=======
+import { connectDB } from '../../utils/connectDB';
+import Car from '../../models/carSchema';
+
+export default async function handler(req, res) {
+  const { method } = req;
+
+  await connectDB();
+
+  switch (method) {
+    case 'GET':
+      try {
+        const users = await Car.find({});
+        res.status(200).json({ success: true, data: users });
+      } catch (error) {
+        res.status(400).json({ success: false });
+      }
+      break;
+    case 'POST':
+      try {
+        const user = await Car.create(req.body);
+        res.status(201).json({ success: true, data: user });
+      } catch (error) {
+        res.status(400).json({ success: false });
+      }
+      break;
+    default:
+      res.status(400).json({ success: false });
+      break;
+  }
+}
+>>>>>>> 018c17997e9b031e6b83b24134466384802cc6d0

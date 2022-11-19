@@ -1,4 +1,6 @@
-import { useEffect, useState } from 'react';
+import { useEffect, createContext, useContext, useState } from 'react';
+import axios from 'axios';
+
 import Link from 'next/link';
 import resolveConfig from 'tailwindcss/resolveConfig';
 import tailwindConfig from '../tailwind.config.js';
@@ -6,6 +8,7 @@ import tailwindConfig from '../tailwind.config.js';
 import { Button, CarCard, Sidebar, StatePicker } from '../components';
 import { koenigsegg, nissan, rollsRoyce, allNewRush } from '../assets';
 import carList from '../constants/carList';
+import { useThemeContext } from '../context/filtersState';
 
 const category = () => {
   const [windowSize, setWindowSize] = useState({
@@ -31,18 +34,17 @@ const category = () => {
 
   const size = useWindowSize();
 
-  const [checkedCapacity, setCheckedCapacity] = useState([]);
-  const [checkedType, setCheckedType] = useState([]);
-  const [checkedPrice, setCheckedPrice] = useState(120);
+  const [filterState, setFilterState] = useThemeContext();
+
+  const { checkedCapacity, checkedPrice, checkedType, checkedInput, checkedPickup, checkedDropoff } = filterState;
+
   const [numberOfCars, setNumberOfCars] = useState(size.width < 1900 ? 12 : 15);
 
-  const filters = ['Sport', 'SUV', 'MPV', 'Sedan', 'Hackback', 'Coupe'];
-  const capacity = [1, 2, 4, 8];
-
-  const totalCars = carList.length;
+  const filters = ['sport', 'SUV', 'MPV', 'sedan', 'hackback', 'coupe', 'family', 'Family', 'Sedan', 'Hackback', 'Coupe', 'Sport', 'Suv', 'Mpv'];
+  const capacity = [1, 2, 4, 6, 8];
+  const location = ['NYC', 'Los Angeles', 'Chicago'];
 
   const showMoreCars = () => {
-    console.log('show more cars');
     setNumberOfCars(numberOfCars * 2);
   };
 
@@ -50,16 +52,102 @@ const category = () => {
     setNumberOfCars(windowSize.width < 1900 ? 12 : 15);
   }, [windowSize.width]);
 
-  const filteredData = () => {
-    const filterData = carList.filter(({ name, type, people, price }) => {
+  const [cars, setCars] = useState([]);
+
+  const fetchCars = async () => {
+    try {
+      const response = await axios.get('/api/car', {
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      });
+      const data = await response.data;
+      console.log('data', data);
+      setCars(data.data);
+    } catch (error) {
+      console.log('Error', error);
+    }
+  };
+
+  // get data
+  useEffect(() => {
+    fetchCars();
+  }, []);
+
+  const totalCars = cars.length;
+
+  const hidden = () => {
+    if (numberOfCars > totalCars) {
+      return 'hidden';
+    }
+    return '';
+  };
+
+  /* const filteredData = () => {
+    let filterData = cars.filter(({ name, category: cat, people, price }) => {
       if (checkedType.length === 0 && checkedCapacity.length === 0) {
-        return filters.some((c) => c === type) && capacity.some((l) => l === people && price < checkedPrice);
+        return filters.some((c) => c === cat) && capacity.some((l) => l === people && price < checkedPrice);
       } if (checkedCapacity.length === 0) {
-        return checkedType.some((c) => c === type) && capacity.some((l) => l === people) && price < checkedPrice;
+        return checkedType.some((c) => c === cat) && capacity.some((l) => l === people) && price < checkedPrice;
       } if (checkedType.length === 0) {
-        return filters.some((c) => c === type) && checkedCapacity.some((l) => l === people) && price < checkedPrice;
+        return filters.some((c) => c === cat) && checkedCapacity.some((l) => l === people) && price < checkedPrice;
       }
-      return checkedType.some((c) => c === type) && checkedCapacity.some((l) => l === people) && price < checkedPrice;
+      return checkedType.some((c) => c === cat) && checkedCapacity.some((l) => l === people) && price < checkedPrice;
+    });
+
+    filterData = filterData.filter(({ pickupLocation: loc }) => {
+      if (Object.keys(checkedPickup.location).length === 0) {
+        return filterData;
+      }
+      return checkedPickup.location.includes(loc);
+    });
+    return filterData;
+  }; */
+
+  const filterPickup = (car) => {
+    const filteredCars = car.filter(({ pickupLocation }) => {
+      if (checkedPickup.location.length > 0) return checkedPickup.location.toLowerCase().includes(pickupLocation.toLowerCase());
+      if (checkedPickup.location.length === 0) return car;
+      return filteredCars;
+    });
+    return filteredCars;
+  };
+
+  const filterDropoff = (car) => {
+    const filteredCars = filterPickup(car).filter(({ dropOffLocation }) => {
+      if (checkedDropoff.location.length > 0) return checkedDropoff.location.toLowerCase().includes(dropOffLocation.toLowerCase());
+      if (checkedDropoff.location.length === 0) return car;
+      return filteredCars;
+    });
+    return filteredCars;
+  };
+
+  const filterPickupDate = (car) => {
+    const filteredCars = filterDropoff(car).filter(({ availabilityFrom }) => {
+      if (checkedPickup.date.length > 0) return checkedPickup.date.getTime() >= availabilityFrom.getTime();
+      if (checkedPickup.date.length === 0) return car;
+      return filteredCars;
+    });
+    return filteredCars;
+  };
+
+  console.log('filterPickupDate', filterPickupDate(cars));
+
+  const filterCarTypes = (car) => {
+    const locationFilteredCars = filterDropoff(car);
+
+    const filterData = locationFilteredCars.filter((allCars) => {
+      if (checkedType.length === 0 && checkedCapacity.length === 0) {
+        return allCars.price < checkedPrice;
+      }
+      if (checkedCapacity.length === 0) {
+        return checkedType.includes(allCars.category) && allCars.price < checkedPrice;
+      }
+      if (checkedType.length === 0) {
+        return checkedCapacity.includes(allCars.people) && allCars.price < checkedPrice;
+      }
+
+      return checkedType.includes(allCars.category) && checkedCapacity.includes(allCars.people) && allCars.price < checkedPrice;
     });
 
     return filterData;
@@ -67,20 +155,20 @@ const category = () => {
 
   return (
     <div className="w-full flex">
-      <Sidebar checkedPrice={checkedPrice} setCheckedPrice={setCheckedPrice} checkedCapacity={checkedCapacity} setCheckedCapacity={setCheckedCapacity} checkedType={checkedType} setCheckedType={setCheckedType} />
+      <Sidebar filterState={filterState} setFilterState={setFilterState} />
       <div className="p-4 w-full">
         <StatePicker windowSize={windowSize} />
-        <div className="flex mt-4 justify-start flex-wrap gap-4">
-          { filteredData().slice(0, numberOfCars).map((model, index) => (
-            <div key={index} className="w-full md:max-w-48 lg:max-w-31 xl:max-w-24 3xl:max-w-19 md:flex-48 lg:flex-31 xl:flex-24 3xl:flex-19">
-              <CarCard model={model.name} image={model.image} people={model.people} type={model.type} price={model.price} checkedCapacity={checkedCapacity} checkedType={checkedType} checkedPrice={checkedPrice} />
+        <div className="flex mt-4 justify-start flex-wrap gap-percentage">
+          { filterCarTypes(cars).slice(0, numberOfCars).map((model, index) => (
+            <div key={index} className="w-full md:max-w-49 lg:max-w-32 xl:max-w-24 3xl:max-w-19 md:flex-48 lg:flex-31 xl:flex-23 3xl:flex-19">
+              <CarCard model={model.carTitle} type={model.type} image={model.image} people={model.people} category={model.category} price={model.price} checkedCapacity={filterState.checkedCapacity} checkedType={filterState.checkedType} checkedPrice={filterState.checkedPrice} />
             </div>
           ))}
-          {filteredData().length === 0 ? <p className="text-5xl p-12 m-auto">no cars matching your criterias</p> : null}
+          {filterCarTypes(cars).length === 0 ? <p className="text-5xl p-12 m-auto">no cars matching your criterias</p> : null}
         </div>
         <div className="ulul my-16">
-          <div>
-            <Button handleClick={showMoreCars} text="Show more cars" textSize="text-sm" bgColor="bg-btn-blue" color="text-white" onClick={() => {}} margin="mx-auto" />
+          <div className={`${hidden()}`}>
+            <Button handleClick={showMoreCars} text="Show more cars" textSize="text-sm" bgColor="bg-btn-blue" color="text-white" margin="mx-auto" />
           </div>
           <div className="lastchild self-center">
             <p className="text-secondinary-light-300 font-jakarta font-bold">{totalCars} cars</p>

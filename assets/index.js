@@ -1,5 +1,5 @@
 import koenigsegg from './koenigsegg.png';
-import nissan from './Nissan GT - R.png';
+import nissan from './Nissan.png';
 import rollsRoyce from './Rolls-Royce copy.png';
 import allNewRush from './allNewRush.png';
 import allNewTerios from './allNewTerios.png';
@@ -17,7 +17,15 @@ import filter from './filter.svg';
 import Profile from './Profile.png';
 import search from './search.svg';
 import Setting from './Setting.png';
+<<<<<<< HEAD
 import vector from './Vector.svg';
+=======
+
+import detailsViewCar from './details-view-car.png';
+import detailsViewCar2 from './details-view-car-2.png';
+import carCurrent from './carMin.png';
+import banner from './background-banner.png';
+>>>>>>> 018c17997e9b031e6b83b24134466384802cc6d0
 
 export default {
   koenigsegg,
@@ -31,6 +39,13 @@ export default {
   user,
   wheel,
   gas,
+<<<<<<< HEAD
+=======
+  detailsViewCar,
+  detailsViewCar2,
+  carCurrent,
+  banner,
+>>>>>>> 018c17997e9b031e6b83b24134466384802cc6d0
   Like,
   Logo,
   menu,
@@ -39,5 +54,8 @@ export default {
   search,
   Setting,
   filter,
+<<<<<<< HEAD
   vector,
+=======
+>>>>>>> 018c17997e9b031e6b83b24134466384802cc6d0
 };
