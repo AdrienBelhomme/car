@@ -4,6 +4,7 @@ import axios from 'axios';
 import Link from 'next/link';
 import resolveConfig from 'tailwindcss/resolveConfig';
 import tailwindConfig from '../tailwind.config.js';
+import LoadingScreen from '../components/LoadingScreen';
 
 import { Button, CarCard, Sidebar, StatePicker } from '../components';
 import { koenigsegg, nissan, rollsRoyce, allNewRush } from '../assets';
@@ -53,6 +54,7 @@ const category = () => {
   }, [windowSize.width]);
 
   const [cars, setCars] = useState([]);
+  const [isLoading, setLoading] = useState(false);
 
   const fetchCars = async () => {
     try {
@@ -64,6 +66,7 @@ const category = () => {
       const data = await response.data;
       console.log('data', data);
       setCars(data.data);
+      setLoading(false);
     } catch (error) {
       console.log('Error', error);
     }
@@ -71,8 +74,11 @@ const category = () => {
 
   // get data
   useEffect(() => {
+    setLoading(true);
     fetchCars();
   }, []);
+
+  if (isLoading) return <LoadingScreen />;
 
   const totalCars = cars.length;
 
@@ -82,6 +88,8 @@ const category = () => {
     }
     return '';
   };
+
+  console.log('isloading', isLoading);
 
   /* const filteredData = () => {
     let filterData = cars.filter(({ name, category: cat, people, price }) => {
