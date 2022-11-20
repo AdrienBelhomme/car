@@ -89,34 +89,8 @@ const category = () => {
     return '';
   };
 
-  console.log('checkedPickup', checkedPickup);
-  console.log('checkedDropoff', checkedDropoff);
-  console.log('filterState', filterState);
-
-  /* const filteredData = () => {
-    let filterData = cars.filter(({ name, category: cat, people, price }) => {
-      if (checkedType.length === 0 && checkedCapacity.length === 0) {
-        return filters.some((c) => c === cat) && capacity.some((l) => l === people && price < checkedPrice);
-      } if (checkedCapacity.length === 0) {
-        return checkedType.some((c) => c === cat) && capacity.some((l) => l === people) && price < checkedPrice;
-      } if (checkedType.length === 0) {
-        return filters.some((c) => c === cat) && checkedCapacity.some((l) => l === people) && price < checkedPrice;
-      }
-      return checkedType.some((c) => c === cat) && checkedCapacity.some((l) => l === people) && price < checkedPrice;
-    });
-
-    filterData = filterData.filter(({ pickupLocation: loc }) => {
-      if (Object.keys(checkedPickup.location).length === 0) {
-        return filterData;
-      }
-      return checkedPickup.location.includes(loc);
-    });
-    return filterData;
-  }; */
-
   const filterPickup = (car) => {
     const filteredCars = car.filter(({ pickupLocation }) => {
-      console.log('pickupLocation', pickupLocation);
       if (checkedPickup.location.length > 0) return checkedPickup.location.toLowerCase().includes(pickupLocation.toLowerCase());
       if (checkedPickup.location.length === 0) return car;
       return filteredCars;
@@ -134,20 +108,19 @@ const category = () => {
   };
 
   const filterPickupDate = (car) => {
-    const filteredCars = filterDropoff(car).filter(({ availabilityFrom }) => {
-      if (checkedPickup.date.length > 0) return checkedPickup.date.getTime() >= availabilityFrom.getTime();
+    const locationFilteredCars = filterDropoff(car);
+    const filteredCars = locationFilteredCars.filter(({ availabilityFrom }) => {
+      if (checkedPickup.date.length > 0) return checkedPickup.date >= availabilityFrom;
       if (checkedPickup.date.length === 0) return car;
       return filteredCars;
     });
     return filteredCars;
   };
 
-  console.log('filterPickupDate', filterPickupDate(cars));
-
   const filterCarTypes = (car) => {
-    const locationFilteredCars = filterDropoff(car);
+    const locationandDateFilteredCars = filterPickupDate(car);
 
-    const filterData = locationFilteredCars.filter((allCars) => {
+    const filterData = locationandDateFilteredCars.filter((allCars) => {
       if (checkedType.length === 0 && checkedCapacity.length === 0) {
         return allCars.price < checkedPrice;
       }
