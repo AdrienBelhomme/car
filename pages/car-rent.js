@@ -8,12 +8,10 @@ const CarRent = () => {
   const [allCars, setAllCars] = useState([]);
   const [popularCars, setPopularCars] = useState([]);
   const [recommendedCars, setRecommendedCars] = useState([]);
-  console.log(popularCars);
-
+  console.log(allCars);
   const [windowSize, setWindowSize] = useState({
     width: undefined,
   });
-  const totalCars = popularCars.length + recommendedCars.length;
 
   const fetchCars = async () => {
     try {
@@ -54,6 +52,11 @@ const CarRent = () => {
 
   const size = useWindowSize();
 
+  const showMoreCars = () => {
+    setPopularCars(allCars);
+    setRecommendedCars(allCars);
+  };
+
   return (
     <div className=" p-6 md:p-16">
       <div className="flex flex-col gap-8 pt-8   md:flex-row  mt-124 bg-bg-color-car-app">
@@ -66,12 +69,12 @@ const CarRent = () => {
             btnColor="bg-btn-blue"
           />
         </div>
-        <div className=" hidden md:flex w-full ">
+        <div style={{ backgroundImage: `url(${image.banner.src})`, backgroundRepeat: 'no-repeat', backgroundPosition: 'top' }} className=" bg-cover rounded-xl hidden md:flex w-full ">
           <CarBanner
             title="Easy way to rent a car at a low price"
             subtitle="Providing cheap car rental services and safe and comfortable facilities."
             carImg={image.nissan}
-            card="bg-btn-blue"
+            card="transparent"
             btnColor="bg-[#5CAFFC]"
           />
         </div>
@@ -84,11 +87,11 @@ const CarRent = () => {
       <CarTypeList carCategory="Recommendation Car" carData={recommendedCars} noscroll="flex-wrap" />
       <div className="flex">
         <div className="flex justify-center mx-auto mt-12 md:mt-16">
-          <Button text="Show more cars" bgColor="bg-btn-blue" color="text-white" handleClick={() => {}} />
+          <Button text="Show more cars" bgColor="bg-btn-blue" color="text-white" handleClick={showMoreCars} />
         </div>
         <div className="flex self-end">
           <p className="flex text-secondinary-light-300 font-medium text-sm md:text-base md:font-semi-bold">
-            {totalCars}Cars
+            {allCars.length} Cars
           </p>
         </div>
       </div>
