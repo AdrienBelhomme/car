@@ -1,21 +1,39 @@
 import { useState, useEffect } from 'react';
+import axios from 'axios';
 import { Button, CarBanner, StatePicker, CarTypeList } from '../components';
 
-import { popularNew, recommendedCars } from '../public/dummyDatabase/CarData';
 import image from '../assets/index';
 
 const CarRent = () => {
-  const [numberOfPopularCars, setNumberOfPopularCars] = useState(popularNew.cars.slice(0, 4));
-  const [numberOfRecommendedCars, setNumberOfRecommendedCars] = useState(recommendedCars.cars.slice(0, 4));
-  const totalCars = numberOfPopularCars.length + numberOfRecommendedCars.length;
+  const [allCars, setAllCars] = useState([]);
+  const [popularCars, setPopularCars] = useState([]);
+  const [recommendedCars, setRecommendedCars] = useState([]);
+  console.log(popularCars);
 
-  const showMoreCars = () => {
-    setNumberOfPopularCars(popularNew.cars);
-    setNumberOfRecommendedCars(recommendedCars.cars);
-  };
   const [windowSize, setWindowSize] = useState({
     width: undefined,
   });
+  const totalCars = popularCars.length + recommendedCars.length;
+
+  const fetchCars = async () => {
+    try {
+      const response = await axios.get('/api/car', {
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      });
+      const data = await response.data;
+      setAllCars(data.data);
+      setPopularCars(data.data.slice(0, 4));
+      setRecommendedCars(data.data.slice(5, 9));
+    } catch (error) {
+      console.log('error', error);
+    }
+  };
+
+  useEffect(() => {
+    fetchCars();
+  }, []);
 
   function useWindowSize() {
     useEffect(() => {
@@ -59,17 +77,18 @@ const CarRent = () => {
         </div>
       </div>
       <div className="mt-[42px]">
-        <StatePicker windowSize={size}/>
+        <StatePicker windowSize={size} />
       </div>
-      <CarTypeList carType={popularNew.type} carAmount={numberOfPopularCars} scrollable="overflow-x-auto md:flex-wrap" />
-      <CarTypeList carData={recommendedCars.type} carAmount={numberOfRecommendedCars} noscroll="flex-wrap" />
+
+      <CarTypeList carCategory="Popular Car" carData={popularCars} scrollable="overflow-x-auto md:flex-wrap" />
+      <CarTypeList carCategory="Recommendation Car" carData={recommendedCars} noscroll="flex-wrap" />
       <div className="flex">
         <div className="flex justify-center mx-auto mt-12 md:mt-16">
-          <Button text="Show more cars" bgColor="bg-btn-blue" color="text-white" handleClick={showMoreCars} />
+          <Button text="Show more cars" bgColor="bg-btn-blue" color="text-white" handleClick={() => {}} />
         </div>
         <div className="flex self-end">
           <p className="flex text-secondinary-light-300 font-medium text-sm md:text-base md:font-semi-bold">
-            {totalCars} Cars
+            {totalCars}Cars
           </p>
         </div>
       </div>
