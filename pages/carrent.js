@@ -2,16 +2,15 @@ import { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Button, CarBanner, StatePicker, CarTypeList } from '../components';
 
+// import { popularNew, recommendedCars } from '../public/dummyDatabase/CarData';
 import image from '../assets/index';
 
 const CarRent = () => {
+  const size = useWindowSize();
   const [allCars, setAllCars] = useState([]);
-  const [popularCars, setPopularCars] = useState([]);
-  const [recommendedCars, setRecommendedCars] = useState([]);
   console.log(allCars);
-  const [windowSize, setWindowSize] = useState({
-    width: undefined,
-  });
+
+  const [numberOfCars, setNumberOfCars] = useState(size.width < 1900 ? 12 : 15);
 
   const fetchCars = async () => {
     try {
@@ -21,77 +20,57 @@ const CarRent = () => {
         },
       });
       const data = await response.data;
+      console.log('data', data);
       setAllCars(data.data);
-      setPopularCars(data.data.slice(0, 4));
-      setRecommendedCars(data.data.slice(5, 9));
     } catch (error) {
-      console.log('error', error);
+      console.log('Error', error);
     }
   };
 
+  // get data
   useEffect(() => {
     fetchCars();
   }, []);
 
-  function useWindowSize() {
-    useEffect(() => {
-      function handleResize() {
-        setWindowSize({
-          width: window.innerWidth,
-        });
-      }
-
-      window.addEventListener('resize', handleResize);
-
-      handleResize();
-
-      return () => window.removeEventListener('resize', handleResize);
-    }, []);
-    return windowSize;
-  }
-
-  const size = useWindowSize();
-
-  const showMoreCars = () => {
-    setPopularCars(allCars);
-    setRecommendedCars(allCars);
-  };
-
   return (
     <div className=" p-6 md:p-16">
       <div className="flex flex-col gap-8 pt-8   md:flex-row  mt-124 bg-bg-color-car-app">
-        <div style={{ backgroundImage: `url(${image.banner2.src})`, backgroundRepeat: 'no-repeat', backgroundPosition: 'top' }} className=" bg-cover rounded-xl w-full ">
+        <div className=" flex w-full ">
           <CarBanner
             title="The Best Platform for Car Rental"
             subtitle="Ease of doing a car rental safely and reliably. Of course at a low price."
             carImg={image.koenigsegg}
-            card="transparent"
+            card="bg-[#5CAFFC]"
             btnColor="bg-btn-blue"
           />
         </div>
-        <div style={{ backgroundImage: `url(${image.banner.src})`, backgroundRepeat: 'no-repeat', backgroundPosition: 'top' }} className=" bg-cover rounded-xl hidden md:flex w-full ">
+        <div className=" hidden md:flex w-full ">
           <CarBanner
             title="Easy way to rent a car at a low price"
             subtitle="Providing cheap car rental services and safe and comfortable facilities."
             carImg={image.nissan}
-            card="transparent"
+            card="bg-btn-blue"
             btnColor="bg-[#5CAFFC]"
           />
         </div>
       </div>
       <div className="mt-[42px]">
-        <StatePicker windowSize={size} />
+        <StatePicker />
       </div>
-
-      <CarTypeList carCategory="Popular Car" carData={popularCars} scrollable="overflow-x-auto md:flex-wrap" />
-      <CarTypeList carCategory="Recommendation Car" carData={recommendedCars} noscroll="flex-wrap" />
+      <div>
+        {/* {allCars.map((car) => (
+          <p>{car.carTitle}</p>
+        ))} */}
+      </div>
+      <CarTypeList carData={allCars} scrollable="overflow-x-auto md:flex-wrap" />
+      <CarTypeList noscroll="flex-wrap" />
       <div className="flex">
         <div className="flex justify-center mx-auto mt-12 md:mt-16">
-          <Button text="Show more cars" bgColor="bg-btn-blue" color="text-white" handleClick={showMoreCars} />
+          <Button text="Show more cars" bgColor="bg-btn-blue" color="text-white" />
         </div>
         <div className="flex self-end">
           <p className="flex text-secondinary-light-300 font-medium text-sm md:text-base md:font-semi-bold">
-            {allCars.length} Cars
+            Cars
           </p>
         </div>
       </div>
