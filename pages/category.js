@@ -89,7 +89,9 @@ const category = () => {
     return '';
   };
 
-  console.log('isloading', isLoading);
+  console.log('checkedPickup', checkedPickup);
+  console.log('checkedDropoff', checkedDropoff);
+  console.log('filterState', filterState);
 
   /* const filteredData = () => {
     let filterData = cars.filter(({ name, category: cat, people, price }) => {
@@ -114,6 +116,7 @@ const category = () => {
 
   const filterPickup = (car) => {
     const filteredCars = car.filter(({ pickupLocation }) => {
+      console.log('pickupLocation', pickupLocation);
       if (checkedPickup.location.length > 0) return checkedPickup.location.toLowerCase().includes(pickupLocation.toLowerCase());
       if (checkedPickup.location.length === 0) return car;
       return filteredCars;
