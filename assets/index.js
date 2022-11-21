@@ -9,5 +9,35 @@ import exclusiveMGZS from './exclusiveMGZS.png';
 import user from './user.svg';
 import gas from './gas.svg';
 import wheel from './wheel.svg';
+import Like from './Like.svg';
+import Notification from './Notification.png';
+import Logo from './Logo.png';
+import menu from './menu.svg';
+import filter from './filter.svg';
+import Profile from './Profile.png';
+import search from './search.svg';
+import Setting from './Setting.png';
+import vector from './Vector.svg';
 
-export default { koenigsegg, nissan, rollsRoyce, allNewRush, allNewTerios, CRV, newMGZS, exclusiveMGZS, user, wheel, gas };
+export default {
+  koenigsegg,
+  nissan,
+  rollsRoyce,
+  allNewRush,
+  allNewTerios,
+  CRV,
+  newMGZS,
+  exclusiveMGZS,
+  user,
+  wheel,
+  gas,
+  Like,
+  Logo,
+  menu,
+  Notification,
+  Profile,
+  search,
+  Setting,
+  filter,
+  vector,
+};
