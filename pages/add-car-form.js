@@ -7,12 +7,11 @@ import Button from '../components/Button';
 import image from '../assets/index';
 
 const addCarForm = () => {
-  const [listOfCars, setListOfCars] = useState([]);
   const [carTitle, setCarTitle] = useState('');
   const [model, setModel] = useState('');
   const [price, setPrice] = useState(0);
   const [people, setPeople] = useState('');
-  const [type, setType] = useState('');
+  const [carType, setCarType] = useState('');
   const [location, setLocation] = useState('');
   const [gas, setGas] = useState(0);
   const [pickupLocation, setPickupLocation] = useState('');
@@ -31,7 +30,7 @@ const addCarForm = () => {
         model,
         price,
         people,
-        type,
+        carType,
         location,
         gas,
         pickupLocation,
@@ -53,7 +52,7 @@ const addCarForm = () => {
     setModel(event.target.value);
     setPrice(event.target.value);
     setPeople(event.target.value);
-    setType(event.target.value);
+    setCarType(event.target.value);
     setLocation(event.target.value);
     setGas(event.target.value);
     setPickupLocation(event.target.value);
@@ -70,30 +69,30 @@ const addCarForm = () => {
     <>
       {// Heading
       }
-      <div className="grid place-items-center flex-row mx-auto mb-6 bg-gray-background px-6 py-6 w-full rounded-lg">
-        <div className="w-1/2 mx-auto py-6 text-black bg-white pl-3 font-bold ">
-          <h1 className="text-left text-2xl text-secondinary-default bg-white flex-wrap">Add a Car for Rent</h1>
-          <p className="text-secondinary-default bg-white flex-wrap">Please enter your car info</p>
+      {/* <div className="grid relative place-items-center flex-row mx-auto mb-2 bg-gray-background px-6 py-6 w-full rounded-lg"> */}
+      <div className="mt-6 pb-10">
+        <div className="w-1/2 mx-auto mt-5 py-6 text-black bg-white pl-3 font-bold ">
+          <h1 className="text-left text-2xl pl-4 text-secondinary-default bg-white flex-wrap">Add a Car for Rent</h1>
+          <p className="text-[#90A3BF] bg-white pb-6 pl-4 text-sm">Please enter your car info</p>
         </div>
 
         {// Form
       }
         <form
-          className="grid gap-6 mb-6 md:grid-cols-2 place-items-center place-content-center w-1/2 px-6 md:mb-0 gap-x-3 overflow:hidden
+          className="grid gap-6 grid-cols-2 mb-6 w-1/2 px-6 mx-auto
          text-black bg-white flex-wrap"
           action="/"
           method="post"
           onSubmit={createCar}
         >
-
           <div className="mb-4">
-            <label className="block text-sm font-bold mb-2 text-form-title-color">cars</label>
+            <label className="block text-base font-bold mb-2 text-form-title-color">Car Title</label>
             <input
-              className="bg-form-grey-background border-r-{10}"
+              className="bg-form-grey-background border-r-{10} text-left pl-8 pb-1 rounded w-96 h-14"
               key="cars"
               type="text"
-              placeholder="placeholder"
-              onClick={handleChange}
+              placeholder="Your title"
+              // onClick={handleChange}
               onChange={(event) => {
                 setCarTitle(event.target.value);
               }}
@@ -102,12 +101,12 @@ const addCarForm = () => {
           </div>
 
           <div className="mb-4">
-            <label className="block text-sm font-bold mb-2 text-form-title-color">brand</label>
+            <label className="block text-base font-bold mb-2 text-form-title-color">Car Brand</label>
             <input
-              className="bg-form-grey-background border-r-{10}"
+              className="bg-form-grey-background border-r-{10} text-left pl-8 pb-1 rounded w-96 h-14"
               key="brand"
               type="text"
-              placeholder="placeholder"
+              placeholder="Brand Name"
               onClick={handleChange}
               onChange={(event) => {
                 setModel(event.target.value);
@@ -116,12 +115,12 @@ const addCarForm = () => {
           </div>
 
           <div className="mb-4">
-            <label className="block text-sm font-bold mb-2 text-form-title-color">price</label>
+            <label className="block text-base font-bold mb-2 text-form-title-color">Rent Price</label>
             <input
-              className="bg-form-grey-background border-r-{10}"
+              className="bg-form-grey-background border-r-{10} text-left pl-8 pb-1 rounded w-96 h-14"
               key="price"
               type="number"
-              placeholder="placeholder"
+              placeholder="Price in dollars"
               onClick={handleChange}
               onChange={(event) => {
                 setPrice(event.target.value);
@@ -130,12 +129,12 @@ const addCarForm = () => {
           </div>
 
           <div className="mb-4">
-            <label className="block text-sm font-bold mb-2 text-form-title-color">people</label>
+            <label className="block text-base font-bold mb-2 text-form-title-color">Capacity</label>
             <input
-              className="bg-form-grey-background border-r-{10}"
+              className="bg-form-grey-background border-r-{10} text-left pl-8 pb-1 rounded w-96 h-14"
               key="people"
               type="number"
-              placeholder="placeholder"
+              placeholder="Capacity in persons"
               onClick={handleChange}
               onChange={(event) => {
                 setPeople(event.target.value);
@@ -144,26 +143,26 @@ const addCarForm = () => {
           </div>
 
           <div className="mb-4">
-            <label className="block text-sm font-bold mb-2 text-form-title-color">type</label>
+            <label className="block text-base font-bold mb-2 text-form-title-color">Car Type</label>
             <input
-              className="bg-form-grey-background border-r-{10}"
+              className="bg-form-grey-background border-r-{10} text-left pl-8 pb-1 rounded w-96 h-14"
               key="type"
               type="text"
-              placeholder="placeholder"
+              placeholder="Car Type"
               onClick={handleChange}
               onChange={(event) => {
-                setType(event.target.value);
+                setCarType(event.target.value);
               }}
             />
           </div>
 
           <div className="mb-4">
-            <label className="block text-sm font-bold mb-2 text-form-title-color">location</label>
+            <label className="block text-base font-bold mb-2 text-form-title-color">Location</label>
             <input
-              className="bg-form-grey-background border-r-{10}"
+              className="bg-form-grey-background border-r-{10} text-left pl-8 pb-1 rounded w-96 h-14"
               key="location"
               type="text"
-              placeholder="placeholder"
+              placeholder="Select your city"
               onClick={handleChange}
               onChange={(event) => {
                 setLocation(event.target.value);
@@ -172,12 +171,12 @@ const addCarForm = () => {
           </div>
 
           <div className="mb-4">
-            <label className="block text-sm font-bold mb-2 text-form-title-color">gas</label>
+            <label className="block text-base font-bold mb-2 text-form-title-color">Gas</label>
             <input
-              className="bg-form-grey-background border-r-{10}"
+              className="bg-form-grey-background border-r-{10} text-left pl-8 pb-1 rounded w-96 h-14"
               key="gas"
               type="number"
-              placeholder="placeholder"
+              placeholder="Gas Capacity"
               onClick={handleChange}
               onChange={(event) => {
                 setGas(event.target.value);
@@ -186,12 +185,12 @@ const addCarForm = () => {
           </div>
 
           <div className="mb-4">
-            <label className="block text-sm font-bold mb-2 text-form-title-color">pickup location</label>
+            <label className="block text-base font-bold mb-2 text-form-title-color">Pickup Location</label>
             <input
-              className="bg-form-grey-background border-r-{10}"
+              className="bg-form-grey-background border-r-{10} text-left pl-8 pb-1 rounded w-96 h-14"
               key="pickupLocation"
               type="text"
-              placeholder="placeholder"
+              placeholder="Pickup Location"
               onClick={handleChange}
               onChange={(event) => {
                 setPickupLocation(event.target.value);
@@ -200,12 +199,12 @@ const addCarForm = () => {
           </div>
 
           <div className="mb-4">
-            <label className="block text-sm font-bold mb-2 text-form-title-color">dropoff location</label>
+            <label className="block text-base font-bold mb-2 text-form-title-color">Dropoff Location</label>
             <input
-              className="bg-form-grey-background border-r-{10}"
+              className="bg-form-grey-background border-r-{10} text-left pl-8 pb-1 rounded w-96 h-14"
               key="dropoffLocation"
               type="text"
-              placeholder="placeholder"
+              placeholder="Dropoff Location"
               onClick={handleChange}
               onChange={(event) => {
                 setDropOffLocation(event.target.value);
@@ -213,13 +212,13 @@ const addCarForm = () => {
             />
           </div>
 
-          <div className="mb-4">
-            <label className="block text-sm font-bold mb-2 text-form-title-color">Availability From</label>
+          <div className="mb-2">
+            <label className="block text-base font-bold mb-2 text-form-title-color">Availability From</label>
             <input
-              className="bg-form-grey-background border-r-{10}"
+              className="bg-form-grey-background border-r-{10} text-left pl-8 pb-1 rounded w-96 h-14"
               key="AvailabilityFrom"
               type="date"
-              placeholder="placeholder"
+              placeholder="Availability From"
               onClick={handleChange}
               onChange={(event) => {
                 setAvailabilityFrom(event.target.value);
@@ -228,12 +227,12 @@ const addCarForm = () => {
           </div>
 
           <div className="mb-4">
-            <label className="block text-sm font-bold mb-2 text-form-title-color">Availability To</label>
+            <label className="block text-base font-bold mb-2 text-form-title-color">Availability To</label>
             <input
-              className="bg-form-grey-background border-r-{10}"
+              className="bg-form-grey-background border-r-{10} text-left pl-8 pb-1 rounded w-96 h-14"
               key="AvailabilityTo"
               type="date"
-              placeholder="placeholder"
+              placeholder="Availability To"
               onClick={handleChange}
               onChange={(event) => {
                 setAvailabilityTo(event.target.value);
@@ -242,12 +241,12 @@ const addCarForm = () => {
           </div>
 
           <div className="mb-4">
-            <label className="block text-sm font-bold mb-2 text-form-title-color">description</label>
+            <label className="block text-base font-bold mb-2 text-form-title-color">Description</label>
             <input
-              className="bg-form-grey-background border-r-{10}"
+              className="bg-form-grey-background border-r-{10} text-left pl-8 pb-1 rounded w-96 h-14"
               key="description"
               type="text"
-              placeholder="placeholder"
+              placeholder="Description"
               onClick={handleChange}
               onChange={(event) => {
                 setDescription(event.target.value);
@@ -255,7 +254,7 @@ const addCarForm = () => {
             />
           </div>
 
-          <div className="mb-4">
+          {/* <div className="mb-4">
             <label className="block text-sm font-bold mb-2 text-form-title-color">isPopular</label>
             <input
               className="bg-form-grey-background border-r-{10}"
@@ -267,18 +266,14 @@ const addCarForm = () => {
                 setIsPopular(event.target.value);
               }}
             />
-          </div>
+          </div> */}
 
           {/* <CustomInput
             label="Car Name"
             type="text"
             id="last"
             placeholder="Car Title"
-            onClick={handleChange}
-            onChange={(event) => {
-              setCarTitle(event.target.value);
-              setModel(event.target.value);
-            }}
+            onChange={handleChange}
           />
 
           <CustomInput
@@ -288,7 +283,7 @@ const addCarForm = () => {
             placeholder="Brand Name"
             onClick={handleChange}
             onChange={(event) => {
-              setModel(event.target.value);
+              setCarTitle(event.target.value);
             }}
           />
 
@@ -297,6 +292,7 @@ const addCarForm = () => {
             type="number"
             id="last"
             placeholder="Price in dollars"
+            onChange={handleChange}
           />
 
           <CustomInput
@@ -304,6 +300,7 @@ const addCarForm = () => {
             type="number"
             id="last"
             placeholder="Capacity in persons"
+            onChange={handleChange}
           />
 
           <CustomInput
@@ -311,6 +308,7 @@ const addCarForm = () => {
             type="text"
             id="last"
             placeholder="Car Type"
+            onChange={handleChange}
           />
 
           <CustomInput
@@ -318,20 +316,46 @@ const addCarForm = () => {
             type="text"
             id="last"
             placeholder="Select your city"
+            onChange={handleChange}
           /> */}
 
-          <button
+          {/* <button
             className="bg-form-grey-background outline-8 outline-black ring-2"
             type="submit"
           >Submit
-          </button>
+          </button> */}
+
+          <div className=" text-black bg-white font-bold text-left">
+            Upload Images
+          </div>
+
+          <br />
+
+          <label
+            htmlFor="dropzone-file"
+            className="flex col-span-2 pr-6 mr-6 justify-center place-items-center w-full h-{180} px-6 transition bg-white border-2
+    border-gray-300 border-dashed rounded-md appearance-none cursor-pointer hover:border-gray-400 focus:outline-none"
+          >
+            <div className="flex flex-col justify-center items-center pt-5 pb-6">
+              <Image src={image.vector} alt="uploadimage" priority className=" object-contain my-4" />
+              <p className="mb-2 text-sm text-[#3563E9]">Drag and drop an image, or <span className="font-semibold text-cyan-600"> Browse</span></p>
+              <p className="text-xs text-gray-500 dark:text-gray-400 mb-2">High resolution images (png, jpg, gif)</p>
+            </div>
+            <input id="dropzone-file" type="file" className="hidden" />
+          </label>
+
+          <br />
+
+          <div className="pb-10 justify-items-end ml-auto place-items-end">
+            <Button />
+          </div>
 
         </form>
 
         {// Upload Images
         }
 
-        <div className="w-1/2 mx-auto my-auto text-black bg-white pl-3">
+        {/* <div className="w-1/2 mx-auto mb-6 text-black bg-white pl-3">
           <div className="mx-auto p-1 text-black bg-white font-bold text-left">
             Upload Images
           </div>
@@ -351,45 +375,45 @@ const addCarForm = () => {
             </label>
           </div>
 
-          {/* <div className="place-content-center w-full md:w-1/2 px-6  mb-6 md:mb-0 gap-x-3 overflow:hidden text-black bg-btn-blue flex flex-wrap">
-          Uploading files
-
-          <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300" htmlFor="multiple_files">Upload multiple files</label>
-          <input
-            className="block w-full text-sm text-gray-900 bg-gray-50 rounded-lg border
-           border-gray-300 cursor-pointer dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400"
-            id="multiple_files"
-            type="file"
-            multiple
-          />
-
-        </div> */}
-          <div className="justify-items-end">
+          <div className="justify-items-end mb-6">
             <Button />
           </div>
-        </div>
-
+        </div> */}
       </div>
 
       {// Confirmation
         }
-      <div className="w-1/2 py-6 mx-auto mb-6 text-black bg-white rounded-lg">
-        <div className="mx-auto p-1 text-black bg-white text-xl text-left font-semibold">
+      <div className="w-1/2 py-6 mx-auto mb-6 text-black bg-white rounded-lg font-jakarta">
+        <div className="mx-auto pl-9 text-black bg-white text-xl text-left font-semibold">
           Confirmation
         </div>
 
-        <p className="text-black bg-white pb-2">We are getting to the end. Just a few clicks and your rental is ready!</p>
+        <p className="text-[#90A3BF] bg-white pl-9 pb-6 text-sm">We are getting to the end. Just a few clicks and your rental is ready!</p>
 
-        <div>
-          <input type="checkbox" className="text-black" /> <label>I agree with sending an Marketing and newsletter emails. No spawm, promissed!</label>
+        <div className="text-left pl-2 pb-1 mx-8 bg-[#F6F7F9] rounded font-semibold">
+          <input type="checkbox" className="text-black m-4 text-base" /> <label>I agree with sending an Marketing and newsletter emails. No spawm, promissed!</label>
         </div>
 
         <br />
 
-        <div>
-          <input type="checkbox" className="text-black" /> <label>I agree with our terms and conditions and privacy policy.</label>
+        <div className="text-left pl-2 pb-1 mx-8 bg-[#F6F7F9] rounded font-semibold">
+          <input type="checkbox" className="text-black m-4 text-base" /> <label>I agree with our terms and conditions and privacy policy.</label>
         </div>
-        <Button />
+
+        <br />
+        <div className="pl-9 pb-6">
+          <Button />
+        </div>
+
+        <div className="pl-9 pb-2">
+          <Image src={image.security} alt="uploadimage" priority className=" object-contain" />
+        </div>
+
+        <div className="mx-auto pl-9 text-black bg-white text-xl text-left font-semibold">
+          All your data is safe
+        </div>
+
+        <p className="text-[#90A3BF] bg-white pl-9 pb-6 text-sm">We are using the most advanced security to provide you the best experience ever.</p>
       </div>
 
     </>

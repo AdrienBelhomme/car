@@ -25,7 +25,7 @@ export default async function handler(req, res) {
       break;
     // case 'DELETE':
     //   try {
-    //     const removePost = await Car.remove({ _id: req.params.postId });
+    //     const removePost = await Car.remove(req.params.postId);
     //     res.status(200).json(removePost);
     //   } catch (error) {
     //     res.status(404).json({ message: error.message });
