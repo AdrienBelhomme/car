@@ -6,12 +6,7 @@ import image from '../assets/index';
 
 const CarRent = () => {
   const [allCars, setAllCars] = useState([]);
-  const [popularCars, setPopularCars] = useState([]);
-  const [recommendedCars, setRecommendedCars] = useState([]);
-  console.log(allCars);
-  const [windowSize, setWindowSize] = useState({
-    width: undefined,
-  });
+  const [initialDisplay, setInitialDisplay] = useState(true);
 
   const fetchCars = async () => {
     try {
@@ -22,8 +17,6 @@ const CarRent = () => {
       });
       const data = await response.data;
       setAllCars(data.data);
-      setPopularCars(data.data.slice(0, 4));
-      setRecommendedCars(data.data.slice(5, 9));
     } catch (error) {
       console.log('error', error);
     }
@@ -33,6 +26,19 @@ const CarRent = () => {
     fetchCars();
   }, []);
 
+  const filterPopularCars = allCars.filter((car) => car.tag === 'popular');
+  const initialPopularCars = allCars.filter((car) => car.tag === 'popular').slice(0, 3);
+  const filterRecommendedCars = allCars.filter((car) => car.tag === 'recommended');
+  const initialRecommendedCars = filterRecommendedCars.slice(0, 2);
+  const totalPopAndRecCars = filterPopularCars.length + filterRecommendedCars.length;
+  const [windowSize, setWindowSize] = useState({
+    width: undefined,
+  });
+
+  const showMoreCars = () => {
+    setInitialDisplay(!initialDisplay);
+  };
+
   function useWindowSize() {
     useEffect(() => {
       function handleResize() {
@@ -40,11 +46,8 @@ const CarRent = () => {
           width: window.innerWidth,
         });
       }
-
       window.addEventListener('resize', handleResize);
-
       handleResize();
-
       return () => window.removeEventListener('resize', handleResize);
     }, []);
     return windowSize;
@@ -52,9 +55,11 @@ const CarRent = () => {
 
   const size = useWindowSize();
 
-  const showMoreCars = () => {
-    setPopularCars(allCars);
-    setRecommendedCars(allCars);
+  const hidden = () => {
+    if (filterPopularCars.length + filterRecommendedCars.length === totalPopAndRecCars.length) {
+      return 'hidden';
+    }
+    return '';
   };
 
   return (
@@ -82,16 +87,15 @@ const CarRent = () => {
       <div className="mt-[42px]">
         <StatePicker windowSize={size} />
       </div>
-
-      <CarTypeList carCategory="Popular Car" carData={popularCars} scrollable="overflow-x-auto md:flex-wrap" />
-      <CarTypeList carCategory="Recommendation Car" carData={recommendedCars} noscroll="flex-wrap" />
+      <CarTypeList carCategory="Popular Car" carData={initialDisplay ? filterPopularCars : initialPopularCars} scrollable="overflow-x-auto md:flex-wrap" />
+      <CarTypeList carCategory="Recommendation Car" carData={initialDisplay ? filterRecommendedCars : initialRecommendedCars} noscroll="flex-wrap" />
       <div className="flex">
-        <div className="flex justify-center mx-auto mt-12 md:mt-16">
-          <Button text="Show more cars" bgColor="bg-btn-blue" color="text-white" handleClick={showMoreCars} />
+        <div className={`flex justify-center mx-auto mt-12 md:mt-16 ${hidden}`}>
+          <Button text={initialDisplay ? 'Show Less Cars' : ' Show More Cars'} bgColor="bg-btn-blue" color="text-white" handleClick={showMoreCars} />
         </div>
         <div className="flex self-end">
           <p className="flex text-secondinary-light-300 font-medium text-sm md:text-base md:font-semi-bold">
-            {allCars.length} Cars
+            {initialDisplay ? totalPopAndRecCars : initialPopularCars.length + initialRecommendedCars.length } Cars
           </p>
         </div>
       </div>
