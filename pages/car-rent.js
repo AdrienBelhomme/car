@@ -55,13 +55,6 @@ const CarRent = () => {
 
   const size = useWindowSize();
 
-  const hidden = () => {
-    if (filterPopularCars.length + filterRecommendedCars.length === totalPopAndRecCars.length) {
-      return 'hidden';
-    }
-    return '';
-  };
-
   return (
     <div className=" p-6 md:p-16">
       <div className="flex flex-col gap-8 pt-8   md:flex-row  mt-124 bg-bg-color-car-app">
@@ -90,7 +83,7 @@ const CarRent = () => {
       <CarTypeList carCategory="Popular Car" carData={initialDisplay ? filterPopularCars : initialPopularCars} scrollable="overflow-x-auto md:flex-wrap" />
       <CarTypeList carCategory="Recommendation Car" carData={initialDisplay ? filterRecommendedCars : initialRecommendedCars} noscroll="flex-wrap" />
       <div className="flex">
-        <div className={`flex justify-center mx-auto mt-12 md:mt-16 ${hidden}`}>
+        <div className="flex justify-center mx-auto mt-12 md:mt-16">
           <Button text={initialDisplay ? 'Show Less Cars' : ' Show More Cars'} bgColor="bg-btn-blue" color="text-white" handleClick={showMoreCars} />
         </div>
         <div className="flex self-end">
