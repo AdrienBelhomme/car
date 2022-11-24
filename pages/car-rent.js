@@ -1,22 +1,30 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
-import { Button, CarBanner, StatePicker, CarTypeList } from '../components';
 
+import { Button, CarBanner, StatePicker, CarTypeList } from '../components';
 import image from '../assets/index';
 
 const CarRent = () => {
-  const [allCars, setAllCars] = useState([]);
-  const [initialDisplay, setInitialDisplay] = useState(true);
+  const [popularCars, setPopularCars] = useState([]);
+  const [recommendedCars, setRecommendedCars] = useState([]);
+  const [displayNumberOfCars, setDisplayNumberOfCars] = useState(true);
 
   const fetchCars = async () => {
     try {
-      const response = await axios.get('/api/car', {
+      const popularCarResponse = await axios.get('/api/cartype?tag=popular', {
         headers: {
           'Content-Type': 'application/json',
         },
       });
-      const data = await response.data;
-      setAllCars(data.data);
+      const recommendedCarResponse = await axios.get('/api/cartype?tag=recommended', {
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      });
+      const popularCarData = await popularCarResponse.data;
+      const recommendedCarData = await recommendedCarResponse.data;
+      setPopularCars(popularCarData.data);
+      setRecommendedCars(recommendedCarData.data);
     } catch (error) {
       console.log('error', error);
     }
@@ -26,17 +34,14 @@ const CarRent = () => {
     fetchCars();
   }, []);
 
-  const filterPopularCars = allCars.filter((car) => car.tag === 'popular');
-  const initialPopularCars = allCars.filter((car) => car.tag === 'popular').slice(0, 3);
-  const filterRecommendedCars = allCars.filter((car) => car.tag === 'recommended');
-  const initialRecommendedCars = filterRecommendedCars.slice(0, 2);
-  const totalPopAndRecCars = filterPopularCars.length + filterRecommendedCars.length;
   const [windowSize, setWindowSize] = useState({
     width: undefined,
   });
-
+  const initialPopularCarsDisplay = popularCars.slice(0, 3);
+  const initialRecommendedCarsDisplay = recommendedCars.slice(0, 2);
+  const totalPopAndRecCars = popularCars.length + recommendedCars.length;
   const showMoreCars = () => {
-    setInitialDisplay(!initialDisplay);
+    setDisplayNumberOfCars(!displayNumberOfCars);
   };
 
   function useWindowSize() {
@@ -80,15 +85,15 @@ const CarRent = () => {
       <div className="mt-[42px]">
         <StatePicker windowSize={size} />
       </div>
-      <CarTypeList carCategory="Popular Car" carData={initialDisplay ? filterPopularCars : initialPopularCars} scrollable="overflow-x-auto md:flex-wrap" />
-      <CarTypeList carCategory="Recommendation Car" carData={initialDisplay ? filterRecommendedCars : initialRecommendedCars} noscroll="flex-wrap" />
+      <CarTypeList carCategory="Popular Car" carData={displayNumberOfCars ? initialPopularCarsDisplay : popularCars} scrollable="overflow-x-auto md:flex-wrap" />
+      <CarTypeList carCategory="Recommendation Car" carData={recommendedCars} noscroll="flex-wrap" />
       <div className="flex">
         <div className="flex justify-center mx-auto mt-12 md:mt-16">
-          <Button text={initialDisplay ? 'Show Less Cars' : ' Show More Cars'} bgColor="bg-btn-blue" color="text-white" handleClick={showMoreCars} />
+          <Button text={displayNumberOfCars ? ' Show More Cars' : 'Show Less Cars'} bgColor="bg-btn-blue" color="text-white" handleClick={showMoreCars} />
         </div>
         <div className="flex self-end">
           <p className="flex text-secondinary-light-300 font-medium text-sm md:text-base md:font-semi-bold">
-            {initialDisplay ? totalPopAndRecCars : initialPopularCars.length + initialRecommendedCars.length } Cars
+            {displayNumberOfCars ? initialPopularCarsDisplay.length + initialRecommendedCarsDisplay.length : totalPopAndRecCars} Cars
           </p>
         </div>
       </div>
