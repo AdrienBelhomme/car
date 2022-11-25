@@ -18,6 +18,7 @@ import Profile from './Profile.png';
 import search from './search.svg';
 import Setting from './Setting.png';
 import vector from './Vector.svg';
+import carcover from './covercar.png';
 
 export default {
   koenigsegg,
@@ -40,4 +41,5 @@ export default {
   Setting,
   filter,
   vector,
+  carcover,
 };
