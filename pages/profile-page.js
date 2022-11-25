@@ -5,13 +5,11 @@ import Link from 'next/link';
 
 import image from '../assets/index';
 import { Button, CarTypeList } from '../components';
-// import carData from '../public/dummyDatabase/CarData';
 
 const Profile = ({ profileName = 'Web3', title = 'Agent' }) => {
   const [rentedCars, setRentedCars] = useState([]);
-  console.log('rentedCars', rentedCars);
   const [carsForRent, setCarsForRent] = useState([]);
-  console.log('carsForREnt', carsForRent);
+
   const fetchCars = async () => {
     try {
       const rentedCarResponse = await axios.get('/api/cartype?tag=rented', {
