@@ -278,7 +278,7 @@ const addCarForm = () => {
             id="last"
             placeholder="Car Title"
             onChange={handleChange}
-            onHandleChange={(event) => handleChange(event, setDescription)}
+            onHandleChange={(event) => handleChange(event, carTitle)}
           />
 
           <CustomInput
@@ -287,7 +287,7 @@ const addCarForm = () => {
             id="last"
             placeholder="Brand Name"
             onClick={handleChange}
-            onHandleChange={(event) => handleChange(event, setDescription)}
+            onHandleChange={(event) => handleChange(event, model)}
           />
 
           <CustomInput
@@ -296,7 +296,7 @@ const addCarForm = () => {
             id="last"
             placeholder="Price in dollars"
             onChange={handleChange}
-            onHandleChange={(event) => handleChange(event, setDescription)}
+            onHandleChange={(event) => handleChange(event, price)}
           />
 
           <CustomInput
@@ -305,7 +305,7 @@ const addCarForm = () => {
             id="last"
             placeholder="Capacity in persons"
             onChange={handleChange}
-            onHandleChange={(event) => handleChange(event, setDescription)}
+            onHandleChange={(event) => handleChange(event, people)}
           />
 
           <CustomInput
@@ -314,7 +314,7 @@ const addCarForm = () => {
             id="last"
             placeholder="Car Type"
             onChange={handleChange}
-            onHandleChange={(event) => handleChange(event, setDescription)}
+            onHandleChange={(event) => handleChange(event, carType)}
           />
 
           <CustomInput
@@ -323,7 +323,7 @@ const addCarForm = () => {
             id="last"
             placeholder="Select your city"
             onChange={handleChange}
-            onHandleChange={(event) => handleChange(event, setDescription)}
+            onHandleChange={(event) => handleChange(event, location)}
           />
           <CustomInput
             label="Gas"
@@ -331,7 +331,7 @@ const addCarForm = () => {
             id="last"
             placeholder="Gas Capacity"
             onChange={handleChange}
-            onHandleChange={(event) => handleChange(event, setDescription)}
+            onHandleChange={(event) => handleChange(event, gas)}
           />
           <CustomInput
             label="Pickup Location"
@@ -339,7 +339,7 @@ const addCarForm = () => {
             id="last"
             placeholder="Pickup Location"
             onChange={handleChange}
-            onHandleChange={(event) => handleChange(event, setDescription)}
+            onHandleChange={(event) => handleChange(event, pickupLocation)}
           />
           <CustomInput
             label="Dropoff Location"
@@ -347,7 +347,7 @@ const addCarForm = () => {
             id="last"
             placeholder="Dropoff Location"
             onChange={handleChange}
-            onHandleChange={(event) => handleChange(event, setDescription)}
+            onHandleChange={(event) => handleChange(event, dropOffLocation)}
           />
           <CustomInput
             label="Availability From"
@@ -355,7 +355,7 @@ const addCarForm = () => {
             id="last"
             placeholder="Availability From"
             onChange={handleChange}
-            onHandleChange={(event) => handleChange(event, setDescription)}
+            onHandleChange={(event) => handleChange(event, availabilityFrom)}
           />
 
           <CustomInput
@@ -364,7 +364,7 @@ const addCarForm = () => {
             id="last"
             placeholder="Availability To"
             onChange={handleChange}
-            onHandleChange={(event) => handleChange(event, setDescription)}
+            onHandleChange={(event) => handleChange(event, availabilityTo)}
           />
           <CustomInput
             label="Description"
@@ -372,7 +372,7 @@ const addCarForm = () => {
             id="last"
             placeholder="Description"
             onChange={handleChange}
-            onHandleChange={(event) => handleChange(event, setDescription)}
+            onHandleChange={(event) => handleChange(event, description)}
           /> */}
           {/* <button
             className="bg-form-grey-background outline-8 outline-black ring-2"
