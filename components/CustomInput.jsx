@@ -11,7 +11,7 @@ const CustomInput = (props) => {
         type={type}
         placeholder={placeholder}
         value={value}
-        onChange={(event) => onHandleChange(event)}
+        onChange={onHandleChange}
       />
 
     </div>

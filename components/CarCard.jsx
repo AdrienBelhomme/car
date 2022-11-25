@@ -18,12 +18,17 @@ const CarCard = ({
   price = '99.00',
   checkedCapacity,
   checkedType,
-  checkedPrice  
+  checkedPrice,
 }) => {
-
   const [isFavorite, setIsFavorite] = useState(false);
 
-  const handleIsFavorite = () => setIsFavorite((prev) => !prev);
+  const handleIsFavorite = () => {
+    const carsArr = window.localStorage.getItem('cars') || [];
+    carsArr.push('car', model);
+    window.localStorage.setItem('car', JSON.stringify(carsArr));
+    setIsFavorite((prev) => !prev);
+    console.log('clicked');
+  };
 
   const iconList = [
     { name: gas, icon: images.gas },

@@ -1,5 +1,5 @@
 import axios from 'axios';
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import Image from 'next/image';
 
 import CustomInput from '../components/CustomInput';
@@ -8,7 +8,7 @@ import image from '../assets/index';
 
 const addCarForm = () => {
   const [carForm, setCarForm] = useState({
-    title: '',
+    carTitle: '',
     model: '',
     price: 0,
     people: '',
@@ -23,39 +23,11 @@ const addCarForm = () => {
     tag: '',
   });
 
-  const [carTitle, setCarTitle] = useState('');
-  const [model, setModel] = useState('');
-  const [price, setPrice] = useState(0);
-  const [people, setPeople] = useState('');
-  const [carType, setCarType] = useState('');
-  const [location, setLocation] = useState('');
-  const [gas, setGas] = useState(0);
-  const [pickupLocation, setPickupLocation] = useState('');
-  const [dropOffLocation, setDropOffLocation] = useState('');
-  const [availabilityFrom, setAvailabilityFrom] = useState(new Date());
-  const [availabilityTo, setAvailabilityTo] = useState(new Date());
-  const [description, setDescription] = useState('');
-  const [tag, setTag] = useState('');
-
   // post data
   const createCar = async (event) => {
     event.preventDefault();
     try {
-      const carData = await axios.post('/api/car', {
-        carTitle,
-        model,
-        price,
-        people,
-        carType,
-        location,
-        gas,
-        pickupLocation,
-        dropOffLocation,
-        availabilityFrom,
-        availabilityTo,
-        description,
-        tag,
-      });
+      const carData = await axios.post('/api/car', { ...carForm });
       alert('User Created');
       console.log(carData);
     } catch (error) {
@@ -67,13 +39,10 @@ const addCarForm = () => {
     setCarForm({ ...carForm, [name]: event.target.value });
   };
 
-  // grid place-items-center flex-row place-content-center -mx-3 mb-6 bg-gray-background border-r-{10} px-6 w-full bg-white flex flex-wrap
-  // flex-row place-items-center place-content-center gap-x-3 px-6 m-20 mx-96 text-black bg-white flex-wrap
   return (
     <>
       {// Heading
       }
-      {/* <div className="grid relative place-items-center flex-row mx-auto mb-2 bg-gray-background px-6 py-6 w-full rounded-lg"> */}
       <div className="mt-6 pb-10">
         <div className="w-1/2 mx-auto mt-5 py-6 text-black bg-white pl-3 font-bold ">
           <h1 className="text-left text-2xl pl-4 text-secondinary-default bg-white flex-wrap">Add a Car for Rent</h1>
@@ -89,196 +58,13 @@ const addCarForm = () => {
           method="post"
           onSubmit={createCar}
         >
-          <div className="mb-4">
-            <label className="block text-base font-bold mb-2 text-form-title-color">Car Title</label>
-            <input
-              className="bg-form-grey-background border-r-{10} text-left pl-8 pb-1 rounded w-96 h-14"
-              key="cars"
-              type="text"
-              placeholder="Your title"
-              // onClick={handleChange}
-              onChange={(event) => {
-                setCarTitle(event.target.value);
-              }}
-            />
-
-          </div>
-
-          <div className="mb-4">
-            <label className="block text-base font-bold mb-2 text-form-title-color">Car Brand</label>
-            <input
-              className="bg-form-grey-background border-r-{10} text-left pl-8 pb-1 rounded w-96 h-14"
-              key="brand"
-              type="text"
-              placeholder="Brand Name"
-              onClick={handleChange}
-              onChange={(event) => {
-                setModel(event.target.value);
-              }}
-            />
-          </div>
-
-          <div className="mb-4">
-            <label className="block text-base font-bold mb-2 text-form-title-color">Rent Price</label>
-            <input
-              className="bg-form-grey-background border-r-{10} text-left pl-8 pb-1 rounded w-96 h-14"
-              key="price"
-              type="number"
-              placeholder="Price in dollars"
-              onClick={handleChange}
-              onChange={(event) => {
-                setPrice(event.target.value);
-              }}
-            />
-          </div>
-
-          <div className="mb-4">
-            <label className="block text-base font-bold mb-2 text-form-title-color">Capacity</label>
-            <input
-              className="bg-form-grey-background border-r-{10} text-left pl-8 pb-1 rounded w-96 h-14"
-              key="people"
-              type="number"
-              placeholder="Capacity in persons"
-              onClick={handleChange}
-              onChange={(event) => {
-                setPeople(event.target.value);
-              }}
-            />
-          </div>
-
-          <div className="mb-4">
-            <label className="block text-base font-bold mb-2 text-form-title-color">Car Type</label>
-            <input
-              className="bg-form-grey-background border-r-{10} text-left pl-8 pb-1 rounded w-96 h-14"
-              key="type"
-              type="text"
-              placeholder="Car Type"
-              onClick={handleChange}
-              onChange={(event) => {
-                setCarType(event.target.value);
-              }}
-            />
-          </div>
-
-          <div className="mb-4">
-            <label className="block text-base font-bold mb-2 text-form-title-color">Location</label>
-            <input
-              className="bg-form-grey-background border-r-{10} text-left pl-8 pb-1 rounded w-96 h-14"
-              key="location"
-              type="text"
-              placeholder="Select your city"
-              onClick={handleChange}
-              onChange={(event) => {
-                setLocation(event.target.value);
-              }}
-            />
-          </div>
-
-          <div className="mb-4">
-            <label className="block text-base font-bold mb-2 text-form-title-color">Gas</label>
-            <input
-              className="bg-form-grey-background border-r-{10} text-left pl-8 pb-1 rounded w-96 h-14"
-              key="gas"
-              type="number"
-              placeholder="Gas Capacity"
-              onClick={handleChange}
-              onChange={(event) => {
-                setGas(event.target.value);
-              }}
-            />
-          </div>
-
-          <div className="mb-4">
-            <label className="block text-base font-bold mb-2 text-form-title-color">Pickup Location</label>
-            <input
-              className="bg-form-grey-background border-r-{10} text-left pl-8 pb-1 rounded w-96 h-14"
-              key="pickupLocation"
-              type="text"
-              placeholder="Pickup Location"
-              onClick={handleChange}
-              onChange={(event) => {
-                setPickupLocation(event.target.value);
-              }}
-            />
-          </div>
-
-          <div className="mb-4">
-            <label className="block text-base font-bold mb-2 text-form-title-color">Dropoff Location</label>
-            <input
-              className="bg-form-grey-background border-r-{10} text-left pl-8 pb-1 rounded w-96 h-14"
-              key="dropoffLocation"
-              type="text"
-              placeholder="Dropoff Location"
-              onClick={handleChange}
-              onChange={(event) => {
-                setDropOffLocation(event.target.value);
-              }}
-            />
-          </div>
-
-          <div className="mb-2">
-            <label className="block text-base font-bold mb-2 text-form-title-color">Availability From</label>
-            <input
-              className="bg-form-grey-background border-r-{10} text-left pl-8 pb-1 rounded w-96 h-14"
-              key="AvailabilityFrom"
-              type="date"
-              placeholder="Availability From"
-              onClick={handleChange}
-              onChange={(event) => {
-                setAvailabilityFrom(event.target.value);
-              }}
-            />
-          </div>
-
-          <div className="mb-4">
-            <label className="block text-base font-bold mb-2 text-form-title-color">Availability To</label>
-            <input
-              className="bg-form-grey-background border-r-{10} text-left pl-8 pb-1 rounded w-96 h-14"
-              key="AvailabilityTo"
-              type="date"
-              placeholder="Availability To"
-              onClick={handleChange}
-              onChange={(event) => {
-                setAvailabilityTo(event.target.value);
-              }}
-            />
-          </div>
-
-          <div className="mb-4">
-            <label className="block text-base font-bold mb-2 text-form-title-color">Description</label>
-            <input
-              className="bg-form-grey-background border-r-{10} text-left pl-8 pb-1 rounded w-96 h-14"
-              key="description"
-              type="text"
-              placeholder="Description"
-              onClick={handleChange}
-              onChange={(event) => {
-                setDescription(event.target.value);
-              }}
-            />
-          </div>
-
-          {/* <div className="mb-4">
-            <label className="block text-sm font-bold mb-2 text-form-title-color">isPopular</label>
-            <input
-              className="bg-form-grey-background border-r-{10}"
-              key="isPopular"
-              type="text"
-              placeholder="placeholder"
-              onClick={handleChange}
-              onChange={(event) => {
-                setIsPopular(event.target.value);
-              }}
-            />
-          </div> */}
-
-          {/* <CustomInput
+          <CustomInput
             label="Car Title"
             type="text"
             id="last"
             placeholder="Car Title"
             onChange={handleChange}
-            onHandleChange={(event) => handleChange(event, carTitle)}
+            onHandleChange={(event) => handleChange(event, 'carTitle')}
           />
 
           <CustomInput
@@ -287,7 +73,7 @@ const addCarForm = () => {
             id="last"
             placeholder="Brand Name"
             onClick={handleChange}
-            onHandleChange={(event) => handleChange(event, model)}
+            onHandleChange={(event) => handleChange(event, 'model')}
           />
 
           <CustomInput
@@ -296,7 +82,7 @@ const addCarForm = () => {
             id="last"
             placeholder="Price in dollars"
             onChange={handleChange}
-            onHandleChange={(event) => handleChange(event, price)}
+            onHandleChange={(event) => handleChange(event, 'price')}
           />
 
           <CustomInput
@@ -305,7 +91,7 @@ const addCarForm = () => {
             id="last"
             placeholder="Capacity in persons"
             onChange={handleChange}
-            onHandleChange={(event) => handleChange(event, people)}
+            onHandleChange={(event) => handleChange(event, 'people')}
           />
 
           <CustomInput
@@ -314,7 +100,7 @@ const addCarForm = () => {
             id="last"
             placeholder="Car Type"
             onChange={handleChange}
-            onHandleChange={(event) => handleChange(event, carType)}
+            onHandleChange={(event) => handleChange(event, 'carType')}
           />
 
           <CustomInput
@@ -323,7 +109,7 @@ const addCarForm = () => {
             id="last"
             placeholder="Select your city"
             onChange={handleChange}
-            onHandleChange={(event) => handleChange(event, location)}
+            onHandleChange={(event) => handleChange(event, 'location')}
           />
           <CustomInput
             label="Gas"
@@ -331,7 +117,7 @@ const addCarForm = () => {
             id="last"
             placeholder="Gas Capacity"
             onChange={handleChange}
-            onHandleChange={(event) => handleChange(event, gas)}
+            onHandleChange={(event) => handleChange(event, 'gas')}
           />
           <CustomInput
             label="Pickup Location"
@@ -339,7 +125,7 @@ const addCarForm = () => {
             id="last"
             placeholder="Pickup Location"
             onChange={handleChange}
-            onHandleChange={(event) => handleChange(event, pickupLocation)}
+            onHandleChange={(event) => handleChange(event, 'pickupLocation')}
           />
           <CustomInput
             label="Dropoff Location"
@@ -347,7 +133,7 @@ const addCarForm = () => {
             id="last"
             placeholder="Dropoff Location"
             onChange={handleChange}
-            onHandleChange={(event) => handleChange(event, dropOffLocation)}
+            onHandleChange={(event) => handleChange(event, 'dropOffLocation')}
           />
           <CustomInput
             label="Availability From"
@@ -355,7 +141,7 @@ const addCarForm = () => {
             id="last"
             placeholder="Availability From"
             onChange={handleChange}
-            onHandleChange={(event) => handleChange(event, availabilityFrom)}
+            onHandleChange={(event) => handleChange(event, 'availabilityFrom')}
           />
 
           <CustomInput
@@ -364,7 +150,7 @@ const addCarForm = () => {
             id="last"
             placeholder="Availability To"
             onChange={handleChange}
-            onHandleChange={(event) => handleChange(event, availabilityTo)}
+            onHandleChange={(event) => handleChange(event, 'availabilityTo')}
           />
           <CustomInput
             label="Description"
@@ -372,8 +158,8 @@ const addCarForm = () => {
             id="last"
             placeholder="Description"
             onChange={handleChange}
-            onHandleChange={(event) => handleChange(event, description)}
-          /> */}
+            onHandleChange={(event) => handleChange(event, 'description')}
+          />
           {/* <button
             className="bg-form-grey-background outline-8 outline-black ring-2"
             type="submit"
