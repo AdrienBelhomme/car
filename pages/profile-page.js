@@ -4,27 +4,32 @@ import axios from 'axios';
 import Link from 'next/link';
 
 import image from '../assets/index';
-import { Button } from '../components';
+import { Button, CarTypeList } from '../components';
 // import carData from '../public/dummyDatabase/CarData';
 
 const Profile = ({ profileName = 'Web3', title = 'Agent' }) => {
-  const [allCars, setAllCars] = useState([]);
-  // const [rentedCars, setRentedCars] = useState([]);
-  // const [carsForRent, setCarsForRent] = useState([]);
-  console.log(allCars);
+  const [rentedCars, setRentedCars] = useState([]);
+  console.log('rentedCars', rentedCars);
+  const [carsForRent, setCarsForRent] = useState([]);
+  console.log('carsForREnt', carsForRent);
   const fetchCars = async () => {
     try {
-      const response = await axios.get('/api/car', {
+      const rentedCarResponse = await axios.get('/api/cartype?tag=rented', {
         headers: {
           'Content-Type': 'application/json',
         },
       });
-      const data = await response.data;
-      setAllCars(data.data);
+      const forRentCarResponse = await axios.get('/api/cartype?tag=forRent', {
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      });
+      const rentedCarData = await rentedCarResponse.data;
+      const forRentCarData = await forRentCarResponse.data;
+      setRentedCars(rentedCarData.data);
+      setCarsForRent(forRentCarData.data);
     } catch (error) {
-      if (error) {
-        <h1>Sorry something went wrong</h1>;
-      }
+      console.log('error', error);
     }
   };
 
@@ -33,7 +38,7 @@ const Profile = ({ profileName = 'Web3', title = 'Agent' }) => {
   }, []);
 
   return (
-    <div className=" p-6 md:p-16 md:pt-[121px] ">
+    <div className=" p-6 md:p-16 md:pt-[68px] ">
       <div className="text-xl font-bold mb-[29px] ">
         My Profile
       </div>
@@ -58,8 +63,8 @@ const Profile = ({ profileName = 'Web3', title = 'Agent' }) => {
           </div>
         </div>
       </div>
-      {/* <CarTypeList carData={carData} carCategory="Rented Cars" />
-      <CarTypeList carData={carData} carCategory="Cars for Rent" /> */}
+      <CarTypeList carData={rentedCars.slice(0, 4)} noscroll="flex-wrap" carCategory="Rented Cars" />
+      <CarTypeList carData={carsForRent.slice(0, 3)} noscroll="flex-wrap" carCategory="Cars for Rent" />
       <div className="flex justify-center mt-[55px]">
         <Link href="/add-car-form">
           <Button text="Add More Cars for Rent" />
