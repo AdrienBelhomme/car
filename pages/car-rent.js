@@ -3,36 +3,13 @@ import axios from 'axios';
 
 import { Button, CarBanner, StatePicker, CarTypeList } from '../components';
 import image from '../assets/index';
+import LoadingScreen from '../components/LoadingScreen';
 
 const CarRent = () => {
   const [popularCars, setPopularCars] = useState([]);
   const [recommendedCars, setRecommendedCars] = useState([]);
   const [displayNumberOfCars, setDisplayNumberOfCars] = useState(true);
-
-  const fetchCars = async () => {
-    try {
-      const popularCarResponse = await axios.get('/api/cartype?tag=popular', {
-        headers: {
-          'Content-Type': 'application/json',
-        },
-      });
-      const recommendedCarResponse = await axios.get('/api/cartype?tag=recommended', {
-        headers: {
-          'Content-Type': 'application/json',
-        },
-      });
-      const popularCarData = await popularCarResponse.data;
-      const recommendedCarData = await recommendedCarResponse.data;
-      setPopularCars(popularCarData.data);
-      setRecommendedCars(recommendedCarData.data);
-    } catch (error) {
-      console.log('error', error);
-    }
-  };
-
-  useEffect(() => {
-    fetchCars();
-  }, []);
+  const [isLoading, setLoading] = useState(false);
 
   const [windowSize, setWindowSize] = useState({
     width: undefined,
@@ -59,6 +36,35 @@ const CarRent = () => {
   }
 
   const size = useWindowSize();
+
+  const fetchCars = async () => {
+    try {
+      const popularCarResponse = await axios.get('/api/cartype?tag=popular', {
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      });
+      const recommendedCarResponse = await axios.get('/api/cartype?tag=recommended', {
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      });
+      const popularCarData = await popularCarResponse.data;
+      const recommendedCarData = await recommendedCarResponse.data;
+      setPopularCars(popularCarData.data);
+      setRecommendedCars(recommendedCarData.data);
+      setLoading(false);
+    } catch (error) {
+      console.log('error', error);
+    }
+  };
+
+  useEffect(() => {
+    setLoading(true);
+    fetchCars();
+  }, []);
+
+  if (isLoading) return <LoadingScreen />;
 
   return (
     <div className=" p-6 md:p-16">
