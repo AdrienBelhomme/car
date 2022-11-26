@@ -38,7 +38,7 @@ const CarRent = () => {
     width: undefined,
   });
   const initialPopularCarsDisplay = popularCars.slice(0, 3);
-  const initialRecommendedCarsDisplay = recommendedCars.slice(0, 2);
+  const initialRecommendedCarsDisplay = recommendedCars.slice(0, 3);
   const totalPopAndRecCars = popularCars.length + recommendedCars.length;
   const showMoreCars = () => {
     setDisplayNumberOfCars(!displayNumberOfCars);
@@ -63,7 +63,7 @@ const CarRent = () => {
   return (
     <div className=" p-6 md:p-16">
       <div className="flex flex-col gap-8 pt-8   md:flex-row  mt-124 bg-bg-color-car-app">
-        <div style={{ backgroundImage: `url(${image.banner.src})`, backgroundRepeat: 'no-repeat', backgroundPosition: 'top' }} className=" bg-cover rounded-xl w-full ">
+        <div style={{ backgroundImage: `url(${image.banner2.src})`, backgroundRepeat: 'no-repeat', backgroundPosition: 'top' }} className=" bg-cover rounded-xl w-full ">
           <CarBanner
             title="The Best Platform for Car Rental"
             subtitle="Ease of doing a car rental safely and reliably. Of course at a low price."
@@ -86,7 +86,7 @@ const CarRent = () => {
         <StatePicker windowSize={size} />
       </div>
       <CarTypeList carCategory="Popular Car" carData={displayNumberOfCars ? initialPopularCarsDisplay : popularCars} scrollable="overflow-x-auto md:flex-wrap" />
-      <CarTypeList carCategory="Recommendation Car" carData={recommendedCars} noscroll="flex-wrap" />
+      <CarTypeList carCategory="Recommendation Car" carData={displayNumberOfCars ? initialRecommendedCarsDisplay : recommendedCars} noscroll="flex-wrap" />
       <div className="flex">
         <div className="flex justify-center mx-auto mt-12 md:mt-16">
           <Button text={displayNumberOfCars ? ' Show More Cars' : 'Show Less Cars'} bgColor="bg-btn-blue" color="text-white" handleClick={showMoreCars} />
