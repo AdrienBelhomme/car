@@ -4,7 +4,7 @@ import axios from 'axios';
 import Link from 'next/link';
 
 import image from '../assets/index';
-import { Button, CarTypeList } from '../components';
+import { Button, CarTypeList, CarCard } from '../components';
 
 const Profile = ({ profileName = 'Web3', title = 'Agent' }) => {
   const [rentedCars, setRentedCars] = useState([]);
@@ -61,6 +61,7 @@ const Profile = ({ profileName = 'Web3', title = 'Agent' }) => {
           </div>
         </div>
       </div>
+      {/* <CarCard carsArr={CarCard.localStorage.getItem('cars')} /> */}
       <CarTypeList carData={rentedCars.slice(0, 4)} noscroll="flex-wrap" carCategory="Rented Cars" />
       <CarTypeList carData={carsForRent.slice(0, 3)} noscroll="flex-wrap" carCategory="Cars for Rent" />
       <div className="flex justify-center mt-[55px]">
