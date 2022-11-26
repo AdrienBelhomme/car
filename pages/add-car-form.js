@@ -153,12 +153,12 @@ const addCarForm = () => {
             onHandleChange={(event) => handleChange(event, 'availabilityTo')}
           />
           <CustomInput
-            label="Description"
+            label="Tag"
             type="text"
             id="last"
-            placeholder="Description"
+            placeholder="Tag Name"
             onChange={handleChange}
-            onHandleChange={(event) => handleChange(event, 'description')}
+            onHandleChange={(event) => handleChange(event, 'tag')}
           />
 
           {// Upload Images
