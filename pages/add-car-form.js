@@ -24,7 +24,7 @@ const addCarForm = () => {
   });
 
   // post data
-  const createCar = (event) => {
+  const createCar = async (event) => {
     event.preventDefault();
     try {
       const carData = await axios.post('/api/car', { ...carForm });

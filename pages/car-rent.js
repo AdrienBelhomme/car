@@ -63,7 +63,7 @@ const CarRent = () => {
   return (
     <div className=" p-6 md:p-16">
       <div className="flex flex-col gap-8 pt-8   md:flex-row  mt-124 bg-bg-color-car-app">
-        <div style={{ backgroundImage: `url(${image.banner2.src})`, backgroundRepeat: 'no-repeat', backgroundPosition: 'top' }} className=" bg-cover rounded-xl w-full ">
+        <div style={{ backgroundImage: `url(${image.banner.src})`, backgroundRepeat: 'no-repeat', backgroundPosition: 'top' }} className=" bg-cover rounded-xl w-full ">
           <CarBanner
             title="The Best Platform for Car Rental"
             subtitle="Ease of doing a car rental safely and reliably. Of course at a low price."
