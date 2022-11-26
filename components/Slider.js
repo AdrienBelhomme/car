@@ -1,13 +1,13 @@
 import ReactSlider from 'react-slider';
 
-const Slider = ({ price, setPrice }) => {
+const Slider = ({ filterState, setFilterState }) => {
   const handleChange = (value) => {
-    setPrice(value);
+    setFilterState({ ...filterState, checkedPrice: (value) });
   };
 
   return (
     <ReactSlider
-      value={price}
+      value={filterState.checkedPrice}
       onChange={handleChange}
       min={50}
       max={120}

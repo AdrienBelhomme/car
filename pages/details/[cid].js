@@ -5,9 +5,12 @@ import { faHeart, faGasPump, faGear, faUser, faStar } from '@fortawesome/free-so
 import '@fortawesome/fontawesome-svg-core/styles.css';
 import Image from 'next/image';
 
-import { Button, CarBanner, CarCard, Sidebar } from '../components';
-import images from '../assets';
-import carList from '../constants/carList';
+import Link from 'next/link';
+import { Button, CarBanner, CarCard, CarTypeList, Sidebar } from '../../components';
+import images from '../../assets';
+import carList from '../../constants/carList';
+import { useThemeContext } from '../../context/filtersState';
+import { popularNew, recommendedCars } from '../../public/dummyDatabase/CarData';
 
 const Stars = ({ rating }) => {
   const stars = [];
@@ -22,22 +25,21 @@ const Stars = ({ rating }) => {
 };
 
 const details = () => {
-  const router = useRouter();
-  const { carImages, model, type, gas, category, people, price, setIsFavorite, isFavorite } = router.query;
+  const [filterState, setFilterState] = useThemeContext();
 
-  const [checkedCapacity, setCheckedCapacity] = useState([1, 2, 4]);
-  const [checkedType, setCheckedType] = useState(['sport']);
-  const [checkedPrice, setCheckedPrice] = useState(120);
   const [banner, setBanner] = useState(images.banner.src);
   const [selected, setSelected] = useState('');
 
+  console.log(filterState);
+
+  const router = useRouter();
+  const { cid } = router.query;
+
+  console.log(cid);
+
+  const { carImages, model, type, gas, category, people, price } = router.query;
+
   const numberOfCars = 10;
-
-  console.log(setIsFavorite);
-
-  const emptyHeart = () => (
-    setIsFavorite((prev) => !prev)
-  );
 
   const filters = ['Sport', 'SUV', 'MPV', 'Sedan', 'Hackback', 'Coupe'];
   const capacity = [1, 2, 4, 8];
@@ -55,16 +57,36 @@ const details = () => {
     images.carCurrent, images.detailsViewCar, images.detailsViewCar2,
   ];
 
+  const filteredData = () => {
+    const filterData = carList.filter(({ name, type, people, price }) => {
+      if (filterState.checkedType.length === 0 && filterState.checkedCapacity.length === 0) {
+        return filters.some((c) => c === type) && capacity.some((l) => l === people && price < filterState.checkedPrice);
+      } if (filterState.checkedCapacity.length === 0) {
+        return filterState.checkedType.some((c) => c === type) && capacity.some((l) => l === people) && price < filterState.checkedPrice;
+      } if (filterState.checkedType.length === 0) {
+        return filters.some((c) => c === type) && filterState.checkedCapacity.some((l) => l === people) && price < filterState.checkedPrice;
+      }
+      return filterState.checkedType.some((c) => c === type) && filterState.checkedCapacity.some((l) => l === people) && price < filterState.checkedPrice;
+    });
+
+    return filterData;
+  };
+
+  const navigate = () => {
+    console.log('navigate');
+    router.push('/category');
+  };
+
   return (
     <div className="w-full flex">
-      <Sidebar checkedPrice={checkedPrice} setCheckedPrice={setCheckedPrice} checkedCapacity={checkedCapacity} setCheckedCapacity={setCheckedCapacity} checkedType={checkedType} setCheckedType={setCheckedType} />
+      <Sidebar />
       <div className="p-4 w-full">
 
-        <div className="flex items-center justify-between">
+        <div className="flex items-baseline justify-between">
 
-          <div className="flex flex-col items-center w-49% rounded-lg p-5">
+          <div className="flex flex-col items-center w-49% rounded-lg" style={{ padding: '0 1.25rem 1.25rem 0' }}>
 
-            <div style={{ backgroundImage: `url(${banner})`, backgroundSize: '50% 100%', backgroundRepeat: 'no-repeat', backgroundPosition: 'top' }} className="md:flex w-full bg-cover rounded">
+            <div style={{ backgroundImage: `url(${banner})`, backgroundSize: 'cover', backgroundRepeat: 'no-repeat', backgroundPosition: 'top' }} className="md:flex w-full bg-cover rounded">
               <CarBanner
                 title={carList[id].text}
                 subtitle={carList[id].subtitle}
@@ -78,6 +100,7 @@ const details = () => {
               <div className="flex items-center justify-between">
                 {carImagess.map((image, i) => (
                   <Image
+                    key={i}
                     onClick={(event) => {
                       handleBanner(event.target.src);
                       handleSelected(i);
@@ -96,17 +119,17 @@ const details = () => {
             <div className="flex items-center justify-between">
 
               <div className="text-3xl font-bold font-jakarta text-center text-input-title">{model}</div>
-              <div className="heart cursor-pointer" onClick={emptyHeart}>
+              <div className="heart cursor-pointer" onClick={() => {}}>
                 <FontAwesomeIcon
                   icon={faHeart}
-                  className={`h-5 ${isFavorite ? 'text-error-default' : 'text-dark-900 dark:text-white'} 2xl:h-5`}
+                  className={`h-5 ${carImages ? 'text-error-default' : 'text-dark-900 dark:text-white'} 2xl:h-5`}
                 />
               </div>
             </div>
 
             <div className="flex items-center mt-3">
 
-              <div className="self-center cursor-pointer" onClick={emptyHeart}>
+              <div className="self-center cursor-pointer">
                 <Stars rating={4} />
               </div>
               <div className="text-sm ml-4 font-jakarta text-center text-input-title">440+ reviewers</div>
@@ -125,7 +148,7 @@ const details = () => {
                 </div>
                 <div className="flex w-full">
                   <p className="tracking-tight text-xl leading-6 text-secondinary-light-300">Capacity:</p>
-                  <p className="tracking-tight text-xl font-bold leading-6 text-input-title ml-3">{capacity}</p>
+                  <p className="tracking-tight text-xl font-bold leading-6 text-input-title ml-3">{people}</p>
                 </div>
               </div>
               <div className="flex items-center justify-between w-full">
@@ -154,12 +177,30 @@ const details = () => {
 
         </div>
 
-        <div className="flex mt-4 justify-between flex-wrap gap-y-4">
-          { carList.map((model, index) => (
-            <div key={index} className="w-full md:w-49% lg:w-32% xl:w-24% 3xl:w-19%">
-              <CarCard model={model.name} image={model.image} people={model.people} type={model.type} price={model.price} />
+        <div className="flex mt-4 justify-start flex-wrap gap-4">
+          <CarTypeList numberOfCars={5} carData={recommendedCars} noscroll="flex-wrap" />
+
+        </div>
+
+        <div className="flex justify-between mt-8 md:mt-[42px]">
+          <h3 className="flex text-secondinary-light-300 font-medium text-sm md:text-base md:font-semi-bold">
+            All cars
+          </h3>
+          <button type="button" onClick={() => {}}>
+            <h3 className="flex justify-end text-btn-blue text-xs font-semibold md:text-base">
+              <Link href="/category">view all</Link>
+            </h3>
+          </button>
+        </div>
+
+        <div className="flex mt-[30px] justify-start flex-wrap gap-4">
+
+          { filteredData().slice(0, numberOfCars).map((model, index) => (
+            <div key={index} className="w-full md:max-w-49 lg:max-w-32 xl:max-w-25 3xl:max-w-20 md:flex-48 lg:flex-31 xl:flex-23 3xl:flex-19">
+              <CarCard model={model.name} image={model.image} people={model.people} type={model.type} price={model.price} checkedCapacity={filterState.checkedCapacity} checkedType={filterState.checkedType} checkedPrice={filterState.checkedPrice} />
             </div>
           ))}
+          {filteredData().length === 0 ? <p className="text-5xl p-12 m-auto">no cars matching your criterias</p> : null}
         </div>
 
       </div>
