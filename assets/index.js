@@ -18,12 +18,10 @@ import Profile from './Profile.png';
 import search from './search.svg';
 import Setting from './Setting.png';
 import vector from './Vector.svg';
-
 import detailsViewCar from './details-view-car.png';
 import detailsViewCar2 from './details-view-car-2.png';
 import carCurrent from './carMin.png';
 import banner from './background-banner.png';
-import banner2 from './backgroundlightblue.png';
 
 export default {
   koenigsegg,
@@ -41,7 +39,6 @@ export default {
   detailsViewCar2,
   carCurrent,
   banner,
-  banner2,
   Like,
   Logo,
   menu,
@@ -50,4 +47,5 @@ export default {
   search,
   Setting,
   filter,
+  vector,
 };

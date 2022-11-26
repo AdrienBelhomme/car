@@ -4,6 +4,7 @@ import axios from 'axios';
 import Link from 'next/link';
 import resolveConfig from 'tailwindcss/resolveConfig';
 import tailwindConfig from '../tailwind.config.js';
+import LoadingScreen from '../components/LoadingScreen';
 
 import { Button, CarCard, Sidebar, StatePicker } from '../components';
 import { koenigsegg, nissan, rollsRoyce, allNewRush } from '../assets';
@@ -53,6 +54,7 @@ const category = () => {
   }, [windowSize.width]);
 
   const [cars, setCars] = useState([]);
+  const [isLoading, setLoading] = useState(false);
 
   const fetchCars = async () => {
     try {
@@ -64,6 +66,7 @@ const category = () => {
       const data = await response.data;
       console.log('data', data);
       setCars(data.data);
+      setLoading(false);
     } catch (error) {
       console.log('Error', error);
     }
@@ -71,8 +74,11 @@ const category = () => {
 
   // get data
   useEffect(() => {
+    setLoading(true);
     fetchCars();
   }, []);
+
+  if (isLoading) return <LoadingScreen />;
 
   const totalCars = cars.length;
 
@@ -82,27 +88,6 @@ const category = () => {
     }
     return '';
   };
-
-  /* const filteredData = () => {
-    let filterData = cars.filter(({ name, category: cat, people, price }) => {
-      if (checkedType.length === 0 && checkedCapacity.length === 0) {
-        return filters.some((c) => c === cat) && capacity.some((l) => l === people && price < checkedPrice);
-      } if (checkedCapacity.length === 0) {
-        return checkedType.some((c) => c === cat) && capacity.some((l) => l === people) && price < checkedPrice;
-      } if (checkedType.length === 0) {
-        return filters.some((c) => c === cat) && checkedCapacity.some((l) => l === people) && price < checkedPrice;
-      }
-      return checkedType.some((c) => c === cat) && checkedCapacity.some((l) => l === people) && price < checkedPrice;
-    });
-
-    filterData = filterData.filter(({ pickupLocation: loc }) => {
-      if (Object.keys(checkedPickup.location).length === 0) {
-        return filterData;
-      }
-      return checkedPickup.location.includes(loc);
-    });
-    return filterData;
-  }; */
 
   const filterPickup = (car) => {
     const filteredCars = car.filter(({ pickupLocation }) => {
@@ -123,20 +108,19 @@ const category = () => {
   };
 
   const filterPickupDate = (car) => {
-    const filteredCars = filterDropoff(car).filter(({ availabilityFrom }) => {
-      if (checkedPickup.date.length > 0) return checkedPickup.date.getTime() >= availabilityFrom.getTime();
+    const locationFilteredCars = filterDropoff(car);
+    const filteredCars = locationFilteredCars.filter(({ availabilityFrom }) => {
+      if (checkedPickup.date.length > 0) return checkedPickup.date >= availabilityFrom;
       if (checkedPickup.date.length === 0) return car;
       return filteredCars;
     });
     return filteredCars;
   };
 
-  console.log('filterPickupDate', filterPickupDate(cars));
-
   const filterCarTypes = (car) => {
-    const locationFilteredCars = filterDropoff(car);
+    const locationandDateFilteredCars = filterPickupDate(car);
 
-    const filterData = locationFilteredCars.filter((allCars) => {
+    const filterData = locationandDateFilteredCars.filter((allCars) => {
       if (checkedType.length === 0 && checkedCapacity.length === 0) {
         return allCars.price < checkedPrice;
       }

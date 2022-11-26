@@ -1,16 +1,18 @@
 import { useRouter } from 'next/router';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHeart, faGasPump, faGear, faUser, faStar } from '@fortawesome/free-solid-svg-icons';
 import '@fortawesome/fontawesome-svg-core/styles.css';
 import Image from 'next/image';
-
 import Link from 'next/link';
+import axios from 'axios';
+
 import { Button, CarBanner, CarCard, CarTypeList, Sidebar } from '../../components';
 import images from '../../assets';
 import carList from '../../constants/carList';
 import { useThemeContext } from '../../context/filtersState';
 import { popularNew, recommendedCars } from '../../public/dummyDatabase/CarData';
+import LoadingScreen from '../../components/LoadingScreen';
 
 const Stars = ({ rating }) => {
   const stars = [];
@@ -26,6 +28,35 @@ const Stars = ({ rating }) => {
 
 const details = () => {
   const [filterState, setFilterState] = useThemeContext();
+
+  const [cars, setCars] = useState([]);
+  // const [isLoading, setLoading] = useState(false);
+
+  const { isPopular } = cars;
+
+  const fetchCars = async () => {
+    try {
+      const response = await axios.get('/api/car', {
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      });
+      const data = await response.data;
+      console.log('data', data);
+      setCars(data.data);
+      // setLoading(false);
+    } catch (error) {
+      console.log('Error', error);
+    }
+  };
+
+  // get data
+  useEffect(() => {
+    // setLoading(true);
+    fetchCars();
+  }, []);
+
+  // if (isLoading) return <LoadingScreen />;
 
   const [banner, setBanner] = useState(images.banner.src);
   const [selected, setSelected] = useState('');
@@ -178,8 +209,7 @@ const details = () => {
         </div>
 
         <div className="flex mt-4 justify-start flex-wrap gap-4">
-          <CarTypeList numberOfCars={5} carData={recommendedCars} noscroll="flex-wrap" />
-
+          <CarTypeList numberOfCars={5} carData={cars} categoryTitle="Popular Cars" noscroll="flex-wrap" />
         </div>
 
         <div className="flex justify-between mt-8 md:mt-[42px]">
