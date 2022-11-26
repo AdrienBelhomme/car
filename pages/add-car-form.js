@@ -1,100 +1,70 @@
-import Axios from 'axios';
-import React, { useEffect, useState } from 'react';
+import axios from 'axios';
+import React, { useState } from 'react';
+import Image from 'next/image';
 
 import CustomInput from '../components/CustomInput';
 import Button from '../components/Button';
+import image from '../assets/index';
 
 const addCarForm = () => {
-  const [listOfCars, setListOfCars] = useState([]);
-  const [carTitle, setCarTitle] = useState('');
-  const [model, setModel] = useState('');
-  const [price, setPrice] = useState(0);
-
-  // get data
-  useEffect(() => {
-    Axios.get('http://localhost:4000/posts').then((response) => {
-      setListOfCars(response.data);
-    });
-  }, []);
+  const [carForm, setCarForm] = useState({
+    carTitle: '',
+    model: '',
+    price: 0,
+    people: '',
+    carType: '',
+    location: '',
+    gas: 0,
+    pickupLocation: '',
+    dropOffLocation: '',
+    availabilityFrom: new Date(),
+    availabilityTo: new Date(),
+    description: '',
+    tag: '',
+  });
 
   // post data
   const createCar = (event) => {
     event.preventDefault();
-    const params = new URLSearchParams();
-    params.append('car-title', carTitle);
-    Axios.post(
-      'http://localhost:4000/posts',
-      {
-        carTitle,
-        model,
-        // price,
-      },
-    ).then((response) => {
+    try {
+      const carData = await axios.post('/api/car', { ...carForm });
       alert('User Created');
-
-      console.log(response);
-    }).catch((err) => {
-      console.log(err);
-    });
+      console.log(carData);
+    } catch (error) {
+      console.log('Error', error);
+    }
   };
 
-  const handleChange = (event) => {
-    setCarTitle(event.target.value);
-    setModel(event.target.value);
-    // setPrice(event.target.value);
+  const handleChange = (event, name) => {
+    setCarForm({ ...carForm, [name]: event.target.value });
   };
 
-  // grid place-items-center flex-row place-content-center -mx-3 mb-6 bg-gray-background border-r-{10} px-6 w-full bg-white flex flex-wrap
-  // flex-row place-items-center place-content-center gap-x-3 px-6 m-20 mx-96 text-black bg-white flex-wrap
   return (
     <>
-      <div className="grid place-items-center flex-row -mx-3 mb-6 bg-gray-background border-r-{10} px-6 w-full">
-        <h1 className="content-center text-left text-2xl text-secondinary-default bg-white flex-wrap">Add a Car for Rent</h1>
-        <p className="text-secondinary-default bg-white flex-wrap">Please enter your car info</p>
-
-        <div className="text-form-title-color">
-          {listOfCars.map((cars) => (
-            <div>
-              <h1>
-                Name: {cars.carTitle}
-              </h1>
-            </div>
-          ))}
+      {// Heading
+      }
+      <div className="mt-6 pb-10">
+        <div className="w-1/2 mx-auto mt-5 py-6 text-black bg-white pl-3 font-bold ">
+          <h1 className="text-left text-2xl pl-4 text-secondinary-default bg-white flex-wrap">Add a Car for Rent</h1>
+          <p className="text-[#90A3BF] bg-white pb-6 pl-4 text-sm">Please enter your car info</p>
         </div>
 
+        {// Form
+      }
         <form
-          className="grid gap-6 mb-6 md:grid-cols-2 place-items-center place-content-center w-full md:w-1/2 px-6 md:mb-0 gap-x-3 overflow:hidden
-         text-black bg-white flex-wrap"
+          className="gap-12 w-1/2 px-6 mx-auto
+         text-black bg-white flex flex-wrap"
           action="/"
           method="post"
           onSubmit={createCar}
         >
-
-          <div className="mb-4">
-            <label className="block text-sm font-bold mb-2 text-form-title-color">cars</label>
-            <input
-              className="bg-form-grey-background border-r-{10}"
-              type="text"
-              placeholder="placeholder"
-              onClick={handleChange}
-              onChange={(event) => {
-                setCarTitle(event.target.value);
-                setModel(event.target.value);
-              }}
-            />
-
-          </div>
-
           <CustomInput
-            label="Car Name"
+            label="Car Title"
             type="text"
             id="last"
             placeholder="Car Title"
-            onClick={handleChange}
-            onChange={(event) => {
-              setCarTitle(event.target.value);
-              setModel(event.target.value);
-            }}
+            onChange={handleChange}
+            onHandleChange={(event) => handleChange(event, 'carTitle')}
           />
 
           <CustomInput
@@ -102,13 +72,17 @@ const addCarForm = () => {
             type="text"
             id="last"
             placeholder="Brand Name"
+            onClick={handleChange}
+            onHandleChange={(event) => handleChange(event, 'model')}
           />
 
           <CustomInput
-            label="Rent Prices"
+            label="Rent Price"
             type="number"
             id="last"
             placeholder="Price in dollars"
+            onChange={handleChange}
+            onHandleChange={(event) => handleChange(event, 'price')}
           />
 
           <CustomInput
@@ -116,6 +90,8 @@ const addCarForm = () => {
             type="number"
             id="last"
             placeholder="Capacity in persons"
+            onChange={handleChange}
+            onHandleChange={(event) => handleChange(event, 'people')}
           />
 
           <CustomInput
@@ -123,6 +99,8 @@ const addCarForm = () => {
             type="text"
             id="last"
             placeholder="Car Type"
+            onChange={handleChange}
+            onHandleChange={(event) => handleChange(event, 'carType')}
           />
 
           <CustomInput
@@ -130,67 +108,125 @@ const addCarForm = () => {
             type="text"
             id="last"
             placeholder="Select your city"
+            onChange={handleChange}
+            onHandleChange={(event) => handleChange(event, 'location')}
+          />
+          <CustomInput
+            label="Gas"
+            type="number"
+            id="last"
+            placeholder="Gas Capacity"
+            onChange={handleChange}
+            onHandleChange={(event) => handleChange(event, 'gas')}
+          />
+          <CustomInput
+            label="Pickup Location"
+            type="text"
+            id="last"
+            placeholder="Pickup Location"
+            onChange={handleChange}
+            onHandleChange={(event) => handleChange(event, 'pickupLocation')}
+          />
+          <CustomInput
+            label="Dropoff Location"
+            type="text"
+            id="last"
+            placeholder="Dropoff Location"
+            onChange={handleChange}
+            onHandleChange={(event) => handleChange(event, 'dropOffLocation')}
+          />
+          <CustomInput
+            label="Availability From"
+            type="date"
+            id="last"
+            placeholder="Availability From"
+            onChange={handleChange}
+            onHandleChange={(event) => handleChange(event, 'availabilityFrom')}
           />
 
-          <button
-            type="submit"
-          >Submit
-          </button>
+          <CustomInput
+            label="Availability To"
+            type="date"
+            id="last"
+            placeholder="Availability To"
+            onChange={handleChange}
+            onHandleChange={(event) => handleChange(event, 'availabilityTo')}
+          />
+          <CustomInput
+            label="Description"
+            type="text"
+            id="last"
+            placeholder="Description"
+            onChange={handleChange}
+            onHandleChange={(event) => handleChange(event, 'description')}
+          />
 
-        </form>
+          {// Upload Images
+        }
+          <div className=" text-black bg-white font-bold text-left">
+            Upload Images
+          </div>
 
-        <div className="place-content-center w-half md:w-1/2 px-6 mb-6 md:mb-0 gap-x-3 overflow:hidden text-black bg-blue flex flex-wrap">
-          Upload Images
-        </div>
+          <br />
 
-        <div className="place-content-center w-full md:w-1/2 px-6 mb-6 md:mb-0 gap-x-3 overflow:hidden text-black bg-white flex flex-wrap">
           <label
             htmlFor="dropzone-file"
-            className="flex justify-center w-full h-32 px-4 transition bg-white border-2
-            border-gray-300 border-dashed rounded-md appearance-none cursor-pointer hover:border-gray-400 focus:outline-none"
+            className="flex pr-6 mr-16 justify-center place-items-center w-full h-{180} px-6 transition bg-white border-2
+    border-gray-300 border-dashed rounded-md appearance-none cursor-pointer hover:border-gray-400 focus:outline-none"
           >
             <div className="flex flex-col justify-center items-center pt-5 pb-6">
-              <svg
-                aria-hidden="true"
-                className="mb-3 w-10 h-10 text-gray-400"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-                xmlns="http://www.w3.org/2000/svg"
-              ><path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth="2"
-                d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"
-              />
-              </svg>
-              <p className="mb-2 text-sm text-gray-500 dark:text-gray-400">Drag and drop an image, or <span className="font-semibold text-cyan-600"> Browse</span></p>
-              <p className="text-xs text-gray-500 dark:text-gray-400">High resolution images (png, jpg, gif)</p>
+              <Image src={image.vector} alt="uploadimage" priority className=" object-contain my-4" />
+              <p className="mb-2 text-sm text-[#3563E9]">Drag and drop an image, or <span className="font-semibold text-cyan-600"> Browse</span></p>
+              <p className="text-xs text-gray-500 dark:text-gray-400 mb-2">High resolution images (png, jpg, gif)</p>
             </div>
             <input id="dropzone-file" type="file" className="hidden" />
           </label>
-        </div>
 
-        <div className="place-content-center w-full md:w-1/2 px-6 mb-6 md:mb-0 gap-x-3 overflow:hidden text-black bg-btn-blue flex flex-wrap">
-          Uploading files
+          <br />
 
-          <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300" htmlFor="multiple_files">Upload multiple files</label>
-          <input
-            className="block w-full text-sm text-gray-900 bg-gray-50 rounded-lg border
-           border-gray-300 cursor-pointer dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400"
-            id="multiple_files"
-            type="file"
-            multiple
-          />
+          <div className="pb-10 ml-auto mr-16">
+            <Button />
+          </div>
 
-        </div>
+        </form>
 
       </div>
 
-      <div className="place-content-center w-full md:w-1/2 px-6 mb-6 md:mb-0 gap-x-3 overflow:hidden text-black bg-white flex flex-wrap">
-        Confirmation
+      {// Confirmation
+        }
+      <div className="w-1/2 py-6 mx-auto mb-6 text-black bg-white rounded-lg font-jakarta">
+        <div className="mx-auto pl-9 text-black bg-white text-xl text-left font-semibold">
+          Confirmation
+        </div>
+
+        <p className="text-[#90A3BF] bg-white pl-9 pb-6 text-sm">We are getting to the end. Just a few clicks and your rental is ready!</p>
+
+        <div className="text-left pl-2 pb-1 mx-8 bg-[#F6F7F9] rounded font-semibold">
+          <input type="checkbox" className="text-black m-4 text-base" /> <label>I agree with sending an Marketing and newsletter emails. No spawm, promissed!</label>
+        </div>
+
+        <br />
+
+        <div className="text-left pl-2 pb-1 mx-8 bg-[#F6F7F9] rounded font-semibold">
+          <input type="checkbox" className="text-black m-4 text-base" /> <label>I agree with our terms and conditions and privacy policy.</label>
+        </div>
+
+        <br />
+        <div className="pl-9 pb-6">
+          <Button />
+        </div>
+
+        <div className="pl-9 pb-2">
+          <Image src={image.security} alt="uploadimage" priority className=" object-contain" />
+        </div>
+
+        <div className="mx-auto pl-9 text-black bg-white text-xl text-left font-semibold">
+          All your data is safe
+        </div>
+
+        <p className="text-[#90A3BF] bg-white pl-9 pb-6 text-sm">We are using the most advanced security to provide you the best experience ever.</p>
       </div>
-      <Button />
+
     </>
   );
 };
