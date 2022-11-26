@@ -22,6 +22,7 @@ import detailsViewCar from './details-view-car.png';
 import detailsViewCar2 from './details-view-car-2.png';
 import carCurrent from './carMin.png';
 import banner from './background-banner.png';
+import carcover from './covercar.png';
 
 export default {
   koenigsegg,
@@ -48,4 +49,5 @@ export default {
   Setting,
   filter,
   vector,
+  carcover,
 };
