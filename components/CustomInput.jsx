@@ -1,5 +1,5 @@
 const CustomInput = (props) => {
-  const { label, type, key, placeholder, value, onHandleChange } = props;
+  const { label, type, placeholder, onHandleChange } = props;
 
   return (
     <div className="mb-4">
@@ -7,10 +7,8 @@ const CustomInput = (props) => {
       <input
         className="bg-form-grey-background border-r-{10} text-left pl-8 pb-1 rounded w-96 h-14"
         autoComplete="off"
-        key={key}
         type={type}
         placeholder={placeholder}
-        value={value}
         onChange={onHandleChange}
       />
 

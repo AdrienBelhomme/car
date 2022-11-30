@@ -61,104 +61,85 @@ const addCarForm = () => {
           <CustomInput
             label="Car Title"
             type="text"
-            id="last"
             placeholder="Car Title"
-            onChange={handleChange}
             onHandleChange={(event) => handleChange(event, 'carTitle')}
           />
 
           <CustomInput
             label="Car Brand"
             type="text"
-            id="last"
             placeholder="Brand Name"
-            onClick={handleChange}
             onHandleChange={(event) => handleChange(event, 'model')}
           />
 
           <CustomInput
             label="Rent Price"
             type="number"
-            id="last"
             placeholder="Price in dollars"
-            onChange={handleChange}
             onHandleChange={(event) => handleChange(event, 'price')}
           />
 
           <CustomInput
             label="Capacity"
             type="number"
-            id="last"
             placeholder="Capacity in persons"
-            onChange={handleChange}
             onHandleChange={(event) => handleChange(event, 'people')}
           />
 
           <CustomInput
             label="Car Type"
             type="text"
-            id="last"
             placeholder="Car Type"
-            onChange={handleChange}
             onHandleChange={(event) => handleChange(event, 'carType')}
           />
 
           <CustomInput
             label="Location"
             type="text"
-            id="last"
             placeholder="Select your city"
-            onChange={handleChange}
             onHandleChange={(event) => handleChange(event, 'location')}
           />
+
           <CustomInput
             label="Gas"
             type="number"
-            id="last"
             placeholder="Gas Capacity"
-            onChange={handleChange}
             onHandleChange={(event) => handleChange(event, 'gas')}
           />
+
           <CustomInput
             label="Pickup Location"
             type="text"
-            id="last"
             placeholder="Pickup Location"
-            onChange={handleChange}
             onHandleChange={(event) => handleChange(event, 'pickupLocation')}
           />
+
           <CustomInput
             label="Dropoff Location"
             type="text"
-            id="last"
             placeholder="Dropoff Location"
-            onChange={handleChange}
             onHandleChange={(event) => handleChange(event, 'dropOffLocation')}
           />
+
           <CustomInput
             label="Availability From"
             type="date"
-            id="last"
             placeholder="Availability From"
-            onChange={handleChange}
             onHandleChange={(event) => handleChange(event, 'availabilityFrom')}
           />
 
           <CustomInput
             label="Availability To"
             type="date"
-            id="last"
             placeholder="Availability To"
-            onChange={handleChange}
             onHandleChange={(event) => handleChange(event, 'availabilityTo')}
           />
+
           <CustomInput
-            label="Description"
+            label="Tag"
             type="text"
-            id="last"
-            placeholder="Description"
-            onChange={handleChange}
-            onHandleChange={(event) => handleChange(event, 'description')}
+            placeholder="Tag name"
+            onHandleChange={(event) => handleChange(event, 'tag')}
           />
 
           {// Upload Images
