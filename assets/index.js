@@ -51,9 +51,6 @@ export default {
   search,
   Setting,
   filter,
-<<<<<<< HEAD
   vector,
   security,
-=======
->>>>>>> 799428f082b2ea087a8b193eadb772dc3e891966
 };
