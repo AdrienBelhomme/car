@@ -7,7 +7,7 @@ const carSchema = mongoose.Schema({
   category: String,
   price: Number,
   people: Number,
-  type: String,
+  carType: String,
   location: String,
   gas: Number,
   pickupLocation: String,

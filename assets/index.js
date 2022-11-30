@@ -18,6 +18,7 @@ import Profile from './Profile.png';
 import search from './search.svg';
 import Setting from './Setting.png';
 import vector from './Vector.svg';
+import security from './ic-security-safety.svg';
 
 import detailsViewCar from './details-view-car.png';
 import detailsViewCar2 from './details-view-car-2.png';
@@ -50,4 +51,6 @@ export default {
   search,
   Setting,
   filter,
+  vector,
+  security,
 };
