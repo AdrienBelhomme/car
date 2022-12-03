@@ -1,11 +1,9 @@
 
 import { useState } from 'react';
 import { useTheme } from 'next-themes';
-import Image from "next/image";
-
+import Image from 'next/image';
 
 import images from '../assets';
-
 
 const Navbar = () => {
   const { theme } = useTheme();
@@ -13,16 +11,16 @@ const Navbar = () => {
   console.log({ theme });
 
   return (
-    <nav className="w-full flex justify-between items-center p-5 bg-white">
+    <nav className="w-full flex justify-between items-center  px-6 md:px-16 py-4 md:py-8 bg-white">
       <div className="flex flex-row gap-4 items-center justify-center">
-        <div className='sm:flex hidden relative w-[148px] h-auto object-contain'>
+        <div className="sm:flex hidden relative w-[148px] h-auto object-contain">
           <Image
             src={images.Logo}
             alt="Logo"
             layout="fill"
           />
         </div>
-        <div className='sm:hidden flex'>
+        <div className="sm:hidden flex">
           <Image
             src={images.menu}
             alt="Menu"
@@ -32,9 +30,10 @@ const Navbar = () => {
           />
         </div>
 
-        <div className='lg:flex hidden items-center'>
+        <div className="lg:flex hidden items-center">
           <div
-            className="min-w-[492px] flex justify-between border rounded-full border-[#C3D4E9] gap-4 px-4 py-2">
+            className="min-w-[492px] flex justify-between border rounded-full border-[#C3D4E9] gap-4 px-4 py-2"
+          >
             <Image
               src={images.search}
               alt="search"
@@ -43,7 +42,7 @@ const Navbar = () => {
               layout="fill"
             />
 
-            <input placeholder='Search something here' className=" flex-1 flex text-[14px] leading-[21px] text-[#3D5278] bg-transparent outline-none" />
+            <input placeholder="Search something here" className=" flex-1 flex text-[14px] leading-[21px] text-[#3D5278] bg-transparent outline-none" />
 
             <Image
               src={images.filter}
@@ -58,7 +57,7 @@ const Navbar = () => {
       </div>
 
       <div className="flex-1 flex flex-row justify-end gap-4 items-center">
-        <div className='sm:flex hidden gap-4'>
+        <div className="sm:flex hidden gap-4">
           <Image
             src={images.Like}
             alt="Like"
