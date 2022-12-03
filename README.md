@@ -1,6 +1,6 @@
 # Project CarRent
 
-Develop a FullStack car renting application.  
+Develop a FullStack car renting application
 
 Check out the complete project requirements [here](https://docs.google.com/document/d/13PeFwRlPEhMw_HPyrIrInvQuKaVWnpNmcv-y3NA208s/edit?usp=sharing)
 
