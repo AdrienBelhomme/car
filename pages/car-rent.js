@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 
-import { Button, CarBanner, StatePicker, CarTypeList } from '../components';
+import { Button, CarBanner, StatePicker, CarTypeListHome } from '../components';
 import image from '../assets/index';
 
 const CarRent = () => {
@@ -85,8 +85,8 @@ const CarRent = () => {
       <div className="mt-[42px]">
         <StatePicker windowSize={size} />
       </div>
-      <CarTypeList carCategory="Popular Car" carData={displayNumberOfCars ? initialPopularCarsDisplay : popularCars} scrollable="overflow-x-auto md:flex-wrap" />
-      <CarTypeList carCategory="Recommendation Car" carData={recommendedCars} noscroll="flex-wrap" />
+      <CarTypeListHome carCategory="Popular Car" carData={displayNumberOfCars ? initialPopularCarsDisplay : popularCars} scrollable="overflow-x-auto md:flex-wrap" />
+      <CarTypeListHome carCategory="Recommendation Car" carData={recommendedCars} noscroll="flex-wrap" />
       <div className="flex">
         <div className="flex justify-center mx-auto mt-12 md:mt-16">
           <Button text={displayNumberOfCars ? ' Show More Cars' : 'Show Less Cars'} bgColor="bg-btn-blue" color="text-white" handleClick={showMoreCars} />

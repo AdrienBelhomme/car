@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import { useThemeContext } from '../context/filtersState';
 import { Picker, InversePicker } from './index.js';

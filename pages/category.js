@@ -1,13 +1,7 @@
-import { useEffect, createContext, useContext, useState } from 'react';
+import { useEffect, useState } from 'react';
 import axios from 'axios';
 
-import Link from 'next/link';
-import resolveConfig from 'tailwindcss/resolveConfig';
-import tailwindConfig from '../tailwind.config.js';
-
 import { Button, CarCard, Sidebar, StatePicker } from '../components';
-import { koenigsegg, nissan, rollsRoyce, allNewRush } from '../assets';
-import carList from '../constants/carList';
 import { useThemeContext } from '../context/filtersState';
 
 const category = () => {
@@ -36,13 +30,9 @@ const category = () => {
 
   const [filterState, setFilterState] = useThemeContext();
 
-  const { checkedCapacity, checkedPrice, checkedType, checkedInput, checkedPickup, checkedDropoff } = filterState;
+  const { checkedCapacity, checkedPrice, checkedType, checkedPickup, checkedDropoff } = filterState;
 
   const [numberOfCars, setNumberOfCars] = useState(size.width < 1900 ? 12 : 15);
-
-  const filters = ['sport', 'SUV', 'MPV', 'sedan', 'hackback', 'coupe', 'family', 'Family', 'Sedan', 'Hackback', 'Coupe', 'Sport', 'Suv', 'Mpv'];
-  const capacity = [1, 2, 4, 6, 8];
-  const location = ['NYC', 'Los Angeles', 'Chicago'];
 
   const showMoreCars = () => {
     setNumberOfCars(numberOfCars * 2);
@@ -82,27 +72,6 @@ const category = () => {
     }
     return '';
   };
-
-  /* const filteredData = () => {
-    let filterData = cars.filter(({ name, category: cat, people, price }) => {
-      if (checkedType.length === 0 && checkedCapacity.length === 0) {
-        return filters.some((c) => c === cat) && capacity.some((l) => l === people && price < checkedPrice);
-      } if (checkedCapacity.length === 0) {
-        return checkedType.some((c) => c === cat) && capacity.some((l) => l === people) && price < checkedPrice;
-      } if (checkedType.length === 0) {
-        return filters.some((c) => c === cat) && checkedCapacity.some((l) => l === people) && price < checkedPrice;
-      }
-      return checkedType.some((c) => c === cat) && checkedCapacity.some((l) => l === people) && price < checkedPrice;
-    });
-
-    filterData = filterData.filter(({ pickupLocation: loc }) => {
-      if (Object.keys(checkedPickup.location).length === 0) {
-        return filterData;
-      }
-      return checkedPickup.location.includes(loc);
-    });
-    return filterData;
-  }; */
 
   const filterPickup = (car) => {
     const filteredCars = car.filter(({ pickupLocation }) => {

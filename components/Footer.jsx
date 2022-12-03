@@ -84,13 +84,13 @@ const Footer = () => (
         <h1 className="max w-35 font-jakarta font-medium text-[16px] leading-[32px] text-[#90A3BF]">Our vision is to provide convenience <br /> and help increase your sales business.</h1>
       </div>
       <div className="flex flex-row flex-wrap gap-28">
-        {footerLinks.map((links) => (
-          <div className="flex flex-col gap-6">
+        {footerLinks.map((links, index) => (
+          <div className="flex flex-col gap-6" key={index}>
 
             <h1 className="font-jakarta font-semibold text-[20px] leading-[24px] text-[#131313]">{links.title}</h1>
             <div className="flex flex-col gap-4 font-jakarta font-medium text-[16px] leading-[19.2px] text-[#90A3BF]">
-              {links.sublinks.map((sublink) => (
-                <a href={sublink.link} className="cursor-pointer">{sublink.name}</a>
+              {links.sublinks.map((sublink, i) => (
+                <a key={sublink.name} href={sublink.link} className="cursor-pointer">{sublink.name}</a>
               ))}
             </div>
           </div>
