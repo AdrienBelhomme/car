@@ -124,7 +124,7 @@ const category = () => {
 
   return (
     <div className="w-full flex">
-      <Sidebar filterState={filterState} setFilterState={setFilterState} />
+      <Sidebar filterState={filterState} setFilterState={setFilterState} cars={cars} />
       <div className="p-4 w-full">
         <StatePicker windowSize={windowSize} />
         <div className="flex mt-4 justify-start flex-wrap gap-percentage">
