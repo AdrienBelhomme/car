@@ -91,10 +91,11 @@ const Navbar = () => {
         {!session
               && (
               <img
-                src="https://www.pngkey.com/png/detail/230-2301779_best-classified-apps-default-user-profile.png"
+                src="https://e7.pngegg.com/pngimages/981/645/png-clipart-default-profile-united-states-computer-icons-desktop-free-high-quality-person-icon-miscellaneous-silhouette-thumbnail.png"
                 alt="Profile"
                 width={44}
                 height={44}
+                style={{ borderRadius: '100%' }}
               />
               ) }
         {session
@@ -104,11 +105,12 @@ const Navbar = () => {
                   alt="Profile"
                   width={44}
                   height={44}
+                  style={{ borderRadius: '100%' }}
                 />
               )}
       </div>
-      {session && <button type="button" onClick={handleSignout} className="btn-signin">Sign out</button> }
-      {!session && <button type="button" onClick={handleSignin} className="btn-signin">Sign in</button> }
+      {session && <button type="button" onClick={handleSignout} className="btn-signin" style={{ marginLeft: '1%' }}>SIGN OUT</button> }
+      {!session && <button type="button" onClick={handleSignin} className="btn-signin" style={{ marginLeft: '1%' }}>SIGN IN</button> }
     </nav>
   );
 };
