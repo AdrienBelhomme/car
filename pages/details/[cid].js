@@ -28,6 +28,8 @@ const Stars = ({ rating }) => {
 const details = () => {
   const [filterState] = useThemeContext();
 
+  const [allFilteredCars, setAllFilteredCars] = useState([]);
+
   const [banner, setBanner] = useState(images.banner.src);
   const [selected, setSelected] = useState('');
 
@@ -77,22 +79,22 @@ const details = () => {
   const filteredData = () => {
     const filterData = cars.filter(({ category: carType, people: carPeople, price: carPrice }) => {
       if (filterState.checkedType.length === 0 && filterState.checkedCapacity.length === 0) {
-        console.log('carType', carType);
         return filters.some((c) => c === carType) && capacity.some((l) => l === carPeople && carPrice < filterState.checkedPrice);
       } if (filterState.checkedCapacity.length === 0) {
-        console.log('here3');
         return filterState.checkedType.some((c) => c === carType) && capacity.some((l) => l === carPeople) && carPrice < filterState.checkedPrice;
       } if (filterState.checkedType.length === 0) {
-        console.log('here');
         return filters.some((c) => c === carType) && filterState.checkedCapacity.some((l) => l === carPeople) && carPrice < filterState.checkedPrice;
       }
-      console.log('here4');
+
       return filterState.checkedType.some((c) => c === carType) && filterState.checkedCapacity.some((l) => l === carPeople) && carPrice < filterState.checkedPrice;
     });
-    console.log(filterData);
-
+    setAllFilteredCars(filterData);
     return filterData;
   };
+
+  useEffect(() => {
+    filteredData();
+  }, [filterState, cars]);
 
   return (
     <div className="w-full flex">
@@ -211,12 +213,12 @@ const details = () => {
 
         <div className="flex mt-[30px] justify-start flex-wrap gap-4">
 
-          { filteredData().slice(0, numberOfCars).map((dataModel, index) => (
+          { allFilteredCars.slice(0, numberOfCars).map((dataModel, index) => (
             <div key={index} className="w-full md:max-w-49 lg:max-w-32 xl:max-w-25 3xl:max-w-20 md:flex-48 lg:flex-31 xl:flex-23 3xl:flex-19">
               <CarCard model={dataModel.name} image={dataModel.image} people={dataModel.people} type={dataModel.type} price={dataModel.price} checkedCapacity={filterState.checkedCapacity} checkedType={filterState.checkedType} checkedPrice={filterState.checkedPrice} />
             </div>
           ))}
-          {filteredData().length === 0 ? <p className="text-5xl p-12 m-auto">no cars matching your criterias</p> : null}
+          {allFilteredCars.length === 0 ? <p className="text-5xl p-12 m-auto">no cars matching your criterias</p> : null}
         </div>
 
       </div>
