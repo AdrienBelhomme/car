@@ -36,7 +36,7 @@ To get started with development, you need to install few tools
 
 3. npm
   
-   `npm` version 5.6.1 or higher. You will have it after you install node.
+   `npm` version 5.6.1 or higher. You will have it after you install node
 
    To check your version of npm, run:
 
