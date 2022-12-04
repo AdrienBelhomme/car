@@ -35,7 +35,7 @@ const Sidebar = (props) => {
   const getNumberOfCarInCategory = (cat) => {
     const numberOfCarInCategory = [];
     let totalNumber = 0;
-    cars.map((car) => {
+    cars?.map((car) => {
       if (typeof cat === 'string') {
         if (car.category === cat) return numberOfCarInCategory.push(cars.category);
       } else if (car.people === cat) return numberOfCarInCategory.push(cars.category);
