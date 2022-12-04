@@ -1,5 +1,3 @@
-import Link from 'next/link';
-import { Button, CarCard, Sidebar } from '../components';
 
 const Home = () => (
   <p>

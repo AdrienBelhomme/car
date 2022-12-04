@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 
 import { useThemeContext } from '../context/filtersState';
+// eslint-disable-next-line import/no-cycle
 import { Picker, InversePicker } from './index.js';
 
 const StatePicker = ({ windowSize }) => {

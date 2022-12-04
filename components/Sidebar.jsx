@@ -2,7 +2,8 @@
 import { Slider, Searchbar } from './index';
 import { useThemeContext } from '../context/filtersState';
 
-const Sidebar = ({ cars }) => {
+const Sidebar = (props) => {
+  const { cars } = props;
   const filters = [
     {
       title: 'Type',
@@ -44,8 +45,6 @@ const Sidebar = ({ cars }) => {
     totalNumber = numberOfCarInCategory.length;
     return totalNumber;
   };
-
-  console.log(cars);
 
   return (
     <div className="hidden flex-col bg-white-color border-sidebar-border border-2 max-w-[360px] md:flex ">

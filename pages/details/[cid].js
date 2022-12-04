@@ -1,16 +1,17 @@
 import { useRouter } from 'next/router';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faHeart, faGasPump, faGear, faUser, faStar } from '@fortawesome/free-solid-svg-icons';
+import { faHeart, faStar } from '@fortawesome/free-solid-svg-icons';
 import '@fortawesome/fontawesome-svg-core/styles.css';
 import Image from 'next/image';
-
+import axios from 'axios';
 import Link from 'next/link';
+
 import { Button, CarBanner, CarCard, CarTypeList, Sidebar } from '../../components';
 import images from '../../assets';
 import carList from '../../constants/carList';
 import { useThemeContext } from '../../context/filtersState';
-import { popularNew, recommendedCars } from '../../public/dummyDatabase/CarData';
+import { recommendedCars } from '../../public/dummyDatabase/CarData';
 
 const Stars = ({ rating }) => {
   const stars = [];
@@ -25,17 +26,12 @@ const Stars = ({ rating }) => {
 };
 
 const details = () => {
-  const [filterState, setFilterState] = useThemeContext();
+  const [filterState] = useThemeContext();
 
   const [banner, setBanner] = useState(images.banner.src);
   const [selected, setSelected] = useState('');
 
-  console.log(filterState);
-
   const router = useRouter();
-  const { cid } = router.query;
-
-  console.log(cid);
 
   const { carImages, model, type, gas, category, people, price } = router.query;
 
@@ -57,29 +53,50 @@ const details = () => {
     images.carCurrent, images.detailsViewCar, images.detailsViewCar2,
   ];
 
+  const [cars, setCars] = useState([]);
+
+  const fetchCars = async () => {
+    try {
+      const response = await axios.get('/api/car', {
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      });
+      const data = await response.data;
+      setCars(data.data);
+    } catch (error) {
+      console.log('Error', error);
+    }
+  };
+
+  // get data
+  useEffect(() => {
+    fetchCars();
+  }, []);
+
   const filteredData = () => {
-    const filterData = carList.filter(({ name, type, people, price }) => {
+    const filterData = cars.filter(({ category: carType, people: carPeople, price: carPrice }) => {
       if (filterState.checkedType.length === 0 && filterState.checkedCapacity.length === 0) {
-        return filters.some((c) => c === type) && capacity.some((l) => l === people && price < filterState.checkedPrice);
+        console.log('carType', carType);
+        return filters.some((c) => c === carType) && capacity.some((l) => l === carPeople && carPrice < filterState.checkedPrice);
       } if (filterState.checkedCapacity.length === 0) {
-        return filterState.checkedType.some((c) => c === type) && capacity.some((l) => l === people) && price < filterState.checkedPrice;
+        console.log('here3');
+        return filterState.checkedType.some((c) => c === carType) && capacity.some((l) => l === carPeople) && carPrice < filterState.checkedPrice;
       } if (filterState.checkedType.length === 0) {
-        return filters.some((c) => c === type) && filterState.checkedCapacity.some((l) => l === people) && price < filterState.checkedPrice;
+        console.log('here');
+        return filters.some((c) => c === carType) && filterState.checkedCapacity.some((l) => l === carPeople) && carPrice < filterState.checkedPrice;
       }
-      return filterState.checkedType.some((c) => c === type) && filterState.checkedCapacity.some((l) => l === people) && price < filterState.checkedPrice;
+      console.log('here4');
+      return filterState.checkedType.some((c) => c === carType) && filterState.checkedCapacity.some((l) => l === carPeople) && carPrice < filterState.checkedPrice;
     });
+    console.log(filterData);
 
     return filterData;
   };
 
-  const navigate = () => {
-    console.log('navigate');
-    router.push('/category');
-  };
-
   return (
     <div className="w-full flex">
-      <Sidebar />
+      <Sidebar cars={cars} />
       <div className="p-4 w-full">
 
         <div className="flex items-baseline justify-between">
@@ -178,8 +195,7 @@ const details = () => {
         </div>
 
         <div className="flex mt-4 justify-start flex-wrap gap-4">
-          <CarTypeList numberOfCars={5} carData={recommendedCars} noscroll="flex-wrap" />
-
+          <CarTypeList carCategory="Reccomended cars for you" numberOfCars={5} carData={recommendedCars} noscroll="flex-wrap" />
         </div>
 
         <div className="flex justify-between mt-8 md:mt-[42px]">
@@ -195,9 +211,9 @@ const details = () => {
 
         <div className="flex mt-[30px] justify-start flex-wrap gap-4">
 
-          { filteredData().slice(0, numberOfCars).map((model, index) => (
+          { filteredData().slice(0, numberOfCars).map((dataModel, index) => (
             <div key={index} className="w-full md:max-w-49 lg:max-w-32 xl:max-w-25 3xl:max-w-20 md:flex-48 lg:flex-31 xl:flex-23 3xl:flex-19">
-              <CarCard model={model.name} image={model.image} people={model.people} type={model.type} price={model.price} checkedCapacity={filterState.checkedCapacity} checkedType={filterState.checkedType} checkedPrice={filterState.checkedPrice} />
+              <CarCard model={dataModel.name} image={dataModel.image} people={dataModel.people} type={dataModel.type} price={dataModel.price} checkedCapacity={filterState.checkedCapacity} checkedType={filterState.checkedType} checkedPrice={filterState.checkedPrice} />
             </div>
           ))}
           {filteredData().length === 0 ? <p className="text-5xl p-12 m-auto">no cars matching your criterias</p> : null}

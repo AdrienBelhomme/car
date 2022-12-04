@@ -1,4 +1,4 @@
-import clientPromise from '../../lib/mongodb';
+/* import clientPromise from '../../lib/mongodb';
 
 export default async (req, res) => {
   try {
@@ -13,3 +13,4 @@ export default async (req, res) => {
     throw new Error(e).message;
   }
 };
+ */
