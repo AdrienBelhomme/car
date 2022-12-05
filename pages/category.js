@@ -92,7 +92,7 @@ const category = () => {
     });
     return filteredCars;
   };
-
+  /*
   const filterPickupDate = (car) => {
     const filteredCars = filterDropoff(car).filter(({ availabilityFrom }) => {
       if (checkedPickup.date.length > 0) return checkedPickup.date.getTime() >= availabilityFrom.getTime();
@@ -101,7 +101,7 @@ const category = () => {
     });
     return filteredCars;
   };
-
+ */
   const filterCarTypes = (car) => {
     const locationFilteredCars = filterDropoff(car);
 
