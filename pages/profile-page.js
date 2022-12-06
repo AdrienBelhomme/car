@@ -37,7 +37,7 @@ const Profile = ({ profileName = 'Web3', title = 'Agent' }) => {
 
   return (
     <div className=" p-6 md:p-16 md:pt-[68px] ">
-      <div className="text-xl font-bold mb-[29px] ">
+      <div className="text-xl font-bold mb-[29px] dark:text-black">
         My Profile
       </div>
       <div className=" rounded-t-xl bg-white max-h-[300px]">
