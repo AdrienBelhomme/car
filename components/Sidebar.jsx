@@ -2,7 +2,8 @@
 import { Slider, Searchbar } from './index';
 import { useThemeContext } from '../context/filtersState';
 
-const Sidebar = () => {
+const Sidebar = (props) => {
+  const { cars } = props;
   const filters = [
     {
       title: 'Type',
@@ -31,6 +32,20 @@ const Sidebar = () => {
     }
   };
 
+  const getNumberOfCarInCategory = (cat) => {
+    const numberOfCarInCategory = [];
+    let totalNumber = 0;
+    cars?.map((car) => {
+      if (typeof cat === 'string') {
+        if (car.category === cat) return numberOfCarInCategory.push(cars.category);
+      } else if (car.people === cat) return numberOfCarInCategory.push(cars.category);
+
+      return numberOfCarInCategory;
+    });
+    totalNumber = numberOfCarInCategory.length;
+    return totalNumber;
+  };
+
   return (
     <div className="hidden flex-col bg-white-color border-sidebar-border border-2 max-w-[360px] md:flex ">
       <Searchbar />
@@ -52,7 +67,7 @@ const Sidebar = () => {
                 }}
                 className="ml-8 w-5 h-4 accent-btn-blue text-secondinary-light-300 bg-white rounded-md border-secondinary-light-300 focus:ring-checkbox-checked dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
               />
-              <label htmlFor="default-checkbox" className="pl-2 text-lg font-semibold font-jakarta text-input-title dark:text-gray-300">{item}<span className="text-secondinary-light-300 font-medium font-jakarta"> ({index * 5})</span></label>
+              <label htmlFor="default-checkbox" className="pl-2 text-lg font-semibold font-jakarta text-input-title dark:text-gray-300">{item}<span className="text-secondinary-light-300 font-medium font-jakarta"> ({getNumberOfCarInCategory(item)})</span></label>
             </div>
           ))}
 

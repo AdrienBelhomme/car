@@ -5,7 +5,7 @@ import Image from 'next/image';
 import { useState } from 'react';
 import Link from 'next/link';
 
-import images, { nissan } from '../assets';
+import images from '../assets';
 import Button from './Button';
 
 const CarCard = ({

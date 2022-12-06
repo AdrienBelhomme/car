@@ -1,7 +1,7 @@
 import { useRouter } from 'next/router';
 import { useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faHeart, faGasPump, faGear, faUser, faStar } from '@fortawesome/free-solid-svg-icons';
+import { faHeart, faStar } from '@fortawesome/free-solid-svg-icons';
 import '@fortawesome/fontawesome-svg-core/styles.css';
 import Image from 'next/image';
 
@@ -23,7 +23,7 @@ const Stars = ({ rating }) => {
 
 const details = () => {
   const router = useRouter();
-  const { carImages, model, type, gas, category, people, price, setIsFavorite, isFavorite } = router.query;
+  const { model, type, gas, category, price, setIsFavorite, isFavorite } = router.query;
 
   const [checkedCapacity, setCheckedCapacity] = useState([1, 2, 4]);
   const [checkedType, setCheckedType] = useState(['sport']);
@@ -31,7 +31,7 @@ const details = () => {
   const [banner, setBanner] = useState(images.banner.src);
   const [selected, setSelected] = useState('');
 
-  const numberOfCars = 10;
+  // const numberOfCars = 10;
 
   console.log(setIsFavorite);
 
@@ -39,7 +39,7 @@ const details = () => {
     setIsFavorite((prev) => !prev)
   );
 
-  const filters = ['Sport', 'SUV', 'MPV', 'Sedan', 'Hackback', 'Coupe'];
+  // const filters = ['Sport', 'SUV', 'MPV', 'Sedan', 'Hackback', 'Coupe'];
   const capacity = [1, 2, 4, 8];
   const id = 0;
 
@@ -155,9 +155,9 @@ const details = () => {
         </div>
 
         <div className="flex mt-4 justify-between flex-wrap gap-y-4">
-          { carList.map((model, index) => (
+          { carList.map((carmodel, index) => (
             <div key={index} className="w-full md:w-49% lg:w-32% xl:w-24% 3xl:w-19%">
-              <CarCard model={model.name} image={model.image} people={model.people} type={model.type} price={model.price} />
+              <CarCard model={carmodel.name} image={carmodel.image} people={carmodel.people} type={carmodel.type} price={carmodel.price} />
             </div>
           ))}
         </div>

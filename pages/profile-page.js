@@ -4,7 +4,7 @@ import axios from 'axios';
 import Link from 'next/link';
 
 import image from '../assets/index';
-import { Button, CarTypeList, CarCard } from '../components';
+import { Button, CarTypeList } from '../components';
 
 const Profile = ({ profileName = 'Web3', title = 'Agent' }) => {
   const [rentedCars, setRentedCars] = useState([]);

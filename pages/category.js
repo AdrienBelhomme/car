@@ -1,4 +1,4 @@
-import { useEffect, createContext, useContext, useState } from 'react';
+import { useEffect, useState } from 'react';
 import axios from 'axios';
 
 import Link from 'next/link';
@@ -7,14 +7,14 @@ import tailwindConfig from '../tailwind.config.js';
 import LoadingScreen from '../components/LoadingScreen';
 
 import { Button, CarCard, Sidebar, StatePicker } from '../components';
-import { koenigsegg, nissan, rollsRoyce, allNewRush } from '../assets';
-import carList from '../constants/carList';
 import { useThemeContext } from '../context/filtersState';
 
 const category = () => {
   const [windowSize, setWindowSize] = useState({
     width: undefined,
   });
+
+  const [allFilteredCars, setAllFilteredCars] = useState([]);
 
   function useWindowSize() {
     useEffect(() => {
@@ -37,13 +37,9 @@ const category = () => {
 
   const [filterState, setFilterState] = useThemeContext();
 
-  const { checkedCapacity, checkedPrice, checkedType, checkedInput, checkedPickup, checkedDropoff } = filterState;
+  const { checkedCapacity, checkedPrice, checkedType, checkedPickup, checkedDropoff } = filterState;
 
   const [numberOfCars, setNumberOfCars] = useState(size.width < 1900 ? 12 : 15);
-
-  const filters = ['sport', 'SUV', 'MPV', 'sedan', 'hackback', 'coupe', 'family', 'Family', 'Sedan', 'Hackback', 'Coupe', 'Sport', 'Suv', 'Mpv'];
-  const capacity = [1, 2, 4, 6, 8];
-  const location = ['NYC', 'Los Angeles', 'Chicago'];
 
   const showMoreCars = () => {
     setNumberOfCars(numberOfCars * 2);
@@ -106,7 +102,7 @@ const category = () => {
     });
     return filteredCars;
   };
-
+  /*
   const filterPickupDate = (car) => {
     const locationFilteredCars = filterDropoff(car);
     const filteredCars = locationFilteredCars.filter(({ availabilityFrom }) => {
@@ -116,7 +112,7 @@ const category = () => {
     });
     return filteredCars;
   };
-
+ */
   const filterCarTypes = (car) => {
     const locationandDateFilteredCars = filterPickupDate(car);
 
@@ -133,22 +129,27 @@ const category = () => {
 
       return checkedType.includes(allCars.category) && checkedCapacity.includes(allCars.people) && allCars.price < checkedPrice;
     });
+    setAllFilteredCars(filterData);
 
     return filterData;
   };
 
+  useEffect(() => {
+    filterCarTypes(cars);
+  }, [checkedCapacity, checkedPrice, checkedType, checkedPickup, checkedDropoff, cars]);
+
   return (
     <div className="w-full flex">
-      <Sidebar filterState={filterState} setFilterState={setFilterState} />
+      <Sidebar filterState={filterState} setFilterState={setFilterState} cars={cars} />
       <div className="p-4 w-full">
         <StatePicker windowSize={windowSize} />
         <div className="flex mt-4 justify-start flex-wrap gap-percentage">
-          { filterCarTypes(cars).slice(0, numberOfCars).map((model, index) => (
+          { allFilteredCars.slice(0, numberOfCars).map((model, index) => (
             <div key={index} className="w-full md:max-w-49 lg:max-w-32 xl:max-w-24 3xl:max-w-19 md:flex-48 lg:flex-31 xl:flex-23 3xl:flex-19">
               <CarCard model={model.carTitle} type={model.type} image={model.image} people={model.people} category={model.category} price={model.price} checkedCapacity={filterState.checkedCapacity} checkedType={filterState.checkedType} checkedPrice={filterState.checkedPrice} />
             </div>
           ))}
-          {filterCarTypes(cars).length === 0 ? <p className="text-5xl p-12 m-auto">no cars matching your criterias</p> : null}
+          {allFilteredCars.length === 0 ? <p className="text-5xl p-12 m-auto">no cars matching your criterias</p> : null}
         </div>
         <div className="ulul my-16">
           <div className={`${hidden()}`}>

@@ -1,6 +1,6 @@
 # Project CarRent
 
-Develop a FullStack car renting application.  
+Develop a FullStack car renting application
 
 Check out the complete project requirements [here](https://docs.google.com/document/d/13PeFwRlPEhMw_HPyrIrInvQuKaVWnpNmcv-y3NA208s/edit?usp=sharing)
 
@@ -36,7 +36,7 @@ To get started with development, you need to install few tools
 
 3. npm
   
-   `npm` version 5.6.1 or higher. You will have it after you install node.
+   `npm` version 5.6.1 or higher. You will have it after you install node
 
    To check your version of npm, run:
 
