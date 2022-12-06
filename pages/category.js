@@ -1,11 +1,6 @@
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 
-import Link from 'next/link';
-import resolveConfig from 'tailwindcss/resolveConfig';
-import tailwindConfig from '../tailwind.config.js';
-import LoadingScreen from '../components/LoadingScreen';
-
 import { Button, CarCard, Sidebar, StatePicker } from '../components';
 import { useThemeContext } from '../context/filtersState';
 
@@ -50,7 +45,6 @@ const category = () => {
   }, [windowSize.width]);
 
   const [cars, setCars] = useState([]);
-  const [isLoading, setLoading] = useState(false);
 
   const fetchCars = async () => {
     try {
@@ -62,7 +56,6 @@ const category = () => {
       const data = await response.data;
       console.log('data', data);
       setCars(data.data);
-      setLoading(false);
     } catch (error) {
       console.log('Error', error);
     }
@@ -70,11 +63,8 @@ const category = () => {
 
   // get data
   useEffect(() => {
-    setLoading(true);
     fetchCars();
   }, []);
-
-  if (isLoading) return <LoadingScreen />;
 
   const totalCars = cars.length;
 
@@ -104,9 +94,8 @@ const category = () => {
   };
   /*
   const filterPickupDate = (car) => {
-    const locationFilteredCars = filterDropoff(car);
-    const filteredCars = locationFilteredCars.filter(({ availabilityFrom }) => {
-      if (checkedPickup.date.length > 0) return checkedPickup.date >= availabilityFrom;
+    const filteredCars = filterDropoff(car).filter(({ availabilityFrom }) => {
+      if (checkedPickup.date.length > 0) return checkedPickup.date.getTime() >= availabilityFrom.getTime();
       if (checkedPickup.date.length === 0) return car;
       return filteredCars;
     });
@@ -114,9 +103,9 @@ const category = () => {
   };
  */
   const filterCarTypes = (car) => {
-    const locationandDateFilteredCars = filterPickupDate(car);
+    const locationFilteredCars = filterDropoff(car);
 
-    const filterData = locationandDateFilteredCars.filter((allCars) => {
+    const filterData = locationFilteredCars.filter((allCars) => {
       if (checkedType.length === 0 && checkedCapacity.length === 0) {
         return allCars.price < checkedPrice;
       }

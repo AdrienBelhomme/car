@@ -4,15 +4,14 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHeart, faStar } from '@fortawesome/free-solid-svg-icons';
 import '@fortawesome/fontawesome-svg-core/styles.css';
 import Image from 'next/image';
-import Link from 'next/link';
 import axios from 'axios';
+import Link from 'next/link';
 
 import { Button, CarBanner, CarCard, CarTypeList, Sidebar } from '../../components';
 import images from '../../assets';
 import carList from '../../constants/carList';
 import { useThemeContext } from '../../context/filtersState';
-import { popularNew, recommendedCars } from '../../public/dummyDatabase/CarData';
-import LoadingScreen from '../../components/LoadingScreen';
+import { recommendedCars } from '../../public/dummyDatabase/CarData';
 
 const Stars = ({ rating }) => {
   const stars = [];
@@ -30,35 +29,6 @@ const details = () => {
   const [filterState] = useThemeContext();
 
   const [allFilteredCars, setAllFilteredCars] = useState([]);
-
-  const [cars, setCars] = useState([]);
-  // const [isLoading, setLoading] = useState(false);
-
-  const { isPopular } = cars;
-
-  const fetchCars = async () => {
-    try {
-      const response = await axios.get('/api/car', {
-        headers: {
-          'Content-Type': 'application/json',
-        },
-      });
-      const data = await response.data;
-      console.log('data', data);
-      setCars(data.data);
-      // setLoading(false);
-    } catch (error) {
-      console.log('Error', error);
-    }
-  };
-
-  // get data
-  useEffect(() => {
-    // setLoading(true);
-    fetchCars();
-  }, []);
-
-  // if (isLoading) return <LoadingScreen />;
 
   const [banner, setBanner] = useState(images.banner.src);
   const [selected, setSelected] = useState('');
@@ -84,6 +54,27 @@ const details = () => {
   const carImagess = [
     images.carCurrent, images.detailsViewCar, images.detailsViewCar2,
   ];
+
+  const [cars, setCars] = useState([]);
+
+  const fetchCars = async () => {
+    try {
+      const response = await axios.get('/api/car', {
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      });
+      const data = await response.data;
+      setCars(data.data);
+    } catch (error) {
+      console.log('Error', error);
+    }
+  };
+
+  // get data
+  useEffect(() => {
+    fetchCars();
+  }, []);
 
   const filteredData = () => {
     const filterData = cars.filter(({ category: carType, people: carPeople, price: carPrice }) => {
@@ -112,7 +103,7 @@ const details = () => {
 
         <div className="flex items-baseline justify-between">
 
-          <div className="hidden md:flex flex-col items-center w-49% rounded-lg" style={{ padding: '0 1.25rem 1.25rem 0' }}>
+          <div className="flex flex-col items-center w-49% rounded-lg" style={{ padding: '0 1.25rem 1.25rem 0' }}>
 
             <div style={{ backgroundImage: `url(${banner})`, backgroundSize: 'cover', backgroundRepeat: 'no-repeat', backgroundPosition: 'top' }} className="md:flex w-full bg-cover rounded">
               <CarBanner
@@ -142,7 +133,7 @@ const details = () => {
             </div>
           </div>
 
-          <div className="w-full md:w-49% bg-white rounded-lg p-5">
+          <div className=" w-49% bg-white rounded-lg p-5">
 
             <div className="flex items-center justify-between">
 
