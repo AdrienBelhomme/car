@@ -75,13 +75,17 @@ const Navbar = () => (
           layout="fill"
         />
       </div>
-      <Image
-        src={images.Profile}
-        alt="Profile"
-        width={44}
-        height={44}
-        layout="fill"
-      />
+      <div className="hover:shadow-md hover:shadow-btn-blue rounded-full">
+        <Link href="profile-page">
+          <Image
+            src={images.Profile}
+            alt="Profile"
+            width={44}
+            height={44}
+            layout="fill"
+          />
+        </Link>
+      </div>
     </div>
 
   </nav>

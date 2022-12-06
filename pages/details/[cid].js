@@ -11,7 +11,6 @@ import { Button, CarBanner, CarCard, CarTypeList, Sidebar } from '../../componen
 import images from '../../assets';
 import carList from '../../constants/carList';
 import { useThemeContext } from '../../context/filtersState';
-import { recommendedCars } from '../../public/dummyDatabase/CarData';
 
 const Stars = ({ rating }) => {
   const stars = [];
@@ -56,7 +55,7 @@ const details = () => {
   ];
 
   const [cars, setCars] = useState([]);
-
+  console.log('here', cars);
   const fetchCars = async () => {
     try {
       const response = await axios.get('/api/car', {
@@ -103,7 +102,7 @@ const details = () => {
 
         <div className="flex items-baseline justify-between">
 
-          <div className="flex flex-col items-center w-49% rounded-lg" style={{ padding: '0 1.25rem 1.25rem 0' }}>
+          <div className="hidden md:flex flex-col items-center w-49% rounded-lg" style={{ padding: '0 1.25rem 1.25rem 0' }}>
 
             <div style={{ backgroundImage: `url(${banner})`, backgroundSize: 'cover', backgroundRepeat: 'no-repeat', backgroundPosition: 'top' }} className="md:flex w-full bg-cover rounded">
               <CarBanner
@@ -133,7 +132,7 @@ const details = () => {
             </div>
           </div>
 
-          <div className=" w-49% bg-white rounded-lg p-5">
+          <div className="w-full  bg-white rounded-lg p-5">
 
             <div className="flex items-center justify-between">
 
@@ -197,7 +196,7 @@ const details = () => {
         </div>
 
         <div className="flex mt-4 justify-start flex-wrap gap-4">
-          <CarTypeList carCategory="Reccomended cars for you" numberOfCars={5} carData={recommendedCars} noscroll="flex-wrap" />
+          <CarTypeList carCategory="Recommended cars for you" numberOfCars={5} carData={cars} noscroll="flex-wrap" />
         </div>
 
         <div className="flex justify-between mt-8 md:mt-[42px]">

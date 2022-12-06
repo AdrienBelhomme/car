@@ -138,7 +138,9 @@ const addCarForm = () => {
           <CustomInput
             label="Tag"
             type="text"
-            placeholder="Tag name"
+            id="last"
+            placeholder="Tag Name"
+            onChange={handleChange}
             onHandleChange={(event) => handleChange(event, 'tag')}
           />
 

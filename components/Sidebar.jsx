@@ -47,7 +47,7 @@ const Sidebar = (props) => {
   };
 
   return (
-    <div className="hidden flex-col bg-white-color border-sidebar-border border-2 max-w-[360px] md:flex ">
+    <div className="static hidden flex-col bg-white-color border-sidebar-border border-2 max-w-[360px] md:flex ">
       <Searchbar />
       {filters.map(({ title, options }) => (
         <div className="container flex-col w-full mt-14" key={title}>

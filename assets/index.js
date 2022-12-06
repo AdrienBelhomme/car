@@ -18,13 +18,13 @@ import Profile from './Profile.png';
 import search from './search.svg';
 import Setting from './Setting.png';
 import vector from './Vector.svg';
-import security from './ic-security-safety.svg';
-
 import detailsViewCar from './details-view-car.png';
 import detailsViewCar2 from './details-view-car-2.png';
 import carCurrent from './carMin.png';
 import banner from './background-banner.png';
 import banner2 from './backgroundlightblue.png';
+import carcover from './covercar.png';
+import security from './ic-security-safety.svg';
 
 export default {
   koenigsegg,
@@ -52,5 +52,6 @@ export default {
   Setting,
   filter,
   vector,
+  carcover,
   security,
 };

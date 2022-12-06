@@ -16,6 +16,8 @@ const carSchema = mongoose.Schema({
   availabilityTo: Date,
   description: String,
   tag: String,
+  isPopular: Boolean,
+
 });
 
 mongoose.models = {};
