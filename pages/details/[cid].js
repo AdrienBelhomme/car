@@ -11,7 +11,6 @@ import { Button, CarBanner, CarCard, CarTypeList, Sidebar } from '../../componen
 import images from '../../assets';
 import carList from '../../constants/carList';
 import { useThemeContext } from '../../context/filtersState';
-import { recommendedCars } from '../../public/dummyDatabase/CarData';
 
 const Stars = ({ rating }) => {
   const stars = [];
@@ -56,7 +55,7 @@ const details = () => {
   ];
 
   const [cars, setCars] = useState([]);
-
+  console.log('here', cars);
   const fetchCars = async () => {
     try {
       const response = await axios.get('/api/car', {
@@ -197,7 +196,7 @@ const details = () => {
         </div>
 
         <div className="flex mt-4 justify-start flex-wrap gap-4">
-          <CarTypeList carCategory="Reccomended cars for you" numberOfCars={5} carData={recommendedCars} noscroll="flex-wrap" />
+          <CarTypeList carCategory="Reccomended cars for you" numberOfCars={5} carData={cars} noscroll="flex-wrap" />
         </div>
 
         <div className="flex justify-between mt-8 md:mt-[42px]">
