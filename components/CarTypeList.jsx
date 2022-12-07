@@ -17,12 +17,11 @@ const CarTypeList = ({ carCategory, carData, scrollable, noscroll }) => (
       </button>
     </div>
     <div className={`flex mt-[30px] justify-start w-full ${noscroll} gap-4 ${scrollable} `}>
-      {carData.cars.map((car, index) => (
-        <div key={car.model + index} className="w-full md:max-w-49 lg:max-w-32 xl:max-w-25 3xl:max-w-20 md:flex-48 lg:flex-31 xl:flex-23 3xl:flex-19"> <CarCard {...car} /></div>
+      {carData.map((car, index) => (
+        <div key={car.model + index} className="min-w-[280px] flex-1"> <CarCard {...car} /></div>
       ))}
     </div>
   </div>
 );
 
 export default CarTypeList;
-

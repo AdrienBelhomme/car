@@ -1,44 +1,21 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 
-import { Button, CarBanner, StatePicker, CarTypeListHome } from '../components';
+import { Button, CarBanner, StatePicker, CarTypeList } from '../components';
 import image from '../assets/index';
+import LoadingScreen from '../components/LoadingScreen';
 
 const CarRent = () => {
   const [popularCars, setPopularCars] = useState([]);
   const [recommendedCars, setRecommendedCars] = useState([]);
   const [displayNumberOfCars, setDisplayNumberOfCars] = useState(true);
-
-  const fetchCars = async () => {
-    try {
-      const popularCarResponse = await axios.get('/api/cartype?tag=popular', {
-        headers: {
-          'Content-Type': 'application/json',
-        },
-      });
-      const recommendedCarResponse = await axios.get('/api/cartype?tag=recommended', {
-        headers: {
-          'Content-Type': 'application/json',
-        },
-      });
-      const popularCarData = await popularCarResponse.data;
-      const recommendedCarData = await recommendedCarResponse.data;
-      setPopularCars(popularCarData.data);
-      setRecommendedCars(recommendedCarData.data);
-    } catch (error) {
-      console.log('error', error);
-    }
-  };
-
-  useEffect(() => {
-    fetchCars();
-  }, []);
+  const [isLoading, setLoading] = useState(false);
 
   const [windowSize, setWindowSize] = useState({
     width: undefined,
   });
   const initialPopularCarsDisplay = popularCars.slice(0, 3);
-  const initialRecommendedCarsDisplay = recommendedCars.slice(0, 2);
+  const initialRecommendedCarsDisplay = recommendedCars.slice(0, 3);
   const totalPopAndRecCars = popularCars.length + recommendedCars.length;
   const showMoreCars = () => {
     setDisplayNumberOfCars(!displayNumberOfCars);
@@ -59,6 +36,35 @@ const CarRent = () => {
   }
 
   const size = useWindowSize();
+
+  const fetchCars = async () => {
+    try {
+      const popularCarResponse = await axios.get('/api/cartype?tag=popular', {
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      });
+      const recommendedCarResponse = await axios.get('/api/cartype?tag=recommended', {
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      });
+      const popularCarData = await popularCarResponse.data;
+      const recommendedCarData = await recommendedCarResponse.data;
+      setPopularCars(popularCarData.data);
+      setRecommendedCars(recommendedCarData.data);
+      setLoading(false);
+    } catch (error) {
+      console.log('error', error);
+    }
+  };
+
+  useEffect(() => {
+    setLoading(true);
+    fetchCars();
+  }, []);
+
+  if (isLoading) return <LoadingScreen />;
 
   return (
     <div className=" p-6 md:p-16">
@@ -85,8 +91,8 @@ const CarRent = () => {
       <div className="mt-[42px]">
         <StatePicker windowSize={size} />
       </div>
-      <CarTypeListHome carCategory="Popular Car" carData={displayNumberOfCars ? initialPopularCarsDisplay : popularCars} scrollable="overflow-x-auto md:flex-wrap" />
-      <CarTypeListHome carCategory="Recommendation Car" carData={recommendedCars} noscroll="flex-wrap" />
+      <CarTypeList carCategory="Popular Car" carData={displayNumberOfCars ? initialPopularCarsDisplay : popularCars} scrollable="overflow-x-auto md:flex-wrap" />
+      <CarTypeList carCategory="Recommendation Car" carData={displayNumberOfCars ? initialRecommendedCarsDisplay : recommendedCars} noscroll="flex-wrap" />
       <div className="flex">
         <div className="flex justify-center mx-auto mt-12 md:mt-16">
           <Button text={displayNumberOfCars ? ' Show More Cars' : 'Show Less Cars'} bgColor="bg-btn-blue" color="text-white" handleClick={showMoreCars} />

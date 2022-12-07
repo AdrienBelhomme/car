@@ -178,12 +178,7 @@ module.exports = {
         'dot-shadow': '0px 0px 0px 6px rgba(53, 99, 233, 0.3)',
         'drop-off-shad': '0px 0px 0px 6px rgba(92, 175, 252, 0.4)',
       },
-      margin: {
-        '0-10%': '0 10%',
-        '0-5%': '0 5%',
-        '0-3%': '0 3%',
-        't-1%': '1% 0 0 0',
-      },
+
       fontSize: {
         11: '11px',
       },

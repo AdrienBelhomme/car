@@ -9,16 +9,16 @@ export default async function handler(req, res) {
   switch (method) {
     case 'GET':
       try {
-        const users = await Car.find({});
-        res.status(200).json({ success: true, data: users });
+        const cars = await Car.find({});
+        res.status(200).json({ success: true, data: cars });
       } catch (error) {
         res.status(400).json({ success: false });
       }
       break;
     case 'POST':
       try {
-        const user = await Car.create(req.body);
-        res.status(201).json({ success: true, data: user });
+        const cars = await Car.create(req.body);
+        res.status(201).json({ success: true, data: cars });
       } catch (error) {
         res.status(400).json({ success: false });
       }

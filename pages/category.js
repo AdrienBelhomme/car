@@ -9,6 +9,8 @@ const category = () => {
     width: undefined,
   });
 
+  const [allFilteredCars, setAllFilteredCars] = useState([]);
+
   function useWindowSize() {
     useEffect(() => {
       function handleResize() {
@@ -90,7 +92,7 @@ const category = () => {
     });
     return filteredCars;
   };
-
+  /*
   const filterPickupDate = (car) => {
     const filteredCars = filterDropoff(car).filter(({ availabilityFrom }) => {
       if (checkedPickup.date.length > 0) return checkedPickup.date.getTime() >= availabilityFrom.getTime();
@@ -99,9 +101,7 @@ const category = () => {
     });
     return filteredCars;
   };
-
-  console.log('filterPickupDate', filterPickupDate(cars));
-
+ */
   const filterCarTypes = (car) => {
     const locationFilteredCars = filterDropoff(car);
 
@@ -118,9 +118,14 @@ const category = () => {
 
       return checkedType.includes(allCars.category) && checkedCapacity.includes(allCars.people) && allCars.price < checkedPrice;
     });
+    setAllFilteredCars(filterData);
 
     return filterData;
   };
+
+  useEffect(() => {
+    filterCarTypes(cars);
+  }, [checkedCapacity, checkedPrice, checkedType, checkedPickup, checkedDropoff, cars]);
 
   return (
     <div className="w-full flex">
@@ -128,12 +133,12 @@ const category = () => {
       <div className="p-4 w-full">
         <StatePicker windowSize={windowSize} />
         <div className="flex mt-4 justify-start flex-wrap gap-percentage">
-          { filterCarTypes(cars).slice(0, numberOfCars).map((model, index) => (
+          { allFilteredCars.slice(0, numberOfCars).map((model, index) => (
             <div key={index} className="w-full md:max-w-49 lg:max-w-32 xl:max-w-24 3xl:max-w-19 md:flex-48 lg:flex-31 xl:flex-23 3xl:flex-19">
               <CarCard model={model.carTitle} type={model.type} image={model.image} people={model.people} category={model.category} price={model.price} checkedCapacity={filterState.checkedCapacity} checkedType={filterState.checkedType} checkedPrice={filterState.checkedPrice} />
             </div>
           ))}
-          {filterCarTypes(cars).length === 0 ? <p className="text-5xl p-12 m-auto">no cars matching your criterias</p> : null}
+          {allFilteredCars.length === 0 ? <p className="text-5xl p-12 m-auto">no cars matching your criterias</p> : null}
         </div>
         <div className="ulul my-16">
           <div className={`${hidden()}`}>

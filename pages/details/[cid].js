@@ -1,16 +1,16 @@
 import { useRouter } from 'next/router';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faHeart, faGasPump, faGear, faUser, faStar } from '@fortawesome/free-solid-svg-icons';
+import { faHeart, faStar } from '@fortawesome/free-solid-svg-icons';
 import '@fortawesome/fontawesome-svg-core/styles.css';
 import Image from 'next/image';
-
+import axios from 'axios';
 import Link from 'next/link';
+
 import { Button, CarBanner, CarCard, CarTypeList, Sidebar } from '../../components';
 import images from '../../assets';
 import carList from '../../constants/carList';
 import { useThemeContext } from '../../context/filtersState';
-import { popularNew, recommendedCars } from '../../public/dummyDatabase/CarData';
 
 const Stars = ({ rating }) => {
   const stars = [];
@@ -25,17 +25,14 @@ const Stars = ({ rating }) => {
 };
 
 const details = () => {
-  const [filterState, setFilterState] = useThemeContext();
+  const [filterState] = useThemeContext();
+
+  const [allFilteredCars, setAllFilteredCars] = useState([]);
 
   const [banner, setBanner] = useState(images.banner.src);
   const [selected, setSelected] = useState('');
 
-  console.log(filterState);
-
   const router = useRouter();
-  const { cid } = router.query;
-
-  console.log(cid);
 
   const { carImages, model, type, gas, category, people, price } = router.query;
 
@@ -57,34 +54,55 @@ const details = () => {
     images.carCurrent, images.detailsViewCar, images.detailsViewCar2,
   ];
 
-  const filteredData = () => {
-    const filterData = carList.filter(({ name, type, people, price }) => {
-      if (filterState.checkedType.length === 0 && filterState.checkedCapacity.length === 0) {
-        return filters.some((c) => c === type) && capacity.some((l) => l === people && price < filterState.checkedPrice);
-      } if (filterState.checkedCapacity.length === 0) {
-        return filterState.checkedType.some((c) => c === type) && capacity.some((l) => l === people) && price < filterState.checkedPrice;
-      } if (filterState.checkedType.length === 0) {
-        return filters.some((c) => c === type) && filterState.checkedCapacity.some((l) => l === people) && price < filterState.checkedPrice;
-      }
-      return filterState.checkedType.some((c) => c === type) && filterState.checkedCapacity.some((l) => l === people) && price < filterState.checkedPrice;
-    });
+  const [cars, setCars] = useState([]);
+  console.log('here', cars);
+  const fetchCars = async () => {
+    try {
+      const response = await axios.get('/api/car', {
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      });
+      const data = await response.data;
+      setCars(data.data);
+    } catch (error) {
+      console.log('Error', error);
+    }
+  };
 
+  // get data
+  useEffect(() => {
+    fetchCars();
+  }, []);
+
+  const filteredData = () => {
+    const filterData = cars.filter(({ category: carType, people: carPeople, price: carPrice }) => {
+      if (filterState.checkedType.length === 0 && filterState.checkedCapacity.length === 0) {
+        return filters.some((c) => c === carType) && capacity.some((l) => l === carPeople && carPrice < filterState.checkedPrice);
+      } if (filterState.checkedCapacity.length === 0) {
+        return filterState.checkedType.some((c) => c === carType) && capacity.some((l) => l === carPeople) && carPrice < filterState.checkedPrice;
+      } if (filterState.checkedType.length === 0) {
+        return filters.some((c) => c === carType) && filterState.checkedCapacity.some((l) => l === carPeople) && carPrice < filterState.checkedPrice;
+      }
+
+      return filterState.checkedType.some((c) => c === carType) && filterState.checkedCapacity.some((l) => l === carPeople) && carPrice < filterState.checkedPrice;
+    });
+    setAllFilteredCars(filterData);
     return filterData;
   };
 
-  const navigate = () => {
-    console.log('navigate');
-    router.push('/category');
-  };
+  useEffect(() => {
+    filteredData();
+  }, [filterState, cars]);
 
   return (
     <div className="w-full flex">
-      <Sidebar />
+      <Sidebar cars={cars} />
       <div className="p-4 w-full">
 
         <div className="flex items-baseline justify-between">
 
-          <div className="flex flex-col items-center w-49% rounded-lg" style={{ padding: '0 1.25rem 1.25rem 0' }}>
+          <div className="hidden md:flex flex-col items-center w-49% rounded-lg" style={{ padding: '0 1.25rem 1.25rem 0' }}>
 
             <div style={{ backgroundImage: `url(${banner})`, backgroundSize: 'cover', backgroundRepeat: 'no-repeat', backgroundPosition: 'top' }} className="md:flex w-full bg-cover rounded">
               <CarBanner
@@ -114,7 +132,7 @@ const details = () => {
             </div>
           </div>
 
-          <div className=" w-49% bg-white rounded-lg p-5">
+          <div className="w-full  bg-white rounded-lg p-5">
 
             <div className="flex items-center justify-between">
 
@@ -178,8 +196,7 @@ const details = () => {
         </div>
 
         <div className="flex mt-4 justify-start flex-wrap gap-4">
-          <CarTypeList numberOfCars={5} carData={recommendedCars} noscroll="flex-wrap" />
-
+          <CarTypeList carCategory="Recommended cars for you" numberOfCars={5} carData={cars} noscroll="flex-wrap" />
         </div>
 
         <div className="flex justify-between mt-8 md:mt-[42px]">
@@ -195,12 +212,12 @@ const details = () => {
 
         <div className="flex mt-[30px] justify-start flex-wrap gap-4">
 
-          { filteredData().slice(0, numberOfCars).map((model, index) => (
+          { allFilteredCars.slice(0, numberOfCars).map((dataModel, index) => (
             <div key={index} className="w-full md:max-w-49 lg:max-w-32 xl:max-w-25 3xl:max-w-20 md:flex-48 lg:flex-31 xl:flex-23 3xl:flex-19">
-              <CarCard model={model.name} image={model.image} people={model.people} type={model.type} price={model.price} checkedCapacity={filterState.checkedCapacity} checkedType={filterState.checkedType} checkedPrice={filterState.checkedPrice} />
+              <CarCard model={dataModel.name} image={dataModel.image} people={dataModel.people} type={dataModel.type} price={dataModel.price} checkedCapacity={filterState.checkedCapacity} checkedType={filterState.checkedType} checkedPrice={filterState.checkedPrice} />
             </div>
           ))}
-          {filteredData().length === 0 ? <p className="text-5xl p-12 m-auto">no cars matching your criterias</p> : null}
+          {allFilteredCars.length === 0 ? <p className="text-5xl p-12 m-auto">no cars matching your criterias</p> : null}
         </div>
 
       </div>

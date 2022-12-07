@@ -99,9 +99,25 @@ const Navbar = () => {
         </Link>
 
       </div>
+
       <button type="button" onClick={session ? handleSignout : handleSignin} className="btn-signin bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded flex flex-row justify-end gap-4 items-center ml-3 lg:ml-4">{session ? 'SIGN OUT' : 'SIGN IN' }</button>
     </nav>
   );
 };
+      <div className="hover:shadow-md hover:shadow-btn-blue rounded-full">
+        <Link href="profile-page">
+          <Image
+            src={images.Profile}
+            alt="Profile"
+            width={44}
+            height={44}
+            layout="fill"
+          />
+        </Link>
+      </div>
+    </div>
+
+  </nav>
+);
 
 export default Navbar;
