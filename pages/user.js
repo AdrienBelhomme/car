@@ -10,25 +10,11 @@ const User = () => {
       <main className="b">
         <div className="c">
           {loading && <div className="fff">Loading...</div>}
-          {
-            session
-              && (
-              <>
-                <h1 className="d">Welcome, {session.user.name ?? session.user.email}!</h1>
-                <p style={{ marginBottom: '10px' }}> </p> <br />
-                <img src={session.user.image} alt="" className="g" />
-              </>
-              )
-            }
-          {
-            !session
-              && (
-              <>
-                <p className="e">Please log in to continue</p>
-                <img src="https://www.pngkey.com/png/detail/230-2301779_best-classified-apps-default-user-profile.png" alt="" className="f" />
-              </>
-              )
-           }
+
+          <h1 className="d">{session ? `Welcome, ${session.user.name} ${session.user.email}!` : 'Please log in to continue'}</h1>
+          <p style={{ marginBottom: '10px' }}> </p> <br />
+          <img src={session ? session.user.image : 'https://www.pngkey.com/png/detail/230-2301779_best-classified-apps-default-user-profile.png'} alt="" className="g" />
+
         </div>
       </main>
     </div>

@@ -88,29 +88,18 @@ const Navbar = () => {
             layout="fill"
           />
         </div>
-        {!session
-              && (
-              <img
-                src="https://e7.pngegg.com/pngimages/981/645/png-clipart-default-profile-united-states-computer-icons-desktop-free-high-quality-person-icon-miscellaneous-silhouette-thumbnail.png"
-                alt="Profile"
-                width={44}
-                height={44}
-                style={{ borderRadius: '100%' }}
-              />
-              ) }
-        {session
-              && (
-                <img
-                  src={session.user.image}
-                  alt="Profile"
-                  width={44}
-                  height={44}
-                  style={{ borderRadius: '100%' }}
-                />
-              )}
+        <Link href="/user">
+          <img
+            src={session ? session.user.image : 'https://e7.pngegg.com/pngimages/981/645/png-clipart-default-profile-united-states-computer-icons-desktop-free-high-quality-person-icon-miscellaneous-silhouette-thumbnail.png'}
+            alt="Profile"
+            width={44}
+            height={44}
+            style={{ borderRadius: '100%' }}
+          />
+        </Link>
+
       </div>
-      {session && <button type="button" onClick={handleSignout} className="btn-signin" style={{ marginLeft: '1%' }}>SIGN OUT</button> }
-      {!session && <button type="button" onClick={handleSignin} className="btn-signin" style={{ marginLeft: '1%' }}>SIGN IN</button> }
+      <button type="button" onClick={session ? handleSignout : handleSignin} className="btn-signin bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded flex flex-row justify-end gap-4 items-center ml-3 lg:ml-4">{session ? 'SIGN OUT' : 'SIGN IN' }</button>
     </nav>
   );
 };
